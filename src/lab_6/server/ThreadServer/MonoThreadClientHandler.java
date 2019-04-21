@@ -8,9 +8,11 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.net.SocketException;
+import java.util.Date;
 import java.util.concurrent.ConcurrentHashMap;
 
-import static lab_6.server.Database.accounts;
+import static lab_6.server.Database.*;
+import static lab_6.server.Settings.*;
 
 
 public class MonoThreadClientHandler implements Runnable {
@@ -69,8 +71,31 @@ public class MonoThreadClientHandler implements Runnable {
     }
 
     private RegistrationResponse registration(RegistrationRequest request){
-        accounts.size();
-        return new RegistrationResponse();
+        RegistrationResponse response = new RegistrationResponse();
+        if (request.login.length() < loginMinimalLength){
+            response.confirm = false;
+            response.message = "login short";
+            return response;
+        }
+        if (request.login.length() > loginMaximalLength){
+            response.confirm = false;
+            response.message = "login long";
+            return response;
+        }
+        Account tempAccount = new Account();
+        tempAccount.login = request.login;
+        tempAccount.publicKey = request.publicKey.clone();
+        tempAccount.privateKey = request.privateKey.clone();
+        tempAccount.registrationDate = (new Date()).toString();
+        if (!accounts.containsKey(request.login)){
+            accounts.putIfAbsent(request.login, tempAccount);
+            response.confirm = true;
+            response.message = "user created";
+        } else {
+            response.confirm = false;
+            response.message = "user exist";
+        }
+        return response;
     }
 
     private IdentificationResponse identification(IdentificationRequest request){

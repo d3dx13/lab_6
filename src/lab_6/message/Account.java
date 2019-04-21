@@ -7,5 +7,5 @@ public final class Account implements Serializable {
     public String login;
     public byte [] publicKey;
     public byte [] privateKey; //Зашифрованный AES по паролю пользователя
-    public Date registrationDate;
+    public String registrationDate;
 }
