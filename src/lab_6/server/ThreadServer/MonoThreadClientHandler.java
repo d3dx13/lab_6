@@ -1,4 +1,6 @@
 package lab_6.server.ThreadServer;
+import lab_6.message.Message;
+
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
@@ -17,9 +19,14 @@ public class MonoThreadClientHandler implements Runnable {
             objectOutputStream = new ObjectOutputStream(clientDialog.getOutputStream());
             objectInputStream = new ObjectInputStream(clientDialog.getInputStream());
 
-            Object entry = objectInputStream.readObject();
+            Object message = objectInputStream.readObject();
+            if (message.getClass().equals(Message.class)){
+                
+            }
 
-            System.out.println(entry + " :: " + entry.getClass());
+
+
+            System.out.println(entry + " :: " + entry.getClass() + "  ::  " + entry.getClass().equals(Double.class));
 
             objectOutputStream.writeObject(entry);
             objectOutputStream.flush();
@@ -30,6 +37,7 @@ public class MonoThreadClientHandler implements Runnable {
         }catch (SocketException e){
             System.out.println(clientDialog.toString() + " disconnected");
         } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }

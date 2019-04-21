@@ -24,16 +24,19 @@ public class TestRunnableClientTester implements Runnable {
                 ObjectInputStream ois = new ObjectInputStream(socket.getInputStream())) {
             System.out.println("Client oos & ois initialized");
 
-            int i = 0;
+            oos.writeObject(this.object);
+            oos.flush();
+            Object in = ois.readObject();
+            System.out.println(in);
 
-            while (i < 5) {
-                oos.writeObject(this.object);
-                oos.flush();
-                Object in = ois.readObject();
-                System.out.println(in);
-                i++;
-            }
+            oos.flush();
         } catch (Exception e) {
+            e.printStackTrace();
+        }
+        try {
+            socket.close();
+        } catch (Exception e){
+            e.printStackTrace();
         }
     }
 }
