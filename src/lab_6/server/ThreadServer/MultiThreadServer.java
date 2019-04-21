@@ -18,7 +18,7 @@ public class MultiThreadServer {
             System.out.println("Server socket created, command console reader for listen to server commands");
             while (!server.isClosed()) {
                 Socket client = server.accept();
-                executeIt.execute(new MonoThreadClientHandler(client, collection, accounts));
+                executeIt.execute(new MonoThreadClientHandler(client));
             }
             executeIt.shutdown();
         } catch (IOException e) {
