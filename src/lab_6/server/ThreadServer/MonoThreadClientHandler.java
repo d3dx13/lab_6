@@ -1,13 +1,17 @@
 package lab_6.server.ThreadServer;
+import lab_6.message.Account;
 import lab_6.message.Message;
-import lab_6.message.loggingIn.AuthenticationResponse;
-import lab_6.message.loggingIn.IdentificationRequest;
-import lab_6.message.registration.RegistrationRequest;
+import lab_6.message.loggingIn.*;
+import lab_6.message.registration.*;
 
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.net.SocketException;
+import java.util.concurrent.ConcurrentHashMap;
+
+import static lab_6.server.Database.accounts;
+
 
 public class MonoThreadClientHandler implements Runnable {
     private Socket clientDialog;
@@ -35,20 +39,21 @@ public class MonoThreadClientHandler implements Runnable {
                 if (msg.values  != null)
                     msg.values.forEach(s -> System.out.print(s+", "));
                 System.out.print("\n");
+                objectOutputStream.writeObject(command(msg));
+                objectOutputStream.flush();
             }
             else if (message.getClass().equals(RegistrationRequest.class)){
-                System.out.println("NEW RegistrationRequest :: " + (RegistrationRequest)message);
+                objectOutputStream.writeObject(registration((RegistrationRequest)message));
+                objectOutputStream.flush();
             }
             else if (message.getClass().equals(IdentificationRequest.class)){
-                System.out.println("NEW IdentificationRequest :: " + (IdentificationRequest)message);
+                objectOutputStream.writeObject(identification((IdentificationRequest)message));
+                objectOutputStream.flush();
             }
-            else if (message.getClass().equals(AuthenticationResponse.class)){
-                System.out.println("NEW AuthenticationResponse :: " + (AuthenticationResponse)message);
+            else if (message.getClass().equals(AuthenticationRequest.class)){
+                objectOutputStream.writeObject(authentication((AuthenticationRequest) message));
+                objectOutputStream.flush();
             }
-
-            objectOutputStream.writeObject(message);
-            objectOutputStream.flush();
-
             objectInputStream.close();
             objectOutputStream.close();
             clientDialog.close();
@@ -57,5 +62,22 @@ public class MonoThreadClientHandler implements Runnable {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private Message command(Message message){
+        return new Message();
+    }
+
+    private RegistrationResponse registration(RegistrationRequest request){
+        accounts.size();
+        return new RegistrationResponse();
+    }
+
+    private IdentificationResponse identification(IdentificationRequest request){
+        return new IdentificationResponse();
+    }
+
+    private AuthenticationResponse authentication(AuthenticationRequest request){
+        return new AuthenticationResponse();
     }
 }

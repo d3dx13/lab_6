@@ -3,7 +3,7 @@ import java.io.Serializable;
 import java.sql.Time;
 import java.util.LinkedList;
 
-public class Message implements Serializable {
+public final class Message implements Serializable {
     public String login;
     public long time;
     public String text;
