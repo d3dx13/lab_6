@@ -1,8 +1,6 @@
 package lab_6.server.ThreadServer;
 
 import lab_6.message.Message;
-
-import java.util.Hashtable;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Stream;
 
@@ -19,7 +17,7 @@ public class CommandHandler {
 
         String stringOfCommands="Введена неверная команда.\nСписок доступных команд:\n remove_lower {String key}\n " +
                 "remove_lower {element}\n remove {String key}\n insert {String key} {element}\n show\n clear\n info\n sort\n exit";
-        if (command.equals("")) {
+        if(command.equals("")) {
             //сообщить о том, что введенной команды не существует
         } else {
             switch (command) {
