@@ -4,20 +4,16 @@ import lab_6.message.Message;
 import lab_6.message.loggingIn.*;
 import lab_6.message.registration.*;
 
-import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
-import javax.crypto.IllegalBlockSizeException;
-import javax.crypto.NoSuchPaddingException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.net.SocketException;
 import java.security.KeyFactory;
-import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
 import java.security.spec.X509EncodedKeySpec;
+import java.util.Arrays;
 import java.util.Date;
-import java.util.Random;
-import java.util.concurrent.ConcurrentHashMap;
 
 import static lab_6.server.Database.*;
 import static lab_6.server.Settings.*;
@@ -75,7 +71,7 @@ public class MonoThreadClientHandler implements Runnable {
     }
 
     private Message command(Message message){
-        return new Message();
+        return message;
     }
 
     private RegistrationResponse registration(RegistrationRequest request){
@@ -98,7 +94,7 @@ public class MonoThreadClientHandler implements Runnable {
         if (!accounts.containsKey(request.login)){
             accounts.putIfAbsent(request.login, tempAccount);
             response.confirm = true;
-            response.message = "user created";
+            response.message = "success";
         } else {
             response.confirm = false;
             response.message = "user exist";
@@ -106,45 +102,63 @@ public class MonoThreadClientHandler implements Runnable {
         return response;
     }
 
-    private IdentificationResponse identification(IdentificationRequest request) throws NoSuchPaddingException, NoSuchAlgorithmException, BadPaddingException, IllegalBlockSizeException {
+    private IdentificationResponse identification(IdentificationRequest request) {
         IdentificationResponse response = new IdentificationResponse();
-        if (request.login.length() < loginMinimalLength){
-            response.message = "login short";
+        try {
+            if (request.login.length() < loginMinimalLength) {
+                response.message = "login short";
+                return response;
+            }
+            if (request.login.length() > loginMaximalLength) {
+                response.message = "login long";
+                return response;
+            }
+            if (!accounts.containsKey(request.login)) {
+                response.message = "login wrong";
+                return response;
+            }
+            Account user = accounts.get(request.login);
+            Cipher cipher = Cipher.getInstance("RSA");
+            cipher.init(Cipher.ENCRYPT_MODE, KeyFactory.getInstance("RSA").generatePublic(new X509EncodedKeySpec(user.publicKey)));
+            SecureRandom secureRandom = new SecureRandom();
+            user.random = new byte[identificationRandomSize];
+            secureRandom.nextBytes(user.random);
+            response.random = cipher.doFinal(user.random);
+            response.privateKey = user.privateKey.clone();
+            accounts.put(request.login, user);
+            response.message = "success";
+            return response;
+        } catch (Exception ex){
+            response.message = ex.getMessage();
             return response;
         }
-        if (request.login.length() > loginMaximalLength){
-            response.message = "login long";
-            return response;
-        }
-        if (!accounts.containsKey(request.login)){
-            response.message = "login wrong";
-            return response;
-        }
-
-
-
-        Cipher cipher = Cipher.getInstance("RSA");
-        cipher.init(Cipher.ENCRYPT_MODE, KeyFactory.getInstance("RSA").generatePublic(new X509EncodedKeySpec(reg.publicKey)));
-
-        Random Random_2 = new Random();
-        byte [] temp = new byte[373];
-        Random_2.nextBytes(temp);
-        log_res.random = cipher.doFinal(temp);
-        log_res.privateKey = reg.privateKey.clone();
-
-
-        System.out.println(new String(log_res.privateKey));
-        System.out.println("\n===\n");
-        System.out.println(new String(log_res.random));
-        System.out.println("\n===\n");
-
-
-
-        return response;
     }
 
     private AuthenticationResponse authentication(AuthenticationRequest request){
         AuthenticationResponse response = new AuthenticationResponse();
-        return response;
+        if (request.login.length() < loginMinimalLength) {
+            response.message = "login short";
+            return response;
+        }
+        if (request.login.length() > loginMaximalLength) {
+            response.message = "login long";
+            return response;
+        }
+        if (!accounts.containsKey(request.login)) {
+            response.message = "login wrong";
+            return response;
+        }
+        if (!(Arrays.equals(accounts.get(request.login).random, request.random))) {
+            response.message = "random wrong";
+            return response;
+        } else {
+            Account user = accounts.get(request.login);
+            SecureRandom secureRandom = new SecureRandom();
+            secureRandom.nextBytes(user.secretKey);
+            response.secretKey = user.secretKey.clone();
+            accounts.put(request.login, user);
+            response.message = "success";
+            return response;
+        }
     }
 }

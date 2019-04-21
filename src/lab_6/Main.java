@@ -95,6 +95,7 @@ public class Main {
 
 
         } catch (Exception ex){
+            System.out.println("\n\n\n"+ ex.getMessage() + "\n\n\n");
             ex.printStackTrace();
         }
     }

@@ -10,7 +10,7 @@ public class CommandHandler {
         Message messageInThread = new Message();//приходит на вход функции
         Message answer = new Message();
         String command = messageInThread.text.trim();
-        ConcurrentHashMap<String,Object> generalCollection = new ConcurrentHashMap<>();//приходит на фход функции
+        ConcurrentHashMap<String,Object> generalCollection = new ConcurrentHashMap<>();//приходит на вход функции
 
         String[] acceptedCommands = {"insert", "show", "remove_lower", "clear", "sort", "info", "remove", "exit"};
 
