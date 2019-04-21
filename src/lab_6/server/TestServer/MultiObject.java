@@ -1,5 +1,7 @@
 package lab_6.server.TestServer;
 
+import lab_6.message.Message;
+
 import java.io.IOException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -19,7 +21,11 @@ public class MultiObject {
         // которые пишут какое-то количество сообщений
         while (j < 10) {
             j++;
-            exec.execute(new TestRunnableClientTester(Double.valueOf(""+j*j*j)));
+            Message msg = new Message();
+            msg.login = "d3dx13"+j;
+            msg.text = "d3dx13"+j*j;
+            msg.time = 1L*j*j*j*j*j*j*j*j*j*j*j*j;
+            exec.execute(new TestRunnableClientTester(msg));
         }
 
         // закрываем фабрику

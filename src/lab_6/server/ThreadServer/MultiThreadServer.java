@@ -8,7 +8,7 @@ import java.util.concurrent.Executors;
 
 public class MultiThreadServer {
 
-    static ExecutorService executeIt = Executors.newFixedThreadPool(10);
+    static ExecutorService executeIt = Executors.newFixedThreadPool(1);
 
     public static void main(String[] args) {
         try {

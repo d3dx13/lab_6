@@ -21,14 +21,24 @@ public class MonoThreadClientHandler implements Runnable {
 
             Object message = objectInputStream.readObject();
             if (message.getClass().equals(Message.class)){
-                
+                Message msg = (Message) message;
+                System.out.println("login: "+ msg.login);
+                System.out.println("time: "+ msg.time);
+                System.out.println("text: "+ msg.text);
+                System.out.print("keys: ");
+                if (msg.keys != null)
+                    msg.keys.forEach(s -> System.out.print(s+", "));
+                System.out.print("\nvalues: ");
+                if (msg.values  != null)
+                    msg.values.forEach(s -> System.out.print(s+", "));
+                System.out.print("\n");
             }
 
 
 
-            System.out.println(entry + " :: " + entry.getClass() + "  ::  " + entry.getClass().equals(Double.class));
+            //System.out.println(entry + " :: " + entry.getClass() + "  ::  " + entry.getClass().equals(Double.class));
 
-            objectOutputStream.writeObject(entry);
+            objectOutputStream.writeObject(message);
             objectOutputStream.flush();
 
             objectInputStream.close();
