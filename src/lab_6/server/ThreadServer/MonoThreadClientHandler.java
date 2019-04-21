@@ -1,5 +1,8 @@
 package lab_6.server.ThreadServer;
 import lab_6.message.Message;
+import lab_6.message.loggingIn.AuthenticationResponse;
+import lab_6.message.loggingIn.IdentificationRequest;
+import lab_6.message.registration.RegistrationRequest;
 
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -33,10 +36,15 @@ public class MonoThreadClientHandler implements Runnable {
                     msg.values.forEach(s -> System.out.print(s+", "));
                 System.out.print("\n");
             }
-
-
-
-            //System.out.println(entry + " :: " + entry.getClass() + "  ::  " + entry.getClass().equals(Double.class));
+            else if (message.getClass().equals(RegistrationRequest.class)){
+                System.out.println("NEW RegistrationRequest :: " + (RegistrationRequest)message);
+            }
+            else if (message.getClass().equals(IdentificationRequest.class)){
+                System.out.println("NEW IdentificationRequest :: " + (IdentificationRequest)message);
+            }
+            else if (message.getClass().equals(AuthenticationResponse.class)){
+                System.out.println("NEW AuthenticationResponse :: " + (AuthenticationResponse)message);
+            }
 
             objectOutputStream.writeObject(message);
             objectOutputStream.flush();
