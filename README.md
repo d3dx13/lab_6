@@ -1,2 +1,2 @@
-# lab-6
-lab-6
+# lab_6
+lab_6
