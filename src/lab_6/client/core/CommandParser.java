@@ -12,6 +12,11 @@ import java.util.LinkedList;
 import java.util.Map;
 
 public class CommandParser {
+    private static String userLogin;
+    public static void setUserLogin(String login){
+        userLogin = login;
+    }
+
     public static Dancer getDancerFromJSONObject(JSONObject JSONobj){
         Dancer tempDancer = new Dancer("NoName");
         tempDancer.dynamicsStateState = DynamicsState.NEUTRAL;
@@ -34,40 +39,36 @@ public class CommandParser {
         }
         return tempDancer;
     }
-    public static Message getMessageFromJSON(String inputJSON, String userLogin){
+    public static Message getMessageFromJSON(String inputJSON){
         Message response = new Message();
         inputJSON = inputJSON.strip();
         if (inputJSON.length() > 3 && inputJSON.substring(0,4).equalsIgnoreCase("show")){
             response.text = "show";
-            inputJSON = inputJSON.substring(4);
         }
         else if (inputJSON.length() > 3 && inputJSON.substring(0,4).equalsIgnoreCase("save")){
             response.text = "save";
-            inputJSON = inputJSON.substring(4);
         }
         else if (inputJSON.length() > 3 && inputJSON.substring(0,4).equalsIgnoreCase("load")){
             response.text = "load";
-            inputJSON = inputJSON.substring(4);
         }
         else if (inputJSON.length() > 3 && inputJSON.substring(0,4).equalsIgnoreCase("info")){
             response.text = "info";
-            inputJSON = inputJSON.substring(4);
         }
-        else if (inputJSON.length() > 12 && inputJSON.substring(0,13).equalsIgnoreCase("remove_higher")){
-            response.text = "remove_higher";
-            inputJSON = inputJSON.substring(13);
+        else if (inputJSON.length() > 9 && inputJSON.substring(0,10).equalsIgnoreCase("add_if_max")){
+            response.text = "add_if_max";
+            inputJSON = inputJSON.substring(10);
         }
-        else if (inputJSON.length() > 11 && inputJSON.substring(0,12).equalsIgnoreCase("remove_lower")){
-            response.text = "remove_lower";
-            inputJSON = inputJSON.substring(12);
+        else if (inputJSON.length() > 9 && inputJSON.substring(0,10).equalsIgnoreCase("add_if_min")){
+            response.text = "add_if_min";
+            inputJSON = inputJSON.substring(10);
         }
         else if (inputJSON.length() > 5 && inputJSON.substring(0,6).equalsIgnoreCase("remove")){
             response.text = "remove";
             inputJSON = inputJSON.substring(6);
         }
-        else if (inputJSON.length() > 5 && inputJSON.substring(0,6).equalsIgnoreCase("insert")){
-            response.text = "insert";
-            inputJSON = inputJSON.substring(6);
+        else if (inputJSON.length() > 2 && inputJSON.substring(0,3).equalsIgnoreCase("add")){
+            response.text = "add";
+            inputJSON = inputJSON.substring(3);
         }
         else if (inputJSON.length() > 9 && inputJSON.substring(0,10).equalsIgnoreCase("disconnect")){
             response.text = "disconnect";
@@ -89,27 +90,14 @@ public class CommandParser {
         else if (inputJSON.length() > 5 && inputJSON.substring(0,6).equalsIgnoreCase("import")){
             response.text = "import";
             return response;
+        } else {
+            response.text = "unknown command : " + inputJSON;
+            return response;
         }
-        response.keys = new LinkedList<String>();
         response.values = new LinkedList<Object>();
         try {
             JSONObject JSONobj = new JSONObject(inputJSON);
-            if (JSONobj.keySet().contains("key") && JSONobj.keySet().contains("value")){
-                response.keys.add(JSONobj.get("key").toString());
-                response.values.add(getDancerFromJSONObject((JSONObject) JSONobj.get("value")));
-            }
-            else if (JSONobj.keySet().contains("key") && !JSONobj.keySet().contains("value")) {
-                response.keys.add(JSONobj.get("key").toString());
-                response.values.add(null);
-            }
-            else if (!JSONobj.keySet().contains("key") && JSONobj.keySet().contains("value")) {
-                response.keys.add(null);
-                response.values.add(getDancerFromJSONObject((JSONObject) JSONobj.get("value")));
-            }
-            else {
-                response.keys.add(null);
-                response.values.add(null);
-            }
+            response.values.add(getDancerFromJSONObject(JSONobj));
             response.time = Instant.now().getEpochSecond() * 1000000L + (long) Instant.now().getNano() /1000;
             response.login = userLogin;
         } catch (Exception ex){
@@ -117,30 +105,14 @@ public class CommandParser {
                 JSONArray JSONarr = new JSONArray(inputJSON);
                 for (Object iter : JSONarr){
                     JSONObject JSONobj = (JSONObject)iter;
-                    if (JSONobj.keySet().contains("key") && JSONobj.keySet().contains("value")){
-                        response.keys.add(JSONobj.get("key").toString());
-                        response.values.add(getDancerFromJSONObject((JSONObject) JSONobj.get("value")));
-                    }
-                    else if (JSONobj.keySet().contains("key") && !JSONobj.keySet().contains("value")) {
-                        response.keys.add(JSONobj.get("key").toString());
-                        response.values.add(null);
-                    }
-                    else if (!JSONobj.keySet().contains("key") && JSONobj.keySet().contains("value")) {
-                        response.keys.add(null);
-                        response.values.add(getDancerFromJSONObject((JSONObject) JSONobj.get("value")));
-                    }
-                    else {
-                        response.keys.add(null);
-                        response.values.add(null);
-                    }
+                    response.values.add(getDancerFromJSONObject(JSONobj));
                     response.time = Instant.now().getEpochSecond() * 1000000L + (long) Instant.now().getNano() /1000;
                     response.login = userLogin;
                 }
             } catch (Exception ex2){
                 System.out.println(JSONParseException);
-                response.text = "command incorrect";
+                response.text = "JSON wrong";
                 response.values = null;
-                response.keys = null;
                 return response;
             }
         }
@@ -148,15 +120,16 @@ public class CommandParser {
     }
 
     public static void main(String[] args) {
-        Message msg = getMessageFromJSON("help[{key:\"1asdw23\", value:{name : dddodd, awda: wdawawd}}, {key:\"dwa\", value:{name : faawa}}]", "d3dx13");
+        setUserLogin("d3dx13");
+        Message msg = getMessageFromJSON("add[[{name : dodo, dynamics: DANCING}, {name : fanta}]");
         System.out.println("=====");
         System.out.println(msg.login);
         System.out.println(msg.time);
         System.out.println(msg.text);
         System.out.println("-----");
-        if (msg.keys != null && msg.values != null)
-            for (int i = 0; i < msg.keys.size(); i++){
-            System.out.println(msg.keys.get(i) + " : " + msg.values.get(i));
+        if (msg.values != null)
+            for (int i = 0; i < msg.values.size(); i++){
+            System.out.println(msg.values.get(i));
         }
         System.out.println("=====");
     }
@@ -166,17 +139,17 @@ public class CommandParser {
                 .append("\n--- Commands ---\n")
                 .append("help - Вывести в стандартный поток вывода помощь по командам\n")
                 .append("exit - Закрыть программу\n")
-                .append("connect - \n")
-                .append("disconnect - \n")
-                .append("import - \n")
-                .append("insert {key:String, value{}} - \n")
-                .append("remove {key:String, value{}} or {key:String} or {value:{}} - \n")
-                .append("remove_lower {key:String} or {value:{}} - \n")
-                .append("remove_higher {key:String} or {value:{}} - \n")
+                .append("connect - выполнить подключение к серверу и получить сессионный AES256 ключ\n")
+                .append("disconnect - выполнить корректное отключение от сервера и уничтожить сессионный AES256 ключ\n")
+                .append("import - загрузить элементы коллекции из файла по пути переменной окружения COLLECTION_PATH в коллекцию на сервере\n")
+                .append("add {...} - Добавить новый элемент в коллекцию\n")
+                .append("add_if_min {...} - Добавить новый элемент в коллекцию, если его значение меньше, чем у наименьшего элемента этой коллекции\n")
+                .append("add_if_max {...} - Добавить новый элемент в коллекцию, если его значение превышает значение наибольшего элемента этой коллекции\n")
+                .append("remove {...} - Удалить элемент из коллекции по его значению\n")
                 .append("show - Вывести в стандартный поток вывода все элементы коллекции в строковом представлении\n")
                 .append("save - Сохранить коллекцию в файл\n")
                 .append("load - Загрузить коллекцию из файла\n")
-                .append("info - \n")
+                .append("info - Вывести в стандартный поток вывода информацию о коллекции (тип, дата инициализации, дата последнего изменения, количество элементов)\n")
                 .append("\n\n--- JSON params ---\n")
                 .append("--- [ЗНАЧЕНИЕ] : [описание] ---\n")
                 .append("-------------------\n")
@@ -220,11 +193,12 @@ public class CommandParser {
             .append("Вид команды таков:\n")
             .append("\"[ИМЯ ПОЛЯ]\" : \"[ЗНАЧЕНИЕ ПОЛЯ]\"\n")
             .append("Обратите внимание на двойные кавычки, и на то, что имя и значение отделены двоеточием.\n")
-            .append("Но конкретно эта программа толекантна к отсутствию СРАЗУ ДВУХ кавычек у имени поля или его значения.\n")
             .append("Итак, данного инструментала хватит для работы с данной программой. но если вам не лень потратить 15 минут,\n")
             .append("Советую прочитать статью и понять, как много можно в JSON.\n")
             .append("...\n")
             .append("Вот пример для тех, кто сразу смотрит вниз собщения:\n")
-            .append("{\"name\" : \"Ricardo Milos\", \"dynamics\" : \"DANCING\"}\n")
-            .append("\n");
+            .append("add {\"name\" : \"Ricardo Milos\", \"dynamics\" : \"DANCING\"}\n")
+            .append("Обратите внимание, что последня версия программы поддерживает управление несколькими элементами\n")
+            .append("Вы можете ввести список ваших объектов через \',\' внутри [...]:\n")
+            .append("add [{\"name\" : \"Pen\"}, {\"name\" : \"Pineapple\"}, {\"name\" : \"Apple\"}, {\"name\" : \"Pen\"}, {\"name\" : \"PIKOTARO\", \"dynamics\" : \"DANCING\"}]\n");
 }

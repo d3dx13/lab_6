@@ -35,9 +35,6 @@ public class MonoThreadClientHandler implements Runnable {
                 System.out.println("login: "+ msg.login);
                 System.out.println("time: "+ msg.time);
                 System.out.println("text: "+ msg.text);
-                System.out.print("keys: ");
-                if (msg.keys != null)
-                    msg.keys.forEach(s -> System.out.print(s+", "));
                 System.out.print("\nvalues: ");
                 if (msg.values  != null)
                     msg.values.forEach(s -> System.out.print(s+", "));

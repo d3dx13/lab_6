@@ -7,6 +7,5 @@ public final class Message implements Serializable {
     public String login;
     public String text;
     public long time;
-    public LinkedList<String>keys;
     public LinkedList<Object>values;
 }

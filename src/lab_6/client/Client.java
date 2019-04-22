@@ -1,9 +1,9 @@
 package lab_6.client;
 
+import lab_6.client.userInterface.console.ConsoleGUI;
+
 public class Client {
     public static void main(String[] args) {
-        System.out.println("Клиентская часть");
-        System.out.println("В процессе разработки");
-        System.out.println("Ожидайте");
+        ConsoleGUI.main(args);
     }
 }
