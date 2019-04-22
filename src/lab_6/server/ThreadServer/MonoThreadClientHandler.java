@@ -152,13 +152,21 @@ public class MonoThreadClientHandler implements Runnable {
             response.message = "random wrong";
             return response;
         } else {
-            Account user = accounts.get(request.login);
-            SecureRandom secureRandom = new SecureRandom();
-            secureRandom.nextBytes(user.secretKey);
-            response.secretKey = user.secretKey.clone();
-            accounts.put(request.login, user);
-            response.message = "success";
-            return response;
+            try {
+                Account user = accounts.get(request.login);
+                Cipher cipher = Cipher.getInstance("RSA");
+                cipher.init(Cipher.ENCRYPT_MODE, KeyFactory.getInstance("RSA").generatePublic(new X509EncodedKeySpec(user.publicKey)));
+                SecureRandom secureRandom = new SecureRandom();
+                user.secretKey = new byte[userAESkeySize];
+                secureRandom.nextBytes(user.secretKey);
+                response.secretKey = cipher.doFinal(user.secretKey);
+                accounts.put(request.login, user);
+                response.message = "success";
+                return response;
+            } catch (Exception ex){
+                response.message = ex.getMessage();
+                return response;
+            }
         }
     }
 }
