@@ -1,4 +1,4 @@
-package lab_6.server.TestServer;
+package lab_6.server.serverTesting;
 
 import lab_6.message.Message;
 

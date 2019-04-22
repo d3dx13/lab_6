@@ -1,4 +1,4 @@
-package lab_6.server.ThreadServer;
+package lab_6.server.core;
 import lab_6.message.Account;
 import lab_6.message.Message;
 import lab_6.message.loggingIn.*;
@@ -16,7 +16,7 @@ import java.util.Arrays;
 import java.util.Date;
 
 import static lab_6.server.Database.*;
-import static lab_6.server.Settings.*;
+import static lab_6.Settings.*;
 
 
 public class MonoThreadClientHandler implements Runnable {

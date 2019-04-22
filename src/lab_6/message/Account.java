@@ -1,7 +1,6 @@
 package lab_6.message;
 
 import java.io.Serializable;
-import java.util.Date;
 
 public final class Account implements Serializable {
     public String login;

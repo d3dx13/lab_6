@@ -1,8 +1,7 @@
-package lab_6.server.ThreadServer;
+package lab_6.server.core;
 
 import lab_6.message.Message;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.stream.Stream;
 
 public class CommandHandler {
     public static void main(String[] args)
