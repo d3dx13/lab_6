@@ -149,16 +149,16 @@ public class CommandParser {
 
     public static void main(String[] args) {
         Message msg = getMessageFromJSON("help[{key:\"1asdw23\", value:{name : dddodd, awda: wdawawd}}, {key:\"dwa\", value:{name : faawa}}]", "d3dx13");
-        System.out.println("===");
+        System.out.println("=====");
         System.out.println(msg.login);
         System.out.println(msg.time);
         System.out.println(msg.text);
-        System.out.println("---");
+        System.out.println("-----");
         if (msg.keys != null && msg.values != null)
             for (int i = 0; i < msg.keys.size(); i++){
             System.out.println(msg.keys.get(i) + " : " + msg.values.get(i));
         }
-        System.out.println("===");
+        System.out.println("=====");
     }
 
     private static void printHelpMessage(){
