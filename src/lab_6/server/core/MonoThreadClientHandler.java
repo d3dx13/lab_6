@@ -1,6 +1,5 @@
 package lab_6.server.core;
-import lab_6.message.Account;
-import lab_6.message.Message;
+import lab_6.message.*;
 import lab_6.message.loggingIn.*;
 import lab_6.message.registration.*;
 
@@ -8,7 +7,6 @@ import javax.crypto.Cipher;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
-import java.net.SocketException;
 import java.security.KeyFactory;
 import java.security.SecureRandom;
 import java.security.spec.X509EncodedKeySpec;
@@ -31,7 +29,6 @@ public class MonoThreadClientHandler implements Runnable {
         try {
             objectOutputStream = new ObjectOutputStream(clientDialog.getOutputStream());
             objectInputStream = new ObjectInputStream(clientDialog.getInputStream());
-
             Object message = objectInputStream.readObject();
             if (message.getClass().equals(Message.class)){
                 Message msg = (Message) message;
@@ -45,7 +42,7 @@ public class MonoThreadClientHandler implements Runnable {
                 if (msg.values  != null)
                     msg.values.forEach(s -> System.out.print(s+", "));
                 System.out.print("\n");
-                objectOutputStream.writeObject(command(msg));
+                objectOutputStream.writeObject(command(msg)); // Вот это сообщение будет шифроваться в Crypted и отправляться
                 objectOutputStream.flush();
             }
             else if (message.getClass().equals(RegistrationRequest.class)){
@@ -63,8 +60,6 @@ public class MonoThreadClientHandler implements Runnable {
             objectInputStream.close();
             objectOutputStream.close();
             clientDialog.close();
-        }catch (SocketException e){
-            System.out.println(clientDialog.toString() + " disconnected");
         } catch (Exception e) {
             e.printStackTrace();
         }
