@@ -1,8 +1,8 @@
 package lab_6.world;
 
 public class IdMaster {
-    static int idCounter = 4096;
-    static int create(){
+    public static int idCounter = 4096;
+    public static int create(){
         idCounter++;
         return idCounter;
     }

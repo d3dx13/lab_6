@@ -1,5 +1,8 @@
 package lab_6.world;
 
+import lab_6.world.creation.Dancer;
+import lab_6.world.creation.Square;
+
 import java.io.*;
 
 public class Main {

@@ -1,9 +1,13 @@
-package lab_6.world;
+package lab_6.world.creation;
 
 import java.io.*;
 import java.util.*;
 
-import lab_6.world.Dancer;
+import lab_6.world.exception.SetupHyperParametersException;
+import lab_6.world.state.DynamicsState;
+import lab_6.world.state.FeelState;
+import lab_6.world.state.PositionState;
+import lab_6.world.state.ThinkState;
 import org.json.*;
 
 public class Square {
@@ -13,7 +17,7 @@ public class Square {
     public String initTime = "Empty";
     public String lastChangeTime = "Empty";
 
-    Square(){
+    public Square(){
         class MyShutdownHook extends Thread {
             public void run() {
                 save();

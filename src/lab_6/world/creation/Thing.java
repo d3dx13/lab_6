@@ -1,10 +1,15 @@
-package lab_6.world;
+package lab_6.world.creation;
 
-import lab_6.world.Existing;
+import lab_6.world.IdMaster;
+import lab_6.world.base.Affected;
+import lab_6.world.base.Existing;
+import lab_6.world.state.AffectState;
+import lab_6.world.state.DynamicsState;
+import lab_6.world.state.PositionState;
 
-public class Thing extends Existing implements Affected{
+public class Thing extends Existing implements Affected {
 
-    Thing(String newName){
+    public Thing(String newName){
         this.name = newName;
         this.id = IdMaster.create();
     }
@@ -18,13 +23,13 @@ public class Thing extends Existing implements Affected{
     }
 
     @Override
-    void setDynamics(DynamicsState newState) {
+    public void setDynamics(DynamicsState newState) {
         this.dynamicsStateState = newState;
         System.out.println("*" + this.toString() + " теперь " + newState + "*");
     }
 
     @Override
-    void setPosition(PositionState newState) {
+    public void setPosition(PositionState newState) {
         this.positionState = newState;
         System.out.println("*" + this.toString() + " теперь " + newState + "*");
     }

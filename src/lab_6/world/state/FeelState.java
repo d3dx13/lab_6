@@ -1,10 +1,10 @@
-package lab_6.world;
+package lab_6.world.state;
 
-public enum ThinkState {
-    NOTICE{
+public enum FeelState {
+    HAPPY{
         @Override
         public String toString() {
-            return "заметил что-то";
+            return "счастье";
         }
     },
     NEUTRAL{
@@ -13,46 +13,40 @@ public enum ThinkState {
             return "...";
         }
     },
-    WATCH{
+    SAD{
         @Override
         public String toString() {
-            return "смотрит";
+            return "грусть";
         }
     },
-    PONDER{
+    CONFUSED{
         @Override
         public String toString() {
-            return "размышляет";
+            return "c растерянностью";
         }
     },
-    UNDERSTAND{
+    SURPRISED{
         @Override
         public String toString() {
-            return "понял";
+            return "удивление";
         }
     },
-    DOES_NOT_WANT_TO_LEAVE{
+    WANT_TO_DANCE{
         @Override
         public String toString() {
-            return "не хочет уходить";
+            return "желание пуститься в пляс";
         }
     },
-    LISTEN{
+    SOFT{
         @Override
         public String toString() {
-            return "слушает";
+            return "нежность";
         }
     },
-    DEPRIVED_OF_ATTENTION{
+    CONFIDENTLY{
         @Override
         public String toString() {
-            return "лишён внимания";
-        }
-    },
-    GONE{
-        @Override
-        public String toString() {
-            return "ушёл";
+            return "с уверенностью";
         }
     }
 }

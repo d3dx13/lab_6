@@ -1,4 +1,4 @@
-package lab_6.world;
+package lab_6.world.exception;
 
 public class SetupHyperParametersException extends Exception {
     @Override

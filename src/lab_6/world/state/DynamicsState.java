@@ -1,4 +1,4 @@
-package lab_6.world;
+package lab_6.world.state;
 
 public enum DynamicsState {
     FALLING{

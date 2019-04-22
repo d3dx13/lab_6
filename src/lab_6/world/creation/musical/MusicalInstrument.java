@@ -1,8 +1,9 @@
-package lab_6.world;
+package lab_6.world.creation.musical;
 
-import lab_6.world.DynamicsState;
-import lab_6.world.FeelState;
-import lab_6.world.Music;
+import lab_6.world.creation.Thing;
+import lab_6.world.state.DynamicsState;
+import lab_6.world.state.FeelState;
+import lab_6.world.state.PositionState;
 
 public class MusicalInstrument extends Thing {
     MusicalInstrument(String newName){

@@ -1,4 +1,4 @@
-package lab_6.world;
+package lab_6.world.exception;
 
 public class BrainOutException extends RuntimeException{
     @Override

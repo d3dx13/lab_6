@@ -1,6 +1,10 @@
-package lab_6.world;
+package lab_6.world.creation;
 
-public class People extends Existing implements Feeling, Thinking, Affecting, Affected{
+import lab_6.world.IdMaster;
+import lab_6.world.base.*;
+import lab_6.world.state.*;
+
+public class People extends Existing implements Feeling, Thinking, Affecting, Affected {
 
     People(String newName){
         this.name = newName;
@@ -21,13 +25,13 @@ public class People extends Existing implements Feeling, Thinking, Affecting, Af
     }
 
     @Override
-    void setDynamics(DynamicsState newState) {
+    public void setDynamics(DynamicsState newState) {
         this.dynamicsStateState = newState;
         System.out.println("*" + this.toString() + " сейчас " + newState + "*");
     }
 
     @Override
-    void setPosition(PositionState newState) {
+    public void setPosition(PositionState newState) {
         this.positionState = newState;
         System.out.println("*" + this.toString() + " сейчас " + newState + "*");
     }

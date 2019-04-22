@@ -1,4 +1,7 @@
-package lab_6.world;
+package lab_6.world.creation;
+
+import lab_6.world.state.DynamicsState;
+import lab_6.world.state.FeelState;
 
 import java.util.Random;
 

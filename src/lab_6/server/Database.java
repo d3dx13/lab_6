@@ -1,11 +1,10 @@
 package lab_6.server;
 
 import lab_6.message.Account;
-import lab_6.world.Dancer;
+import lab_6.world.creation.Dancer;
 
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.PriorityBlockingQueue;
-import java.util.stream.Collectors;
 
 public class Database {
     public static PriorityBlockingQueue<Dancer> collection = new PriorityBlockingQueue<Dancer>();

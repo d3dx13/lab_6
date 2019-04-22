@@ -1,10 +1,11 @@
-package lab_6.world;
+package lab_6.world.base;
 
-import lab_6.world.DynamicsState;
+import lab_6.world.state.DynamicsState;
+import lab_6.world.state.PositionState;
 
 public abstract class Existing {
-    abstract void setDynamics(DynamicsState newState);
-    abstract void setPosition(PositionState newState);
+    public abstract void setDynamics(DynamicsState newState);
+    public abstract void setPosition(PositionState newState);
     public PositionState getPosition(){
         //Добавить ли сюда сообщение?
         return this.positionState;

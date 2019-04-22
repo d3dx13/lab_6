@@ -1,13 +1,15 @@
 package lab_6.client.core;
 
 import lab_6.message.Message;
-import lab_6.world.*;
+import lab_6.world.creation.Dancer;
+import lab_6.world.state.DynamicsState;
+import lab_6.world.state.FeelState;
+import lab_6.world.state.PositionState;
+import lab_6.world.state.ThinkState;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.sql.Time;
 import java.time.Instant;
-import java.time.temporal.TemporalField;
 import java.util.LinkedList;
 import java.util.Map;
 

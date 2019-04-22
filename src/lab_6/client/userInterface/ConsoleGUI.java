@@ -1,4 +1,4 @@
-package lab_6.client.userInterface.console;
+package lab_6.client.userInterface;
 
 import lab_6.client.core.CommandParser;
 import lab_6.message.Message;

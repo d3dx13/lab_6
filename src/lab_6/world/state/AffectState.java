@@ -1,52 +1,52 @@
-package lab_6.world;
+package lab_6.world.state;
 
-public enum FeelState {
-    HAPPY{
+public enum AffectState {
+    CREATE{
         @Override
         public String toString() {
-            return "счастье";
+            return "создать";
+        }
+    },
+    THROW{
+        @Override
+        public String toString() {
+            return "кинуть";
+        }
+    },
+    CATCH{
+        @Override
+        public String toString() {
+            return "поймать";
+        }
+    },
+    MOVE{
+        @Override
+        public String toString() {
+            return "подвинуть";
         }
     },
     NEUTRAL{
         @Override
         public String toString() {
-            return "...";
+            return "";
         }
     },
-    SAD{
+    WATCH_OUT{
         @Override
         public String toString() {
-            return "грусть";
+            return "посмотрел из";
         }
     },
-    CONFUSED{
+    DISAPPEAR_INTO{
         @Override
         public String toString() {
-            return "c растерянностью";
+            return "исчезнул в";
         }
     },
-    SURPRISED{
+    RUN_ON {
         @Override
         public String toString() {
-            return "удивление";
-        }
-    },
-    WANT_TO_DANCE{
-        @Override
-        public String toString() {
-            return "желание пуститься в пляс";
-        }
-    },
-    SOFT{
-        @Override
-        public String toString() {
-            return "нежность";
-        }
-    },
-    CONFIDENTLY{
-        @Override
-        public String toString() {
-            return "с уверенностью";
+            return "бежал по";
         }
     }
 }
