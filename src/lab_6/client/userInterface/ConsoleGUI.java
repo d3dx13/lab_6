@@ -8,8 +8,6 @@ import java.io.InputStreamReader;
 
 public class ConsoleGUI {
     public static void main(String[] args) {
-
-
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         boolean exit = false;
         while (!exit) {
@@ -24,15 +22,5 @@ public class ConsoleGUI {
                 exit = true;
             }
         }
-
     }
-
-
-
-
-
-
-
-
-
 }

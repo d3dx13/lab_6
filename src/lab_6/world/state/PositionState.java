@@ -1,6 +1,8 @@
 package lab_6.world.state;
 
-public enum PositionState {
+import java.io.Serializable;
+
+public enum PositionState implements Serializable {
     NOWHERE{
         @Override
         public String toString() {

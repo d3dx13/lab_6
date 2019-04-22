@@ -1,6 +1,8 @@
 package lab_6.world.state;
 
-public enum AffectState {
+import java.io.Serializable;
+
+public enum AffectState implements Serializable {
     CREATE{
         @Override
         public String toString() {

@@ -3,9 +3,10 @@ package lab_6.world.creation;
 import lab_6.world.state.DynamicsState;
 import lab_6.world.state.FeelState;
 
+import java.io.Serializable;
 import java.util.Random;
 
-public class Dancer extends People implements Comparable<Dancer>{
+public class Dancer extends People implements Comparable<Dancer>, Serializable {
     final Random random = new Random();
     /**<p>Качество танца</p>
      */
@@ -23,7 +24,7 @@ public class Dancer extends People implements Comparable<Dancer>{
      * @param newName String : имя
      * @param danceSkill int : умение танцевать
      */
-    Dancer(String newName, int danceSkill){
+    public Dancer(String newName, int danceSkill){
         super(newName);
         this.danceQuality = danceSkill;
     }

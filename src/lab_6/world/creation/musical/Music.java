@@ -7,7 +7,9 @@ import lab_6.world.IdMaster;
 import lab_6.world.state.AffectState;
 import lab_6.world.state.FeelState;
 
-public class Music implements Affecting, Feeling {
+import java.io.Serializable;
+
+public class Music implements Affecting, Feeling, Serializable {
     public Music(String instrumentName){
         this.instrument = instrumentName;
         this.feelState = FeelState.NEUTRAL;

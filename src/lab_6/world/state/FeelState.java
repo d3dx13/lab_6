@@ -1,6 +1,8 @@
 package lab_6.world.state;
 
-public enum FeelState {
+import java.io.Serializable;
+
+public enum FeelState implements Serializable {
     HAPPY{
         @Override
         public String toString() {

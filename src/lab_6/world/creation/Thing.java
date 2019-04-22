@@ -7,7 +7,9 @@ import lab_6.world.state.AffectState;
 import lab_6.world.state.DynamicsState;
 import lab_6.world.state.PositionState;
 
-public class Thing extends Existing implements Affected {
+import java.io.Serializable;
+
+public class Thing extends Existing implements Affected, Serializable {
 
     public Thing(String newName){
         this.name = newName;

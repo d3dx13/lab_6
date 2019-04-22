@@ -4,7 +4,9 @@ import lab_6.world.IdMaster;
 import lab_6.world.base.*;
 import lab_6.world.state.*;
 
-public class People extends Existing implements Feeling, Thinking, Affecting, Affected {
+import java.io.Serializable;
+
+public class People extends Existing implements Feeling, Thinking, Affecting, Affected, Serializable {
 
     People(String newName){
         this.name = newName;

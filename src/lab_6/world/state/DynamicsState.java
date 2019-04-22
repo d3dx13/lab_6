@@ -1,6 +1,8 @@
 package lab_6.world.state;
 
-public enum DynamicsState {
+import java.io.Serializable;
+
+public enum DynamicsState implements Serializable {
     FALLING{
         @Override
         public String toString() {

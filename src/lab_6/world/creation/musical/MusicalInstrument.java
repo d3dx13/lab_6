@@ -5,7 +5,9 @@ import lab_6.world.state.DynamicsState;
 import lab_6.world.state.FeelState;
 import lab_6.world.state.PositionState;
 
-public class MusicalInstrument extends Thing {
+import java.io.Serializable;
+
+public class MusicalInstrument extends Thing implements Serializable {
     MusicalInstrument(String newName){
         super(newName);
         this.dynamicsStateState = DynamicsState.NEUTRAL;

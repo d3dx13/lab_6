@@ -1,6 +1,8 @@
 package lab_6.world.state;
 
-public enum ThinkState {
+import java.io.Serializable;
+
+public enum ThinkState implements Serializable {
     NOTICE{
         @Override
         public String toString() {

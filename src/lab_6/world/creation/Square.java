@@ -10,7 +10,7 @@ import lab_6.world.state.PositionState;
 import lab_6.world.state.ThinkState;
 import org.json.*;
 
-public class Square {
+public class Square implements Serializable{
     public PriorityQueue<Dancer> container = new PriorityQueue<Dancer>(30);
     public Date date = new Date();
     public String type = "Empty";

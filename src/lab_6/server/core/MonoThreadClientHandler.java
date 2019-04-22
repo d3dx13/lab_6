@@ -7,6 +7,7 @@ import javax.crypto.Cipher;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.net.SocketException;
 import java.security.KeyFactory;
 import java.security.SecureRandom;
 import java.security.spec.X509EncodedKeySpec;
@@ -57,6 +58,7 @@ public class MonoThreadClientHandler implements Runnable {
             objectInputStream.close();
             objectOutputStream.close();
             clientDialog.close();
+        } catch (SocketException e){
         } catch (Exception e) {
             e.printStackTrace();
         }

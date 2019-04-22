@@ -3,7 +3,9 @@ package lab_6.world.creation.musical;
 import lab_6.world.state.FeelState;
 import lab_6.world.state.PositionState;
 
-public class StringedMusicalInstrument extends MusicalInstrument {
+import java.io.Serializable;
+
+public class StringedMusicalInstrument extends MusicalInstrument implements Serializable {
     StringedMusicalInstrument(String newName) {
         super(newName);
         StringsInit();
@@ -30,7 +32,7 @@ public class StringedMusicalInstrument extends MusicalInstrument {
         for (int i = 0; i < 7; i++)
             strings[i].touch(newState);
     }
-    public class Strings{
+    public class Strings implements Serializable{
         Strings(String newName){
             this.name = newName;
         }
