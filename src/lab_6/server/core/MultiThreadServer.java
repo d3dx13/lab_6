@@ -1,9 +1,7 @@
 package lab_6.server.core;
 
-import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.net.SocketException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import static lab_6.Settings.ApplicationPort;
@@ -18,7 +16,6 @@ public class MultiThreadServer {
                 executeIt.execute(new MonoThreadClientHandler(client));
             }
             executeIt.shutdown();
-        } catch (SocketException e){
         } catch (Exception e) {
             e.printStackTrace();
         }

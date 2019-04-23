@@ -12,7 +12,6 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
-import java.net.SocketException;
 import java.security.KeyFactory;
 import java.security.SecureRandom;
 import java.security.spec.X509EncodedKeySpec;
@@ -238,8 +237,8 @@ public class MonoThreadClientHandler implements Runnable {
     private Message show(){
         Message response = new Message();
         response.text = "show";
-
-        collection.stream().sorted();
+        response.values
+        collection.stream().sorted().;
         return response;
     }
 }

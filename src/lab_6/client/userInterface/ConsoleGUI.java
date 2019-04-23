@@ -22,11 +22,11 @@ public class ConsoleGUI {
                     Message response = NetworkConnection.command(message);
                     if (response.text.length() > 3 && response.text.substring(0, 4).equals("help"))
                         System.out.println(response.text.substring(4));
-                    if (response.text.length() > 9 && response.text.substring(0, 10).equals("disconnect")) {
+                    else if (response.text.length() > 9 && response.text.substring(0, 10).equals("disconnect")) {
                         System.out.println("user disconnected");
                         break;
                     }
-                    if (response.text.length() > 3 && response.text.substring(0, 4).equals("show")) {
+                    else if (response.text.length() > 3 && response.text.substring(0, 4).equals("show")) {
                         System.out.println("SHOW me a boost");
                     }
                 }
