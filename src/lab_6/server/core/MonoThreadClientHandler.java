@@ -5,6 +5,7 @@ import lab_6.message.registration.*;
 import lab_6.crypto.ObjectCryption;
 
 import javax.crypto.Cipher;
+import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
@@ -26,7 +27,6 @@ public class MonoThreadClientHandler implements Runnable {
     public MonoThreadClientHandler(Socket client) {
         this.clientDialog = client;
         this.objectCryption = new ObjectCryption();
-        objectCryption.setSecretKey("12345678901234567890123456789012".getBytes());
     }
     @Override
     public void run() {
@@ -37,8 +37,11 @@ public class MonoThreadClientHandler implements Runnable {
             objectInputStream = new ObjectInputStream(clientDialog.getInputStream());
             Object message = objectInputStream.readObject();
             if (message.getClass().equals(Crypted.class)){
-                Crypted msg = (Crypted) message;;
-                Message request = objectCryption.messageDecrypt(msg);
+                Crypted crypted = (Crypted) message;
+                if (!accounts.containsKey(crypted.login))
+                    throw new IOException();
+                this.objectCryption.setSecretKey(accounts.get(crypted.login).secretKey);
+                Message request = objectCryption.messageDecrypt(crypted);
                 System.out.print("\n======\n");
                 System.out.println(request.text);
                 System.out.println(request.login);
@@ -48,7 +51,7 @@ public class MonoThreadClientHandler implements Runnable {
                     for (Object iter : request.values)
                         System.out.print("\n"+iter);
                 System.out.print("\n======\n");
-                objectOutputStream.writeObject(command(request)); // Вот это сообщение будет шифроваться в Crypted и отправляться
+                objectOutputStream.writeObject(objectCryption.messageEncrypt(command(request)));
                 objectOutputStream.flush();
             }
             else if (message.getClass().equals(RegistrationRequest.class)){
@@ -66,7 +69,6 @@ public class MonoThreadClientHandler implements Runnable {
             objectInputStream.close();
             objectOutputStream.close();
             clientDialog.close();
-        } catch (SocketException e){
         } catch (Exception e) {
             e.printStackTrace();
         }

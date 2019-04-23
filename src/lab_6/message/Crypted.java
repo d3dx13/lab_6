@@ -3,4 +3,5 @@ import java.io.Serializable;
 
 public class Crypted implements Serializable {
     public byte[] data;
+    public String login;
 }

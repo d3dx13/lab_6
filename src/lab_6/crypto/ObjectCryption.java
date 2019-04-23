@@ -16,13 +16,17 @@ import java.time.Instant;
 
 public class ObjectCryption {
     public void setUserLogin(String message){
-        login = message;
+        this.login = message;
+    }
+    public String getUserLogin(){
+        return this.login;
     }
     public void setSecretKey(byte [] message){
-        secretKey = message.clone();
+        this.secretKey = message.clone();
     }
     public Crypted messageEncrypt(Message message) throws IOException, NoSuchPaddingException, NoSuchAlgorithmException, InvalidKeyException, BadPaddingException, IllegalBlockSizeException {
         Crypted response = new Crypted();
+        response.login = this.login;
         SecureRandom secureRandom = new SecureRandom();
         response.data = messageSerialize(message);
         SecretKeySpec secretKeySpec = new SecretKeySpec(secretKey, "AES");
@@ -74,6 +78,6 @@ public class ObjectCryption {
         message.text = text;
         return message;
     }
-    protected static String login;
-    protected static byte [] secretKey;
+    protected String login;
+    protected byte [] secretKey;
 }

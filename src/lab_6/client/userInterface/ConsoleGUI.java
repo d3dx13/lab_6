@@ -16,8 +16,10 @@ public class ConsoleGUI {
                 String command;
                 System.out.print(String.format("%s: ", userLogin));
                 command = reader.readLine();
-                Message response = CommandParser.getMessageFromJSON(command);
-                NetworkConnection.command(response);
+                if (!command.strip().equals("")) {
+                    Message response = NetworkConnection.command(CommandParser.getMessageFromJSON(command));
+                    System.out.println(response.text);
+                }
             } catch (Exception ex) {
                 System.out.println(ex.getMessage());
                 exit = true;
