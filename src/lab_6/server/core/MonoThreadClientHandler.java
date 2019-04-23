@@ -260,8 +260,8 @@ public class MonoThreadClientHandler implements Runnable {
             response.text = "add_if_max failed";
             return response;
         }
-        Dancer dancerMax = collection.stream().max(Dancer::compareTo).get();
-        request.values.parallelStream().map(o -> (Dancer)o).filter(o -> (o.compareTo(dancerMax)) < 0).forEach(dancer -> collection.add(dancer));
+        Dancer dancerMax = collection.stream().max((dancer, t1) -> (dancer.getDanceQuality() - t1.getDanceQuality())).get();
+        request.values.parallelStream().map(o -> (Dancer)o).filter(o -> (o.getDanceQuality() >= dancerMax.getDanceQuality())).forEach(dancer -> collection.add(dancer));
         response.text = "add_if_max success";
         return response;
     }
@@ -271,8 +271,8 @@ public class MonoThreadClientHandler implements Runnable {
             response.text = "add_if_min failed";
             return response;
         }
-        Dancer dancerMin = collection.stream().min(Dancer::compareTo).get();
-        request.values.parallelStream().map(o -> (Dancer)o).filter(o -> (o.compareTo(dancerMin)) > 0).forEach(dancer -> collection.add(dancer));
+        Dancer dancerMin = collection.stream().min((dancer, t1) -> (dancer.getDanceQuality() - t1.getDanceQuality())).get();
+        request.values.parallelStream().map(o -> (Dancer)o).filter(o -> (o.getDanceQuality() <= dancerMin.getDanceQuality())).forEach(dancer -> collection.add(dancer));
         response.text = "add_if_min success";
         return response;
     }
