@@ -251,16 +251,16 @@ public class MonoThreadClientHandler implements Runnable {
     private Message add(Message request){
         Message response = new Message();
         response.text = "add";
-        LinkedList<Dancer>dancers = new LinkedList<Dancer>();
-        dancers = request.values.stream().collect(Collectors.toCollection());
-        for (Object iter: request.values)
-            dancers.add((Dancer)iter);
+
+        LinkedList<Dancer> dancers = new LinkedList<>();
+        response.values.stream().forEach(o -> dancers.add((Dancer) o));
         collection.addAll(dancers);
         return response;
     }
     private Message add_if_max(Message request){
         Message response = new Message();
         response.text = "add_if_max";
+        collection.take()
         response.values = null;
         return response;
     }
@@ -273,7 +273,6 @@ public class MonoThreadClientHandler implements Runnable {
     private Message remove(Message request){
         Message response = new Message();
         response.text = "remove";
-        request.values.forEach(o -> System.out.println(o));
         request.values.stream().forEach(o -> collection.remove((Dancer) o));
         //collection.stream().filter(dancer -> dancer.equals(request.values)).forEach(dancer -> collection.remove(dancer));
         return response;
@@ -292,7 +291,7 @@ public class MonoThreadClientHandler implements Runnable {
     }
     private Message info(Message request){
         Message response = new Message();
-        response.text = "add";
+        response.text = "info";
         response.values = null;
         return response;
     }
