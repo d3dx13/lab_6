@@ -3,6 +3,9 @@ import lab_6.message.*;
 import lab_6.message.loggingIn.*;
 import lab_6.message.registration.*;
 import lab_6.crypto.ObjectCryption;
+import lab_6.world.state.FeelState;
+import lab_6.world.state.PositionState;
+import lab_6.world.state.ThinkState;
 
 import javax.crypto.Cipher;
 import java.io.IOException;
@@ -42,15 +45,6 @@ public class MonoThreadClientHandler implements Runnable {
                     throw new IOException();
                 this.objectCryption.setSecretKey(accounts.get(crypted.login).secretKey);
                 Message request = objectCryption.messageDecrypt(crypted);
-                System.out.print("\n======\n");
-                System.out.println(request.text);
-                System.out.println(request.login);
-                System.out.println(request.time);
-                System.out.print("------");
-                if (request.values != null)
-                    for (Object iter : request.values)
-                        System.out.print("\n"+iter);
-                System.out.print("\n======\n");
                 objectOutputStream.writeObject(objectCryption.messageEncrypt(command(request)));
                 objectOutputStream.flush();
             }
@@ -75,7 +69,20 @@ public class MonoThreadClientHandler implements Runnable {
     }
 
     private Message command(Message message){
-        return message;
+        Account user = accounts.get(message.login);
+        if (message.time > user.lastAccessTime) {
+            user.lastAccessTime = message.time;
+            accounts.put(message.login, user);
+        }
+        else
+            return objectCryption.getNewMessage("Hello from the Mesozoic");
+        if (message.text.length() > 3 && message.text.substring(0,4).equals("help"))
+            return getHelpMessage();
+        if (message.text.length() > 9 && message.text.substring(0,10).equals("disconnect"))
+            return disconnect(message);
+        if (message.text.length() > 3 && message.text.substring(0,4).equals("show"))
+            return show();
+        return new Message();
     }
 
     private RegistrationResponse registration(RegistrationRequest request){
@@ -172,5 +179,67 @@ public class MonoThreadClientHandler implements Runnable {
                 return response;
             }
         }
+    }
+
+    private Message disconnect(Message message){
+        Account user = accounts.get(message.login);
+        user.lastAccessTime = 0;
+        user.secretKey = null;
+        user.random = null;
+        accounts.put(message.login, user);
+        return objectCryption.getNewMessage("disconnect");
+    }
+
+    private Message getHelpMessage(){
+        StringBuffer stringBuffer = new StringBuffer()
+                .append("help\n")
+                .append("--- Commands ---\n")
+                .append("help - Вывести в стандартный поток вывода помощь по командам\n")
+                .append("disconnect - выполнить корректное отключение от сервера и уничтожить сессионный AES256 ключ\n")
+                .append("import - загрузить элементы коллекции из файла по пути переменной окружения COLLECTION_PATH в коллекцию на сервере\n")
+                .append("add {...} - Добавить новый элемент в коллекцию\n")
+                .append("add_if_min {...} - Добавить новый элемент в коллекцию, если его значение меньше, чем у наименьшего элемента этой коллекции\n")
+                .append("add_if_max {...} - Добавить новый элемент в коллекцию, если его значение превышает значение наибольшего элемента этой коллекции\n")
+                .append("remove {...} - Удалить элемент из коллекции по его значению\n")
+                .append("show - Вывести в стандартный поток вывода все элементы коллекции в строковом представлении\n")
+                .append("save - Сохранить коллекцию в файл\n")
+                .append("load - Загрузить коллекцию из файла\n")
+                .append("info - Вывести в стандартный поток вывода информацию о коллекции (тип, дата инициализации, дата последнего изменения, количество элементов)\n")
+                .append("\n\n--- JSON params ---\n")
+                .append("--- [ЗНАЧЕНИЕ] : [описание] ---\n")
+                .append("-------------------\n")
+                .append("=== name ===\n")
+                .append("====== String : Строка с именем\n")
+                .append("============\n")
+                .append("=== danceQuality ===\n")
+                .append("====== int : Начальное количество \"dance points\"\n")
+                .append("====================\n");
+        stringBuffer.append("=== dynamics ===\n");
+        for (PositionState iter : PositionState.values())
+            stringBuffer.append(String.format("====== %s : %s\n", iter.name(), iter.toString()));
+        stringBuffer.append("================\n");
+        stringBuffer.append("=== feel ===\n");
+        for (FeelState iter : FeelState.values())
+            stringBuffer.append(String.format("====== %s : %s\n", iter.name(), iter.toString()));
+        stringBuffer.append("============\n");
+        stringBuffer.append("=== think ===\n");
+        for (ThinkState iter : ThinkState.values())
+            stringBuffer.append(String.format("====== %s : %s\n", iter.name(), iter.toString()));
+        stringBuffer.append("=============\n");
+        stringBuffer.append("=== position ===\n");
+        for (PositionState iter : PositionState.values())
+            stringBuffer.append(String.format("====== %s : %s\n", iter.name(), iter.toString()));
+        stringBuffer.append("=============\n");
+        Message response = new Message();
+        response.text = stringBuffer.toString();
+        return response;
+    }
+
+    private Message show(){
+        Message response = new Message();
+        response.text = "show";
+
+        collection.stream().sorted();
+        return response;
     }
 }

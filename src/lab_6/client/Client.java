@@ -46,9 +46,9 @@ public class Client {
         String hostname;
         int port;
         try {
-            System.out.print("\nhostname: ");
+            System.out.print("hostname: ");
             hostname = reader.readLine();
-            System.out.print("\nport: ");
+            System.out.print("port: ");
             port = Integer.valueOf(reader.readLine());
         } catch (Exception ex){
             System.out.println("В поле \"port\" нужно ввести порт сервера\nЭто целое число от 1 до 65535");
@@ -79,7 +79,7 @@ public class Client {
             return;
         }
         NetworkConnection.objectCryption.setUserLogin(login);
-        CommandParser.setUserLogin(NetworkConnection.objectCryption.getUserLogin());
+        CommandParser.setUserLogin(login);
     }
     public static void connect()  {
         if (getServerAddressr() == null)

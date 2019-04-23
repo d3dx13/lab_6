@@ -16,8 +16,19 @@ public class ConsoleGUI {
                 System.out.print(String.format("%s: ", NetworkConnection.objectCryption.getUserLogin()));
                 command = reader.readLine();
                 if (!command.strip().equals("")) {
-                    Message response = NetworkConnection.command(CommandParser.getMessageFromJSON(command));
-                    System.out.println(response.text);
+                    Message message = CommandParser.getMessageFromJSON(command);
+                    if (message.text.length() > 5 && message.text.substring(0,6).equals("import")){
+                    }
+                    Message response = NetworkConnection.command(message);
+                    if (response.text.length() > 3 && response.text.substring(0, 4).equals("help"))
+                        System.out.println(response.text.substring(4));
+                    if (response.text.length() > 9 && response.text.substring(0, 10).equals("disconnect")) {
+                        System.out.println("user disconnected");
+                        break;
+                    }
+                    if (response.text.length() > 3 && response.text.substring(0, 4).equals("show")) {
+                        System.out.println("SHOW me a boost");
+                    }
                 }
             } catch (Exception ex) {
                 System.out.println(ex.getMessage());

@@ -18,27 +18,21 @@ import javax.crypto.spec.SecretKeySpec;
 import java.io.*;
 import java.math.BigInteger;
 import java.net.InetSocketAddress;
-import java.net.SocketException;
 import java.nio.ByteBuffer;
-import java.nio.channels.ScatteringByteChannel;
 import java.nio.channels.SocketChannel;
+import java.nio.channels.UnresolvedAddressException;
 import java.nio.charset.Charset;
 import java.security.*;
-import java.security.spec.InvalidKeySpecException;
 import java.security.spec.PKCS8EncodedKeySpec;
 import java.security.spec.RSAKeyGenParameterSpec;
-import java.time.Instant;
 import java.util.Arrays;
 
-import static java.time.Instant.now;
 import static lab_6.Settings.loginMaximalLength;
 import static lab_6.Settings.loginMinimalLength;
 import static lab_6.Settings.userRSAkeyLength;
 
 public class NetworkConnection {
     public static Message command(Message message) throws IOException, IllegalBlockSizeException, InvalidKeyException, BadPaddingException, NoSuchAlgorithmException, NoSuchPaddingException, ClassNotFoundException {
-        if (serverAddress == null)
-            throw new SocketException();
         Object response = objectSend(objectCryption.messageEncrypt(message));
         return objectCryption.messageDecrypt((Crypted)response);
     }
@@ -53,18 +47,11 @@ public class NetworkConnection {
 
     public static boolean signUp() {
         try {
-            if (serverAddress == null )
-                throw new SocketException(){
-                @Override
-                public String getMessage() {
-                    return "server unavailable";
-                }
-            };
             String password;
             BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
             RegistrationRequest registrationRequest = new RegistrationRequest();
             registrationRequest.login = objectCryption.getUserLogin();
-            if (objectCryption.getUserLogin().length() < loginMinimalLength || objectCryption.getUserLogin().length() > loginMaximalLength){
+            if (objectCryption.getUserLogin().length() < loginMinimalLength || objectCryption.getUserLogin().length() > loginMaximalLength) {
                 System.out.println("!!! Login must be %d to %d characters !!!");
                 return false;
             }
@@ -78,14 +65,14 @@ public class NetworkConnection {
             }
             System.out.println("\nGenerating RSA pair...");
             KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance("RSA");
-            RSAKeyGenParameterSpec kpgSpec = new RSAKeyGenParameterSpec(userRSAkeyLength, BigInteger.probablePrime(userRSAkeyLength-1, new SecureRandom()));
+            RSAKeyGenParameterSpec kpgSpec = new RSAKeyGenParameterSpec(userRSAkeyLength, BigInteger.probablePrime(userRSAkeyLength - 1, new SecureRandom()));
             System.out.println("Generating done");
             System.out.println("Generating encrypted AES passwords");
             keyPairGenerator.initialize(kpgSpec);
             KeyPair keyPair = keyPairGenerator.genKeyPair();
             registrationRequest.publicKey = keyPair.getPublic().getEncoded();
             MessageDigest sha = MessageDigest.getInstance("SHA-256");
-            byte [] secretKey = Arrays.copyOf(sha.digest(password.getBytes(Charset.forName("UTF-8"))), 32);
+            byte[] secretKey = Arrays.copyOf(sha.digest(password.getBytes(Charset.forName("UTF-8"))), 32);
             SecretKeySpec secretKeySpec = new SecretKeySpec(secretKey, "AES");
             Cipher cipher = Cipher.getInstance("AES");
             cipher.init(Cipher.ENCRYPT_MODE, secretKeySpec);
@@ -99,24 +86,19 @@ public class NetworkConnection {
                 objectCryption.setSecretKey(secretKey);
                 return true;
             } else
-                System.out.println("failed\nReason: "+registrationResponse.message);
-                return false;
+                System.out.println("failed\nReason: " + registrationResponse.message);
+            return false;
+        }catch (UnresolvedAddressException ex){
+            System.out.println("Address is incorrect");
+            return false;
         } catch (Exception ex){
             System.out.println(ex.getMessage());
             return false;
         }
     }
 
-
     public static boolean signIn() {
         try {
-            if (serverAddress == null)
-                throw new SocketException(){
-                    @Override
-                    public String getMessage() {
-                        return "server unavailable";
-                    }
-                };
             String password;
             BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
             IdentificationRequest identificationRequest = new IdentificationRequest();
@@ -164,12 +146,6 @@ public class NetworkConnection {
             System.out.println(ex.getMessage());
             return false;
         }
-    }
-    public static void disconnect() throws IOException, ClassNotFoundException {
-        objectSend(objectCryption.getNewMessage("disconnect"));
-    }
-    public static void status() throws IOException, ClassNotFoundException {
-        objectSend(objectCryption.getNewMessage("status"));
     }
 
     protected static Object objectSend(Object message) throws IOException, ClassNotFoundException {

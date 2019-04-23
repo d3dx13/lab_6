@@ -42,13 +42,9 @@ public class CommandParser {
         return tempDancer;
     }
     public static Message getMessageFromJSON(String inputJSON){
-        Message response = new Message();
+        Message response = NetworkConnection.objectCryption.getNewMessage();
         inputJSON = inputJSON.strip();
-        if (inputJSON.length() > 5 && inputJSON.substring(0,6).equalsIgnoreCase("status")){
-            response.text = "status";
-            return response;
-        }
-        else if (inputJSON.length() > 3 && inputJSON.substring(0,4).equalsIgnoreCase("show")){
+        if (inputJSON.length() > 3 && inputJSON.substring(0,4).equalsIgnoreCase("show")){
             response.text = "show";
             return response;
         }
@@ -84,12 +80,7 @@ public class CommandParser {
             response.text = "disconnect";
             return response;
         }
-        else if (inputJSON.length() > 3 && inputJSON.substring(0,4).equalsIgnoreCase("exit")){
-            response.text = "exit";
-            return response;
-        }
         else if (inputJSON.length() > 3 && inputJSON.substring(0,4).equalsIgnoreCase("help")){
-            printHelpMessage();
             response.text = "help";
             return response;
         }
@@ -123,50 +114,6 @@ public class CommandParser {
             }
         }
         return response;
-    }
-
-    private static void printHelpMessage(){
-        StringBuffer stringBuffer = new StringBuffer()
-                .append("\n--- Commands ---\n")
-                .append("help - Вывести в стандартный поток вывода помощь по командам\n")
-                .append("exit - Закрыть программу\n")
-                .append("connect - выполнить подключение к серверу и получить сессионный AES256 ключ\n")
-                .append("disconnect - выполнить корректное отключение от сервера и уничтожить сессионный AES256 ключ\n")
-                .append("import - загрузить элементы коллекции из файла по пути переменной окружения COLLECTION_PATH в коллекцию на сервере\n")
-                .append("add {...} - Добавить новый элемент в коллекцию\n")
-                .append("add_if_min {...} - Добавить новый элемент в коллекцию, если его значение меньше, чем у наименьшего элемента этой коллекции\n")
-                .append("add_if_max {...} - Добавить новый элемент в коллекцию, если его значение превышает значение наибольшего элемента этой коллекции\n")
-                .append("remove {...} - Удалить элемент из коллекции по его значению\n")
-                .append("show - Вывести в стандартный поток вывода все элементы коллекции в строковом представлении\n")
-                .append("save - Сохранить коллекцию в файл\n")
-                .append("load - Загрузить коллекцию из файла\n")
-                .append("info - Вывести в стандартный поток вывода информацию о коллекции (тип, дата инициализации, дата последнего изменения, количество элементов)\n")
-                .append("\n\n--- JSON params ---\n")
-                .append("--- [ЗНАЧЕНИЕ] : [описание] ---\n")
-                .append("-------------------\n")
-                .append("=== name ===\n")
-                .append("====== String : Строка с именем\n")
-                .append("============\n")
-                .append("=== danceQuality ===\n")
-                .append("====== int : Начальное количество \"dance points\"\n")
-                .append("====================\n");
-        stringBuffer.append("=== dynamics ===\n");
-        for (PositionState iter : PositionState.values())
-            stringBuffer.append(String.format("====== %s : %s\n", iter.name(), iter.toString()));
-        stringBuffer.append("================\n");
-        stringBuffer.append("=== feel ===\n");
-        for (FeelState iter : FeelState.values())
-            stringBuffer.append(String.format("====== %s : %s\n", iter.name(), iter.toString()));
-        stringBuffer.append("============\n");
-        stringBuffer.append("=== think ===\n");
-        for (ThinkState iter : ThinkState.values())
-            stringBuffer.append(String.format("====== %s : %s\n", iter.name(), iter.toString()));
-        stringBuffer.append("=============\n");
-        stringBuffer.append("=== position ===\n");
-        for (PositionState iter : PositionState.values())
-            stringBuffer.append(String.format("====== %s : %s\n", iter.name(), iter.toString()));
-        stringBuffer.append("=============\n");
-        System.out.println(stringBuffer);
     }
 
     private static final StringBuffer JSONParseException = new StringBuffer()
