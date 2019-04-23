@@ -260,7 +260,6 @@ public class MonoThreadClientHandler implements Runnable {
     private Message add_if_max(Message request){
         Message response = new Message();
         response.text = "add_if_max";
-        collection.take()
         response.values = null;
         return response;
     }
