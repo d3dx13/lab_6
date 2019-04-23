@@ -3,6 +3,7 @@ import lab_6.message.*;
 import lab_6.message.loggingIn.*;
 import lab_6.message.registration.*;
 import lab_6.crypto.ObjectCryption;
+import lab_6.world.creation.Dancer;
 import lab_6.world.state.FeelState;
 import lab_6.world.state.PositionState;
 import lab_6.world.state.ThinkState;
@@ -81,6 +82,8 @@ public class MonoThreadClientHandler implements Runnable {
             return disconnect(message);
         if (message.text.length() > 3 && message.text.substring(0,4).equals("show"))
             return show();
+        if (message.text.length() > 2 && message.text.substring(0,3).equals("add"))
+            return add(message);
         return new Message();
     }
 
@@ -241,9 +244,8 @@ public class MonoThreadClientHandler implements Runnable {
     }
     private Message add(Message request){
         Message response = new Message();
+        collection.add(new Dancer("RICARDO"));
         response.text = "add";
-        if (request.values == null)
-            return response;
         response.values.parallelStream().forEach(o -> collection.add((Dancer) o));
         return response;
     }

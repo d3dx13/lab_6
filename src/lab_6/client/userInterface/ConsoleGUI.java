@@ -29,8 +29,11 @@ public class ConsoleGUI {
                     else if (response.text.length() > 3 && response.text.substring(0, 4).equals("show")) {
                         System.out.println(response.values);
                         if (response.values != null)
-                            response.values.forEach(o -> System.out.println(o));
-                        System.out.println("SHOW me a boost");
+                            response.values.forEach(o -> System.out.println("> " + o));
+                        System.out.println(response.text);
+                    }
+                    else if (response.text.length() > 2 && response.text.substring(0, 3).equals("add")) {
+                        System.out.println(response.text);
                     }
                 }
             } catch (Exception ex) {
