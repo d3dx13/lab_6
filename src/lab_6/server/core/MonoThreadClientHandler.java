@@ -18,6 +18,8 @@ import java.security.SecureRandom;
 import java.security.spec.X509EncodedKeySpec;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.concurrent.PriorityBlockingQueue;
+import java.util.stream.Collectors;
 
 import static lab_6.Settings.*;
 import static lab_6.server.Database.accounts;
@@ -239,14 +241,13 @@ public class MonoThreadClientHandler implements Runnable {
     private Message show(){
         Message response = new Message();
         response.text = "show";
-        collection.stream().sorted().forEach(dancer -> response.values.addLast(dancer));
+        collection.stream().sorted().forEachOrdered(dancer -> response.values.addLast(dancer));
         return response;
     }
     private Message add(Message request){
         Message response = new Message();
-        collection.add(new Dancer("RICARDO"));
         response.text = "add";
-        response.values.parallelStream().forEach(o -> collection.add((Dancer) o));
+        collection.addAll(response.values.parallelStream().map((o) -> (Dancer)o).collect(Collectors.toList()));
         return response;
     }
     private Message add_if_max(Message request){
