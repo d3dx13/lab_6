@@ -242,7 +242,9 @@ public class MonoThreadClientHandler implements Runnable {
     private Message add(Message request){
         Message response = new Message();
         response.text = "add";
-        response.values = null;
+        if (request.values == null)
+            return response;
+        response.values.parallelStream().forEach(o -> collection.add((Dancer) o));
         return response;
     }
     private Message add_if_max(Message request){
