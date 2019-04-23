@@ -241,4 +241,12 @@ public class MonoThreadClientHandler implements Runnable {
         collection.stream().sorted().count();
         return response;
     }
+
+    private Message show_2(){
+        Message response = new Message();
+        response.text = "show_2";
+        response.values
+        collection.stream().sorted().;
+        return response;
+    }
 }
