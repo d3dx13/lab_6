@@ -238,7 +238,7 @@ public class MonoThreadClientHandler implements Runnable {
         Message response = new Message();
         response.text = "show";
         response.values
-        collection.stream().sorted().;
+        collection.stream().sorted().count();
         return response;
     }
 }
