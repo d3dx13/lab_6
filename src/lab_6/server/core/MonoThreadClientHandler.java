@@ -253,6 +253,7 @@ public class MonoThreadClientHandler implements Runnable {
     private Message add_if_max(Message request){
         Message response = new Message();
         response.text = "add_if_max";
+        collection.take()
         response.values = null;
         return response;
     }
@@ -264,8 +265,9 @@ public class MonoThreadClientHandler implements Runnable {
     }
     private Message remove(Message request){
         Message response = new Message();
-        response.text = "add";
-        response.values = null;
+        response.text = "remove";
+        request.values.stream().forEach(o -> collection.remove((Dancer) o));
+        //collection.stream().filter(dancer -> dancer.equals(request.values)).forEach(dancer -> collection.remove(dancer));
         return response;
     }
     private Message save(Message request){
