@@ -233,20 +233,52 @@ public class MonoThreadClientHandler implements Runnable {
         response.text = stringBuffer.toString();
         return response;
     }
-
     private Message show(){
         Message response = new Message();
         response.text = "show";
-        response.values
-        collection.stream().sorted().count();
+        response.values = null;
         return response;
     }
-
-    private Message show_2(){
+    private Message add(Message request){
         Message response = new Message();
-        response.text = "show_2";
-        response.values
-        collection.stream().sorted().;
+        response.text = "add";
+        response.values = null;
+        return response;
+    }
+    private Message add_if_max(Message request){
+        Message response = new Message();
+        response.text = "add_if_max";
+        response.values = null;
+        return response;
+    }
+    private Message add_if_min(Message request){
+        Message response = new Message();
+        response.text = "add_if_min";
+        response.values = null;
+        return response;
+    }
+    private Message remove(Message request){
+        Message response = new Message();
+        response.text = "add";
+        response.values = null;
+        return response;
+    }
+    private Message save(Message request){
+        Message response = new Message();
+        response.text = "add";
+        response.values = null;
+        return response;
+    }
+    private Message load(Message request){
+        Message response = new Message();
+        response.text = "add";
+        response.values = null;
+        return response;
+    }
+    private Message info(Message request){
+        Message response = new Message();
+        response.text = "add";
+        response.values = null;
         return response;
     }
 }
