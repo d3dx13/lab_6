@@ -18,6 +18,7 @@ import java.security.SecureRandom;
 import java.security.spec.X509EncodedKeySpec;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.concurrent.PriorityBlockingQueue;
 import java.util.stream.Collectors;
 
@@ -247,7 +248,10 @@ public class MonoThreadClientHandler implements Runnable {
     private Message add(Message request){
         Message response = new Message();
         response.text = "add";
-        collection.addAll(response.values.parallelStream().map((o) -> (Dancer)o).collect(Collectors.toList()));
+
+        LinkedList<Dancer> dancers = new LinkedList<>();
+        response.values.stream().forEach(o -> dancers.add((Dancer) o));
+        collection.addAll(dancers);
         return response;
     }
     private Message add_if_max(Message request){
@@ -284,7 +288,7 @@ public class MonoThreadClientHandler implements Runnable {
     }
     private Message info(Message request){
         Message response = new Message();
-        response.text = "add";
+        response.text = "info";
         response.values = null;
         return response;
     }
