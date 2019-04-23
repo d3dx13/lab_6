@@ -44,17 +44,25 @@ public class CommandParser {
     public static Message getMessageFromJSON(String inputJSON){
         Message response = new Message();
         inputJSON = inputJSON.strip();
-        if (inputJSON.length() > 3 && inputJSON.substring(0,4).equalsIgnoreCase("show")){
+        if (inputJSON.length() > 5 && inputJSON.substring(0,6).equalsIgnoreCase("status")){
+            response.text = "status";
+            return response;
+        }
+        else if (inputJSON.length() > 3 && inputJSON.substring(0,4).equalsIgnoreCase("show")){
             response.text = "show";
+            return response;
         }
         else if (inputJSON.length() > 3 && inputJSON.substring(0,4).equalsIgnoreCase("save")){
             response.text = "save";
+            return response;
         }
         else if (inputJSON.length() > 3 && inputJSON.substring(0,4).equalsIgnoreCase("load")){
             response.text = "load";
+            return response;
         }
         else if (inputJSON.length() > 3 && inputJSON.substring(0,4).equalsIgnoreCase("info")){
             response.text = "info";
+            return response;
         }
         else if (inputJSON.length() > 9 && inputJSON.substring(0,10).equalsIgnoreCase("add_if_max")){
             response.text = "add_if_max";

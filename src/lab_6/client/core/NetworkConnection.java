@@ -7,34 +7,57 @@ import lab_6.message.loggingIn.IdentificationRequest;
 import lab_6.message.loggingIn.IdentificationResponse;
 import lab_6.message.registration.RegistrationRequest;
 import lab_6.message.registration.RegistrationResponse;
+import lab_6.crypto.ObjectCryption;
+
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
+import java.io.*;
+import java.net.InetSocketAddress;
+import java.nio.ByteBuffer;
+import java.nio.channels.SocketChannel;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
 
 public class NetworkConnection {
-    public Message command(Message message){
-
-        return new Message();
+    public static void command(Message message) throws IOException, IllegalBlockSizeException, InvalidKeyException, BadPaddingException, NoSuchAlgorithmException, NoSuchPaddingException {
+        objectSend(objectCryption.messageEncrypt(message));
     }
-    public Message connect(){
-
-        return new Message();
+    public static void connect(String hostname, int port) throws IOException {
+        serverAddress = new InetSocketAddress(hostname, port);
+        try {
+            objectSend(objectCryption.messageEncrypt(objectCryption.getNewMessage("connect")));
+        } catch (Exception ex){
+            ex.printStackTrace();
+        }
     }
-    public Message disconnect(){
-
-        return new Message();
+    public static void disconnect() throws IOException {
+        objectSend(objectCryption.getNewMessage("disconnect"));
+    }
+    public static void status() throws IOException {
+        objectSend(objectCryption.getNewMessage("status"));
     }
 
-
-    private IdentificationResponse identification (IdentificationRequest request){
+    protected static void objectSend(Object message) throws IOException {
+        server = SocketChannel.open(serverAddress);
+        ByteBuffer buffer = ByteBuffer.wrap(objectCryption.messageSerialize(message));
+        server.write(buffer);
+        buffer.clear();
+        server.close();
+    }
+    protected static IdentificationResponse identification (IdentificationRequest request){
 
         return new IdentificationResponse();
     }
-    private RegistrationResponse registration (RegistrationRequest request){
+    protected static RegistrationResponse registration (RegistrationRequest request){
 
         return new RegistrationResponse();
     }
-    private AuthenticationResponse authentication (AuthenticationRequest request){
+    protected static AuthenticationResponse authentication (AuthenticationRequest request){
 
         return new AuthenticationResponse();
     }
-    private String login;
-    private byte [] secretKey;
+    protected static SocketChannel server;
+    protected static InetSocketAddress serverAddress;
+    public static ObjectCryption objectCryption = new ObjectCryption();
 }

@@ -2,6 +2,7 @@ package lab_6.server.core;
 import lab_6.message.*;
 import lab_6.message.loggingIn.*;
 import lab_6.message.registration.*;
+import lab_6.crypto.ObjectCryption;
 
 import javax.crypto.Cipher;
 import java.io.ObjectInputStream;
@@ -14,14 +15,18 @@ import java.security.spec.X509EncodedKeySpec;
 import java.util.Arrays;
 import java.util.Date;
 
-import static lab_6.server.Database.*;
 import static lab_6.Settings.*;
+import static lab_6.server.Database.accounts;
+import static lab_6.server.Database.collection;
 
 
 public class MonoThreadClientHandler implements Runnable {
     private Socket clientDialog;
+    private ObjectCryption objectCryption;
     public MonoThreadClientHandler(Socket client) {
         this.clientDialog = client;
+        this.objectCryption = new ObjectCryption();
+        objectCryption.setSecretKey("12345678901234567890123456789012".getBytes());
     }
     @Override
     public void run() {
@@ -31,16 +36,19 @@ public class MonoThreadClientHandler implements Runnable {
             objectOutputStream = new ObjectOutputStream(clientDialog.getOutputStream());
             objectInputStream = new ObjectInputStream(clientDialog.getInputStream());
             Object message = objectInputStream.readObject();
-            if (message.getClass().equals(Message.class)){
-                Message msg = (Message) message;
-                System.out.println("login: "+ msg.login);
-                System.out.println("time: "+ msg.time);
-                System.out.println("text: "+ msg.text);
-                System.out.print("\nvalues: ");
-                if (msg.values  != null)
-                    msg.values.forEach(s -> System.out.print(s+", "));
-                System.out.print("\n");
-                objectOutputStream.writeObject(command(msg)); // Вот это сообщение будет шифроваться в Crypted и отправляться
+            if (message.getClass().equals(Crypted.class)){
+                Crypted msg = (Crypted) message;;
+                Message request = objectCryption.messageDecrypt(msg);
+                System.out.print("\n======\n");
+                System.out.println(request.text);
+                System.out.println(request.login);
+                System.out.println(request.time);
+                System.out.print("------");
+                if (request.values != null)
+                    for (Object iter : request.values)
+                        System.out.print("\n"+iter);
+                System.out.print("\n======\n");
+                objectOutputStream.writeObject(command(request)); // Вот это сообщение будет шифроваться в Crypted и отправляться
                 objectOutputStream.flush();
             }
             else if (message.getClass().equals(RegistrationRequest.class)){
