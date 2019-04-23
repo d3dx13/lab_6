@@ -3,6 +3,7 @@ package lab_6.client.userInterface;
 import lab_6.client.core.CommandParser;
 import lab_6.client.core.NetworkConnection;
 import lab_6.message.Message;
+import lab_6.world.creation.Dancer;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -20,6 +21,8 @@ public class ConsoleGUI {
                     if (message.text.length() > 5 && message.text.substring(0,6).equals("import")){
                     }
                     Message response = NetworkConnection.command(message);
+                    if (response.text == null)
+                        continue;
                     if (response.text.length() > 3 && response.text.substring(0, 4).equals("help"))
                         System.out.println(response.text.substring(4));
                     else if (response.text.length() > 9 && response.text.substring(0, 10).equals("disconnect")) {
@@ -29,15 +32,11 @@ public class ConsoleGUI {
                     else if (response.text.length() > 3 && response.text.substring(0, 4).equals("show")) {
                         System.out.println(response.values);
                         if (response.values != null)
-                            response.values.forEach(o -> System.out.println("> " + o));
+                            response.values.forEach(o -> System.out.println("> " + ((Dancer)o).getDanceQuality() + " - " + ((Dancer)o)));
                         System.out.println(response.text);
                     }
-                    else if (response.text.length() > 2 && response.text.substring(0, 3).equals("add")) {
+                    else
                         System.out.println(response.text);
-                    }
-                    else if (response.text.length() > 5 && response.text.substring(0, 6).equals("remove")) {
-                        System.out.println(response.text);
-                    }
                 }
             } catch (Exception ex) {
                 ex.printStackTrace();

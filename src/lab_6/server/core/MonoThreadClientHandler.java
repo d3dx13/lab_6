@@ -18,10 +18,6 @@ import java.security.SecureRandom;
 import java.security.spec.X509EncodedKeySpec;
 import java.util.Arrays;
 import java.util.Date;
-import java.util.LinkedList;
-import java.util.concurrent.PriorityBlockingQueue;
-import java.util.stream.Collector;
-import java.util.stream.Collectors;
 
 import static lab_6.Settings.*;
 import static lab_6.server.Database.accounts;
@@ -86,6 +82,10 @@ public class MonoThreadClientHandler implements Runnable {
             return disconnect(message);
         if (message.text.length() > 3 && message.text.substring(0,4).equals("show"))
             return show();
+        if (message.text.length() > 9 && message.text.substring(0,10).equals("add_if_max"))
+            return add_if_max(message);
+        if (message.text.length() > 9 && message.text.substring(0,10).equals("add_if_min"))
+            return add_if_min(message);
         if (message.text.length() > 2 && message.text.substring(0,3).equals("add"))
             return add(message);
         if (message.text.length() > 5 && message.text.substring(0,6).equals("remove"))
@@ -250,41 +250,47 @@ public class MonoThreadClientHandler implements Runnable {
     }
     private Message add(Message request){
         Message response = new Message();
-        response.text = "add";
-
-        LinkedList<Dancer> dancers = new LinkedList<>();
-        response.values.stream().forEach(o -> dancers.add((Dancer) o));
-        collection.addAll(dancers);
+        response.text = "add success";
+        request.values.parallelStream().map(o -> (Dancer)o).forEach(dancer -> collection.add(dancer));
         return response;
     }
     private Message add_if_max(Message request){
         Message response = new Message();
-        response.text = "add_if_max";
-        response.values = null;
+        if (collection.isEmpty()){
+            response.text = "add_if_max failed";
+            return response;
+        }
+        Dancer dancerMax = collection.stream().max(Dancer::compareTo).get();
+        request.values.parallelStream().map(o -> (Dancer)o).filter(o -> (o.compareTo(dancerMax)) < 0).forEach(dancer -> collection.add(dancer));
+        response.text = "add_if_max success";
         return response;
     }
     private Message add_if_min(Message request){
         Message response = new Message();
-        response.text = "add_if_min";
-        response.values = null;
+        if (collection.isEmpty()){
+            response.text = "add_if_min failed";
+            return response;
+        }
+        Dancer dancerMin = collection.stream().min(Dancer::compareTo).get();
+        request.values.parallelStream().map(o -> (Dancer)o).filter(o -> (o.compareTo(dancerMin)) > 0).forEach(dancer -> collection.add(dancer));
+        response.text = "add_if_min success";
         return response;
     }
     private Message remove(Message request){
         Message response = new Message();
-        response.text = "remove";
-        request.values.stream().forEach(o -> collection.remove((Dancer) o));
-        //collection.stream().filter(dancer -> dancer.equals(request.values)).forEach(dancer -> collection.remove(dancer));
+        request.values.parallelStream().map(o -> (Dancer)o).forEach(o -> collection.remove(o));
+        response.text = "remove success";
         return response;
     }
     private Message save(Message request){
         Message response = new Message();
-        response.text = "add";
+        response.text = "save";
         response.values = null;
         return response;
     }
     private Message load(Message request){
         Message response = new Message();
-        response.text = "add";
+        response.text = "load";
         response.values = null;
         return response;
     }

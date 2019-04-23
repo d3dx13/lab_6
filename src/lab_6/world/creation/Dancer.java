@@ -11,6 +11,9 @@ public class Dancer extends People implements Comparable<Dancer>, Serializable {
     /**<p>Качество танца</p>
      */
     protected int danceQuality;
+    public int getDanceQuality() {
+        return danceQuality;
+    }
 
     /**<p>Конструктор</p>
      * @param newName String : имя
