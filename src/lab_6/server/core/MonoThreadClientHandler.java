@@ -38,7 +38,7 @@ public class MonoThreadClientHandler implements Runnable {
             Object message = objectInputStream.readObject();
             if (message.getClass().equals(Crypted.class)){
                 Crypted crypted = (Crypted) message;
-                if (!accounts.containsKey(crypted.login))
+                if (!accounts.containsKey(crypted.login) || accounts.get(crypted.login).secretKey == null)
                     throw new IOException();
                 this.objectCryption.setSecretKey(accounts.get(crypted.login).secretKey);
                 Message request = objectCryption.messageDecrypt(crypted);

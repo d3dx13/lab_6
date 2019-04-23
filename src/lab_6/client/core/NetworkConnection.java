@@ -18,6 +18,7 @@ import javax.crypto.spec.SecretKeySpec;
 import java.io.*;
 import java.math.BigInteger;
 import java.net.InetSocketAddress;
+import java.net.SocketException;
 import java.nio.ByteBuffer;
 import java.nio.channels.ScatteringByteChannel;
 import java.nio.channels.SocketChannel;
@@ -36,6 +37,8 @@ import static lab_6.Settings.userRSAkeyLength;
 
 public class NetworkConnection {
     public static Message command(Message message) throws IOException, IllegalBlockSizeException, InvalidKeyException, BadPaddingException, NoSuchAlgorithmException, NoSuchPaddingException, ClassNotFoundException {
+        if (serverAddress == null)
+            throw new SocketException();
         Object response = objectSend(objectCryption.messageEncrypt(message));
         return objectCryption.messageDecrypt((Crypted)response);
     }
@@ -44,8 +47,19 @@ public class NetworkConnection {
         serverAddress = new InetSocketAddress(hostname, port);
     }
 
+    public static InetSocketAddress getServerAddressr(){
+        return serverAddress;
+    }
+
     public static boolean signUp() {
         try {
+            if (serverAddress == null )
+                throw new SocketException(){
+                @Override
+                public String getMessage() {
+                    return "server unavailable";
+                }
+            };
             String password;
             BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
             RegistrationRequest registrationRequest = new RegistrationRequest();
@@ -88,55 +102,68 @@ public class NetworkConnection {
                 System.out.println("failed\nReason: "+registrationResponse.message);
                 return false;
         } catch (Exception ex){
+            System.out.println(ex.getMessage());
             return false;
         }
     }
 
 
-    public static boolean signIn() throws IOException, InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, ClassNotFoundException, InvalidKeySpecException {
-        String password;
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        IdentificationRequest identificationRequest = new IdentificationRequest();
-        identificationRequest.login = NetworkConnection.objectCryption.getUserLogin();
-        IdentificationResponse identificationResponse = identification(identificationRequest);
-        AuthenticationRequest authenticationRequest = new AuthenticationRequest();
-        System.out.print("\nEnter your password: ");
-        password = reader.readLine();
-        MessageDigest sha = MessageDigest.getInstance("SHA-256");
-        SecretKeySpec secretKeySpec = new SecretKeySpec(Arrays.copyOf(sha.digest(password.getBytes(Charset.forName("UTF-8"))), 32), "AES");
-        Cipher cipher = Cipher.getInstance("AES");
-        cipher.init(Cipher.DECRYPT_MODE, secretKeySpec);
-        byte[] privateKey;
-        System.out.println(identificationResponse.message);
+    public static boolean signIn() {
         try {
-            privateKey = cipher.doFinal(identificationResponse.privateKey);
-        }catch (Exception ex){
-            System.out.println("\nPassword incorrect");
-            return false;
-        }
-        Cipher cipher2 = Cipher.getInstance("RSA");
-        cipher2.init(Cipher.DECRYPT_MODE, KeyFactory.getInstance("RSA").generatePrivate(new PKCS8EncodedKeySpec(privateKey)));
-        try {
-            authenticationRequest.random = cipher2.doFinal(identificationResponse.random);
-        } catch (Exception e) {
-            System.out.println("\nPassword incorrect");
-            return false;
-        }
-        authenticationRequest.login = NetworkConnection.objectCryption.getUserLogin();
-        AuthenticationResponse authenticationResponse = authentication(authenticationRequest);
-        if (authenticationResponse.message.equals("success")){
-            byte [] secretKey;
+            if (serverAddress == null)
+                throw new SocketException(){
+                    @Override
+                    public String getMessage() {
+                        return "server unavailable";
+                    }
+                };
+            String password;
+            BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+            IdentificationRequest identificationRequest = new IdentificationRequest();
+            identificationRequest.login = NetworkConnection.objectCryption.getUserLogin();
+            IdentificationResponse identificationResponse = identification(identificationRequest);
+            AuthenticationRequest authenticationRequest = new AuthenticationRequest();
+            System.out.print("Logging in...\nEnter your password: ");
+            password = reader.readLine();
+            MessageDigest sha = MessageDigest.getInstance("SHA-256");
+            SecretKeySpec secretKeySpec = new SecretKeySpec(Arrays.copyOf(sha.digest(password.getBytes(Charset.forName("UTF-8"))), 32), "AES");
+            Cipher cipher = Cipher.getInstance("AES");
+            cipher.init(Cipher.DECRYPT_MODE, secretKeySpec);
+            byte[] privateKey;
+            System.out.println(identificationResponse.message);
             try {
-                secretKey = cipher2.doFinal(authenticationResponse.secretKey);
+                privateKey = cipher.doFinal(identificationResponse.privateKey);
+            } catch (Exception ex) {
+                System.out.println("\nPassword incorrect");
+                return false;
+            }
+            Cipher cipher2 = Cipher.getInstance("RSA");
+            cipher2.init(Cipher.DECRYPT_MODE, KeyFactory.getInstance("RSA").generatePrivate(new PKCS8EncodedKeySpec(privateKey)));
+            try {
+                authenticationRequest.random = cipher2.doFinal(identificationResponse.random);
             } catch (Exception e) {
                 System.out.println("\nPassword incorrect");
                 return false;
             }
-            objectCryption.setSecretKey(secretKey);
-            return true;
+            authenticationRequest.login = NetworkConnection.objectCryption.getUserLogin();
+            AuthenticationResponse authenticationResponse = authentication(authenticationRequest);
+            if (authenticationResponse.message.equals("success")) {
+                byte[] secretKey;
+                try {
+                    secretKey = cipher2.doFinal(authenticationResponse.secretKey);
+                } catch (Exception e) {
+                    System.out.println("\nPassword incorrect");
+                    return false;
+                }
+                objectCryption.setSecretKey(secretKey);
+                return true;
+            }
+            System.out.println("Authentication failed: " + authenticationResponse.message);
+            return false;
+        } catch (Exception ex){
+            System.out.println(ex.getMessage());
+            return false;
         }
-        System.out.println("Authentication failed: " + authenticationResponse.message);
-        return false;
     }
     public static void disconnect() throws IOException, ClassNotFoundException {
         objectSend(objectCryption.getNewMessage("disconnect"));

@@ -8,13 +8,12 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
 public class ConsoleGUI {
-    public static void main(String userLogin) {
+    public static void main() {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        boolean exit = false;
-        while (!exit) {
+        while (true) {
             try {
                 String command;
-                System.out.print(String.format("%s: ", userLogin));
+                System.out.print(String.format("%s: ", NetworkConnection.objectCryption.getUserLogin()));
                 command = reader.readLine();
                 if (!command.strip().equals("")) {
                     Message response = NetworkConnection.command(CommandParser.getMessageFromJSON(command));
@@ -22,7 +21,7 @@ public class ConsoleGUI {
                 }
             } catch (Exception ex) {
                 System.out.println(ex.getMessage());
-                exit = true;
+                break;
             }
         }
     }

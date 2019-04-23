@@ -84,10 +84,6 @@ public class CommandParser {
             response.text = "disconnect";
             return response;
         }
-        else if (inputJSON.length() > 6 && inputJSON.substring(0,7).equalsIgnoreCase("connect")){
-            response.text = "connect";
-            return response;
-        }
         else if (inputJSON.length() > 3 && inputJSON.substring(0,4).equalsIgnoreCase("exit")){
             response.text = "exit";
             return response;
@@ -127,21 +123,6 @@ public class CommandParser {
             }
         }
         return response;
-    }
-
-    public static void main(String[] args) {
-        setUserLogin("d3dx13");
-        Message msg = getMessageFromJSON("add[[{name : dodo, dynamics: DANCING}, {name : fanta}]");
-        System.out.println("=====");
-        System.out.println(msg.login);
-        System.out.println(msg.time);
-        System.out.println(msg.text);
-        System.out.println("-----");
-        if (msg.values != null)
-            for (int i = 0; i < msg.values.size(); i++){
-            System.out.println(msg.values.get(i));
-        }
-        System.out.println("=====");
     }
 
     private static void printHelpMessage(){
