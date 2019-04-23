@@ -18,7 +18,9 @@ import java.security.SecureRandom;
 import java.security.spec.X509EncodedKeySpec;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.concurrent.PriorityBlockingQueue;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import static lab_6.Settings.*;
@@ -86,6 +88,8 @@ public class MonoThreadClientHandler implements Runnable {
             return show();
         if (message.text.length() > 2 && message.text.substring(0,3).equals("add"))
             return add(message);
+        if (message.text.length() > 5 && message.text.substring(0,6).equals("remove"))
+            return remove(message);
         return new Message();
     }
 
@@ -247,13 +251,16 @@ public class MonoThreadClientHandler implements Runnable {
     private Message add(Message request){
         Message response = new Message();
         response.text = "add";
-        collection.addAll(response.values.parallelStream().map((o) -> (Dancer)o).collect(Collectors.toList()));
+        LinkedList<Dancer>dancers = new LinkedList<Dancer>();
+        dancers = request.values.stream().collect(Collectors.toCollection());
+        for (Object iter: request.values)
+            dancers.add((Dancer)iter);
+        collection.addAll(dancers);
         return response;
     }
     private Message add_if_max(Message request){
         Message response = new Message();
         response.text = "add_if_max";
-        collection.take()
         response.values = null;
         return response;
     }
@@ -266,6 +273,7 @@ public class MonoThreadClientHandler implements Runnable {
     private Message remove(Message request){
         Message response = new Message();
         response.text = "remove";
+        request.values.forEach(o -> System.out.println(o));
         request.values.stream().forEach(o -> collection.remove((Dancer) o));
         //collection.stream().filter(dancer -> dancer.equals(request.values)).forEach(dancer -> collection.remove(dancer));
         return response;

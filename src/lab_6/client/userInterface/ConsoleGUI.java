@@ -35,9 +35,12 @@ public class ConsoleGUI {
                     else if (response.text.length() > 2 && response.text.substring(0, 3).equals("add")) {
                         System.out.println(response.text);
                     }
+                    else if (response.text.length() > 5 && response.text.substring(0, 6).equals("remove")) {
+                        System.out.println(response.text);
+                    }
                 }
             } catch (Exception ex) {
-                System.out.println(ex.getMessage());
+                ex.printStackTrace();
                 break;
             }
         }
