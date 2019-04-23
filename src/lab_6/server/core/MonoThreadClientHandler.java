@@ -236,7 +236,7 @@ public class MonoThreadClientHandler implements Runnable {
     private Message show(){
         Message response = new Message();
         response.text = "show";
-        response.values = null;
+        collection.stream().sorted().forEach(dancer -> response.values.addLast(dancer));
         return response;
     }
     private Message add(Message request){
