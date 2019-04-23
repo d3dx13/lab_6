@@ -150,10 +150,8 @@ public class NetworkConnection {
         ByteBuffer outBuffer = ByteBuffer.wrap(objectCryption.messageSerialize(message));
         server.write(outBuffer);
         outBuffer.clear();
-        ByteBuffer buf = ByteBuffer.allocate(10000000);
-        long time = Instant.now().getEpochSecond();
-        while (server.read(buf) != -1 && (Instant.now().getEpochSecond() - time < 10)) { }
-        Object response = objectCryption.messageDeserialize(buf.array());
+        byte [] buffer = server.socket().getInputStream().readAllBytes();
+        Object response = objectCryption.messageDeserialize(buffer);
         server.close();
         return response;
     }
