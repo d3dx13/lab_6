@@ -3,6 +3,7 @@ import lab_6.message.*;
 import lab_6.message.loggingIn.*;
 import lab_6.message.registration.*;
 import lab_6.crypto.ObjectCryption;
+import lab_6.world.creation.Dancer;
 import lab_6.world.state.FeelState;
 import lab_6.world.state.PositionState;
 import lab_6.world.state.ThinkState;
@@ -236,13 +237,15 @@ public class MonoThreadClientHandler implements Runnable {
     private Message show(){
         Message response = new Message();
         response.text = "show";
-        response.values = null;
+
         return response;
     }
     private Message add(Message request){
         Message response = new Message();
         response.text = "add";
-        response.values = null;
+        if (request.values == null)
+            return response;
+        response.values.parallelStream().forEach(o -> collection.add((Dancer) o));
         return response;
     }
     private Message add_if_max(Message request){
