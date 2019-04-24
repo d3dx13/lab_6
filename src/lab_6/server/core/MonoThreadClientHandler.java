@@ -16,6 +16,7 @@ import java.net.Socket;
 import java.security.KeyFactory;
 import java.security.SecureRandom;
 import java.security.spec.X509EncodedKeySpec;
+import java.time.Instant;
 import java.util.Arrays;
 import java.util.Date;
 
@@ -258,6 +259,7 @@ public class MonoThreadClientHandler implements Runnable {
         Message response = new Message();
         response.text = "add success";
         request.values.parallelStream().map(o -> (Dancer)o).forEach(dancer -> collectionData.add(dancer));
+        collectionInfo.lastChangeTime = Date.from(Instant.now()).toString();
         return response;
     }
     private Message add_if_max(Message request){
@@ -269,6 +271,7 @@ public class MonoThreadClientHandler implements Runnable {
         Dancer dancerMax = collectionData.stream().max((dancer, t1) -> (dancer.getDanceQuality() - t1.getDanceQuality())).get();
         request.values.parallelStream().map(o -> (Dancer)o).filter(o -> (o.getDanceQuality() >= dancerMax.getDanceQuality())).forEach(dancer -> collectionData.add(dancer));
         response.text = "add_if_max success";
+        collectionInfo.lastChangeTime = Date.from(Instant.now()).toString();
         return response;
     }
     private Message add_if_min(Message request){
@@ -280,12 +283,14 @@ public class MonoThreadClientHandler implements Runnable {
         Dancer dancerMin = collectionData.stream().min((dancer, t1) -> (dancer.getDanceQuality() - t1.getDanceQuality())).get();
         request.values.parallelStream().map(o -> (Dancer)o).filter(o -> (o.getDanceQuality() <= dancerMin.getDanceQuality())).forEach(dancer -> collectionData.add(dancer));
         response.text = "add_if_min success";
+        collectionInfo.lastChangeTime = Date.from(Instant.now()).toString();
         return response;
     }
     private Message remove(Message request){
         Message response = new Message();
         request.values.parallelStream().map(o -> (Dancer)o).forEach(o -> collectionData.remove(o));
         response.text = "remove success";
+        collectionInfo.lastChangeTime = Date.from(Instant.now()).toString();
         return response;
     }
     private Message save(){
