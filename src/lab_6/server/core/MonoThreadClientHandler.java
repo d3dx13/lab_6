@@ -69,6 +69,7 @@ public class MonoThreadClientHandler implements Runnable {
     }
 
     private Message command(Message message){
+        System.out.println(message.login);
         Account user = accounts.get(message.login);
         if (message.time > user.lastAccessTime) {
             user.lastAccessTime = message.time;

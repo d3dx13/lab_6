@@ -10,7 +10,7 @@ public class TableGUI {
             return;
         if (message.values.size() == 0){
             System.out.print("\n--- Collection is Empty ---\n");
-            //return;
+            return;
         }
         String [] tableHeader  = new String [] {
                 "name",
