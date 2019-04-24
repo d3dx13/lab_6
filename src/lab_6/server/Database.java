@@ -100,6 +100,6 @@ public class Database {
     }
     public synchronized static String getInfo(){
         collectionInfo.size = collectionData.size();
-        return "Error if getInfo\nempty\n";
+        return collectionInfo.toString();
     }
 }
