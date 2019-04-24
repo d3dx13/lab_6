@@ -26,13 +26,10 @@ public class FileParser {
         try {
             // Создается построитель документа
             DocumentBuilder documentBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-
             // Создается дерево DOM документа из файла
             Document document = documentBuilder.parse(pathToFile);
-
             // Получаем корневой элемент
             Node root = document.getDocumentElement();
-
             // Просматриваем все подэлементы корневого - т.е. объекты
             NodeList dancers = root.getChildNodes();
             for (int i = 0; i < dancers.getLength(); i++) {
@@ -46,16 +43,12 @@ public class FileParser {
                         // Если нода не текст, то это один из параметров объекта - печатаем
                         if (dancerParametr.getNodeType() != Node.TEXT_NODE) {
                             dancerObject.setParam(dancerParametr.getNodeName(),dancerParametr.getChildNodes().item(0).getTextContent());
-                            //System.out.println(dancerParametr.getNodeName() + ":" + dancerParametr.getChildNodes().item(0).getTextContent());
                         }
                     }
                     xmlFileMessage.values.add(dancerObject);
-                    //System.out.println("===========>>>>");
                 }
             }
-
         } catch (FileNotFoundException fnfe){
-            fnfe.printStackTrace();
             System.out.println("---Файл не найден. Его не существует или доступ к нему закрыт---");
         } catch (ParserConfigurationException ex) {
             ex.printStackTrace(System.out);
