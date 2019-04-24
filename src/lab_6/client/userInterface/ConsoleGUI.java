@@ -9,6 +9,8 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.StreamCorruptedException;
 
+import static lab_6.client.userInterface.TableGUI.printTable;
+
 public class ConsoleGUI {
     public static void main() {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
@@ -20,6 +22,7 @@ public class ConsoleGUI {
                 if (!command.strip().equals("")) {
                     Message message = CommandParser.getMessageFromJSON(command);
                     if (message.text.length() > 5 && message.text.substring(0, 6).equals("import")) {
+
                     }
                     Message response = NetworkConnection.command(message);
                     if (response.text == null)
@@ -30,10 +33,7 @@ public class ConsoleGUI {
                         System.out.println("user disconnected");
                         break;
                     } else if (response.text.length() > 3 && response.text.substring(0, 4).equals("show")) {
-                        System.out.println(response.values);
-                        if (response.values != null)
-                            response.values.forEach(o -> System.out.println("> " + ((Dancer) o).getDanceQuality() + " - " + ((Dancer) o)));
-                        System.out.println(response.text);
+                        printTable(response);
                     } else
                         System.out.println(response.text);
                 }
