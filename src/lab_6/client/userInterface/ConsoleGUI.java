@@ -4,7 +4,6 @@ import lab_6.client.core.CommandParser;
 import lab_6.client.core.FileParser;
 import lab_6.client.core.NetworkConnection;
 import lab_6.message.Message;
-import lab_6.world.creation.Dancer;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -24,7 +23,8 @@ public class ConsoleGUI {
                     Message message = CommandParser.getMessageFromJSON(command);
                     if (message.text.length() > 5 && message.text.substring(0, 6).equals("import")) {
                         Message response = FileParser.getMessageFromXMLFile(System.getenv().get("COLLECTION_PATH"));
-                        NetworkConnection.command(response);
+                        response = NetworkConnection.command(response);
+                        System.out.println("import" + response.text.substring(3));
                         continue;
                     }
                     Message response = NetworkConnection.command(message);
