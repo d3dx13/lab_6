@@ -20,8 +20,7 @@ import java.util.Arrays;
 import java.util.Date;
 
 import static lab_6.Settings.*;
-import static lab_6.server.Database.accounts;
-import static lab_6.server.Database.collection;
+import static lab_6.server.Database.*;
 
 
 public class MonoThreadClientHandler implements Runnable {
@@ -112,6 +111,7 @@ public class MonoThreadClientHandler implements Runnable {
         tempAccount.registrationDate = (new Date()).toString();
         if (!accounts.containsKey(request.login)){
             accounts.putIfAbsent(request.login, tempAccount);
+            accountsSave();
             response.confirm = true;
             response.message = "success";
         } else {
@@ -245,59 +245,58 @@ public class MonoThreadClientHandler implements Runnable {
     private Message show(){
         Message response = new Message();
         response.text = "show";
-        collection.stream().sorted().forEachOrdered(dancer -> response.values.addLast(dancer));
+        collectionData.stream().sorted().forEachOrdered(dancer -> response.values.addLast(dancer));
         return response;
     }
     private Message add(Message request){
         Message response = new Message();
         response.text = "add success";
-        request.values.parallelStream().map(o -> (Dancer)o).forEach(dancer -> collection.add(dancer));
+        request.values.parallelStream().map(o -> (Dancer)o).forEach(dancer -> collectionData.add(dancer));
         return response;
     }
     private Message add_if_max(Message request){
         Message response = new Message();
-        if (collection.isEmpty()){
+        if (collectionData.isEmpty()){
             response.text = "add_if_max failed";
             return response;
         }
-        Dancer dancerMax = collection.stream().max((dancer, t1) -> (dancer.getDanceQuality() - t1.getDanceQuality())).get();
-        request.values.parallelStream().map(o -> (Dancer)o).filter(o -> (o.getDanceQuality() >= dancerMax.getDanceQuality())).forEach(dancer -> collection.add(dancer));
+        Dancer dancerMax = collectionData.stream().max((dancer, t1) -> (dancer.getDanceQuality() - t1.getDanceQuality())).get();
+        request.values.parallelStream().map(o -> (Dancer)o).filter(o -> (o.getDanceQuality() >= dancerMax.getDanceQuality())).forEach(dancer -> collectionData.add(dancer));
         response.text = "add_if_max success";
         return response;
     }
     private Message add_if_min(Message request){
         Message response = new Message();
-        if (collection.isEmpty()){
+        if (collectionData.isEmpty()){
             response.text = "add_if_min failed";
             return response;
         }
-        Dancer dancerMin = collection.stream().min((dancer, t1) -> (dancer.getDanceQuality() - t1.getDanceQuality())).get();
-        request.values.parallelStream().map(o -> (Dancer)o).filter(o -> (o.getDanceQuality() <= dancerMin.getDanceQuality())).forEach(dancer -> collection.add(dancer));
+        Dancer dancerMin = collectionData.stream().min((dancer, t1) -> (dancer.getDanceQuality() - t1.getDanceQuality())).get();
+        request.values.parallelStream().map(o -> (Dancer)o).filter(o -> (o.getDanceQuality() <= dancerMin.getDanceQuality())).forEach(dancer -> collectionData.add(dancer));
         response.text = "add_if_min success";
         return response;
     }
     private Message remove(Message request){
         Message response = new Message();
-        request.values.parallelStream().map(o -> (Dancer)o).forEach(o -> collection.remove(o));
+        request.values.parallelStream().map(o -> (Dancer)o).forEach(o -> collectionData.remove(o));
         response.text = "remove success";
         return response;
     }
     private Message save(Message request){
         Message response = new Message();
         response.text = "save";
-        response.values = null;
+        collectionSave();
         return response;
     }
     private Message load(Message request){
         Message response = new Message();
         response.text = "load";
-        response.values = null;
+        collectionLoad();
         return response;
     }
     private Message info(Message request){
         Message response = new Message();
-        response.text = "info";
-        response.values = null;
+        response.text = "info\n" + getInfo();
         return response;
     }
 }

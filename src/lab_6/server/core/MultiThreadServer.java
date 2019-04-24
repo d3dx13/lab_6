@@ -8,7 +8,7 @@ import static lab_6.Settings.ApplicationPort;
 
 public class MultiThreadServer {
     static ExecutorService executeIt = Executors.newFixedThreadPool(12);
-    public static void main(String[] args) {
+    public static void main() {
         try {
             ServerSocket server = new ServerSocket(ApplicationPort);
             while (!server.isClosed()) {
