@@ -3,7 +3,9 @@ package lab_6.world.base;
 import lab_6.world.state.DynamicsState;
 import lab_6.world.state.PositionState;
 
-public abstract class Existing {
+import java.io.Serializable;
+
+public abstract class Existing implements Serializable {
     public Existing(){
         this.dynamicsStateState = DynamicsState.NEUTRAL;
         this.positionState = PositionState.NEUTRAL;
