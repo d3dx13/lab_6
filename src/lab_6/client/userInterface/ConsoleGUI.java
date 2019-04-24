@@ -1,6 +1,7 @@
 package lab_6.client.userInterface;
 
 import lab_6.client.core.CommandParser;
+import lab_6.client.core.FileParser;
 import lab_6.client.core.NetworkConnection;
 import lab_6.message.Message;
 import lab_6.world.creation.Dancer;
@@ -22,7 +23,9 @@ public class ConsoleGUI {
                 if (!command.strip().equals("")) {
                     Message message = CommandParser.getMessageFromJSON(command);
                     if (message.text.length() > 5 && message.text.substring(0, 6).equals("import")) {
-
+                        Message response = FileParser.getMessageFromXMLFile(System.getenv().get("COLLECTION_PATH"));
+                        NetworkConnection.command(response);
+                        continue;
                     }
                     Message response = NetworkConnection.command(message);
                     if (response.text == null)

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<import>
+    <Dancer>
+        <name>Ricardo</name>
+        <dynamics>DANCING</dynamics>
+        <feel>NEUTRAL</feel>
+    </Dancer>
+    <Dancer>
+        <name>Medvedev</name>
+        <dynamics>DANCING</dynamics>
+        <feel>SOFT</feel>
+    </Dancer>
+    <Dancer>
+        <name>Peregudin</name>
+        <feel>WANT_TO_DANCE</feel>
+        <position>IN_AIR</position>
+    </Dancer>
+</import>
