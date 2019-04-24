@@ -39,7 +39,7 @@ public class Client {
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
     }
     public static void server(){

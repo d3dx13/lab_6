@@ -5,7 +5,8 @@ public final class Settings {
     public final static int loginMinimalLength = 3;
     public final static int loginMaximalLength = 20;
     public final static int identificationRandomSize= 373;
-    public final static int userAESkeySize= 32;
-    public final static int userAESkeyLength= 256;
-    public final static int userRSAkeyLength= 3072;
+    public final static int userAESKeySize = 32;
+    public final static int userRSAKeyLength = 3072;
+    public final static int clientReceiveTimeout = 10;
+    public final static int clientReceiveBuffer = 100000000;
 }
