@@ -23,8 +23,8 @@ public class ConsoleGUI {
                 if (!command.strip().equals("")) {
                     Message message = CommandParser.getMessageFromJSON(command);
                     if (message.text.length() > 5 && message.text.substring(0, 6).equals("import")) {
-                        Message response = FileParser.getMessageFromXMLFile();
-                        NetworkConnection.command(message);
+                        Message response = FileParser.getMessageFromXMLFile(System.getenv().get("COLLECTION_PATH"));
+                        NetworkConnection.command(response);
                         continue;
                     }
                     Message response = NetworkConnection.command(message);
