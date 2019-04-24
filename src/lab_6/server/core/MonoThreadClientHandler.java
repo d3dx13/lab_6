@@ -179,7 +179,7 @@ public class MonoThreadClientHandler implements Runnable {
                 Cipher cipher = Cipher.getInstance("RSA");
                 cipher.init(Cipher.ENCRYPT_MODE, KeyFactory.getInstance("RSA").generatePublic(new X509EncodedKeySpec(user.publicKey)));
                 SecureRandom secureRandom = new SecureRandom();
-                user.secretKey = new byte[userAESkeySize];
+                user.secretKey = new byte[userAESKeySize];
                 secureRandom.nextBytes(user.secretKey);
                 response.secretKey = cipher.doFinal(user.secretKey);
                 accounts.put(request.login, user);

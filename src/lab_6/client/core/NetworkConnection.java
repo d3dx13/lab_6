@@ -25,11 +25,10 @@ import java.nio.charset.Charset;
 import java.security.*;
 import java.security.spec.PKCS8EncodedKeySpec;
 import java.security.spec.RSAKeyGenParameterSpec;
+import java.time.Instant;
 import java.util.Arrays;
 
-import static lab_6.Settings.loginMaximalLength;
-import static lab_6.Settings.loginMinimalLength;
-import static lab_6.Settings.userRSAkeyLength;
+import static lab_6.Settings.*;
 
 public class NetworkConnection {
     public static Message command(Message message) throws IOException, IllegalBlockSizeException, InvalidKeyException, BadPaddingException, NoSuchAlgorithmException, NoSuchPaddingException, ClassNotFoundException {
@@ -63,9 +62,15 @@ public class NetworkConnection {
                 System.out.println("Passwords do not match");
                 return false;
             }
+            if (password.equals("")){
+                System.out.println(new StringBuffer()
+                        .append("\n\"Enter\" instead of a password\n")
+                        .append("Glory to Richard Matthew Stallman !!!\n")
+                        .append("\"NO\" to passwords !!!\n\n"));
+            }
             System.out.println("\nGenerating RSA pair...");
             KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance("RSA");
-            RSAKeyGenParameterSpec kpgSpec = new RSAKeyGenParameterSpec(userRSAkeyLength, BigInteger.probablePrime(userRSAkeyLength - 1, new SecureRandom()));
+            RSAKeyGenParameterSpec kpgSpec = new RSAKeyGenParameterSpec(userRSAKeyLength, BigInteger.probablePrime(userRSAKeyLength - 1, new SecureRandom()));
             System.out.println("Generating done");
             System.out.println("Generating encrypted AES passwords");
             keyPairGenerator.initialize(kpgSpec);
@@ -142,6 +147,9 @@ public class NetworkConnection {
             }
             System.out.println("Authentication failed: " + authenticationResponse.message);
             return false;
+        } catch (UnresolvedAddressException ex){
+            System.out.println("Address is incorrect");
+            return false;
         } catch (Exception ex){
             System.out.println(ex.getMessage());
             return false;
@@ -153,8 +161,10 @@ public class NetworkConnection {
         ByteBuffer outBuffer = ByteBuffer.wrap(objectCryption.messageSerialize(message));
         server.write(outBuffer);
         outBuffer.clear();
-        byte [] buffer = server.socket().getInputStream().readAllBytes();
-        Object response = objectCryption.messageDeserialize(buffer);
+        ByteBuffer byteBuffer = ByteBuffer.allocate(clientReceiveBuffer);
+        long time = Instant.now().getEpochSecond();
+        while (server.read(byteBuffer) != -1 && (Instant.now().getEpochSecond() - time < clientReceiveTimeout)){ }
+        Object response = objectCryption.messageDeserialize(byteBuffer.array());
         server.close();
         return response;
     }
