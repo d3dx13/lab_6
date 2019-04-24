@@ -93,6 +93,8 @@ public class MonoThreadClientHandler implements Runnable {
             return remove(message);
         if (message.text.length() > 3 && message.text.substring(0,4).equals("info"))
             return info(message);
+        if (message.text.length() > 5 && message.text.substring(0,6).equals("import"))
+            return fileImport(message);
         return new Message();
     }
 
@@ -309,6 +311,11 @@ public class MonoThreadClientHandler implements Runnable {
         response.text = "Type of collection is "+collection.getClass()+".\nSize of collection:"+collection.size()+".\n"
         +"Time of request:"+date.getHours()+":"+date.getMinutes()+":"+date.getSeconds();
         response.values = null;
+        return response;
+    }
+    private Message fileImport(Message request) {
+        Message response = new Message();
+        response.text="import success";
         return response;
     }
 }
