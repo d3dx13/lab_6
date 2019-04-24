@@ -12,6 +12,8 @@ public class People extends Existing implements Feeling, Thinking, Affecting, Af
         this.name = newName;
         this.feelState = FeelState.NEUTRAL;
         this.thinkState = ThinkState.NEUTRAL;
+        this.dynamicsStateState = DynamicsState.NEUTRAL;
+        this.positionState = PositionState.NOWHERE;
         this.id = IdMaster.create();
     }
 
