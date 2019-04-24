@@ -9,6 +9,15 @@ public class CollectionInfo implements Serializable {
     @Override
     public String toString()
     {
-        return "Collection type:"+type+"\nLast change time:"+lastChangeTime+"\nSize of collection:"+size;
+        return new StringBuffer()
+                .append("\n--- Collection info ---")
+                .append("\nCollection type: ")
+                .append(type)
+                .append("\nLast change time: ")
+                .append(lastChangeTime)
+                .append("\nSize of collection: ")
+                .append(size)
+                .append("\n-----------------------\n")
+                .toString();
     }
 }
