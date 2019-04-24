@@ -89,6 +89,12 @@ public class MonoThreadClientHandler implements Runnable {
             return add(message);
         if (message.text.length() > 5 && message.text.substring(0,6).equals("remove"))
             return remove(message);
+        if (message.text.length() > 3 && message.text.substring(0,4).equals("save"))
+            return save();
+        if (message.text.length() > 3 && message.text.substring(0,4).equals("load"))
+            return load();
+        if (message.text.length() > 3 && message.text.substring(0,4).equals("info"))
+            return info();
         return new Message();
     }
 
@@ -282,19 +288,24 @@ public class MonoThreadClientHandler implements Runnable {
         response.text = "remove success";
         return response;
     }
-    private Message save(Message request){
+    private Message save(){
         Message response = new Message();
-        response.text = "save";
-        collectionSave();
+        if (collectionSave())
+            response.text = "save success";
+        else
+            response.text = "save failed";
         return response;
     }
-    private Message load(Message request){
+    private Message load(){
         Message response = new Message();
-        response.text = "load";
-        collectionLoad();
+        response.text = "load success";
+        if (collectionLoad())
+            response.text = "load success";
+        else
+            response.text = "load failed";
         return response;
     }
-    private Message info(Message request){
+    private Message info(){
         Message response = new Message();
         response.text = "info\n" + getInfo();
         return response;
