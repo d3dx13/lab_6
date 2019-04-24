@@ -8,6 +8,10 @@ import lab_6.world.creation.Dancer;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.StreamCorruptedException;
+import java.sql.Date;
+import java.time.Instant;
+
+import static lab_6.server.Database.collectionInfo;
 
 public class ConsoleGUI {
     public static void main() {
@@ -34,7 +38,11 @@ public class ConsoleGUI {
                         if (response.values != null)
                             response.values.forEach(o -> System.out.println("> " + ((Dancer) o).getDanceQuality() + " - " + ((Dancer) o)));
                         System.out.println(response.text);
-                    } else
+                    } else if ((response.text.length() > 2 && response.text.substring(0, 3).equals("add")) ||
+                            (response.text.length() > 5 && response.text.substring(0, 6).equals("remove"))) {
+                        collectionInfo.lastChangeTime = Date.from(Instant.now()).toString();
+                        System.out.println(response.text);
+                    }else
                         System.out.println(response.text);
                 }
             }catch (StreamCorruptedException ex){

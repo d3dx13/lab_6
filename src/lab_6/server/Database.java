@@ -30,10 +30,10 @@ public class Database {
             fileOutputStream.close();
             return true;
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
             return false;
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
             return false;
         }
     }
@@ -51,13 +51,13 @@ public class Database {
             fileInputStream.close();
             return true;
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
             return false;
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
             return false;
         } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
             return false;
         }
     }
@@ -71,10 +71,10 @@ public class Database {
             fileOutputStream.close();
             return true;
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
             return false;
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
             return false;
         }
     }
@@ -88,17 +88,18 @@ public class Database {
             fileInputStream.close();
             return true;
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
             return false;
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
             return false;
         } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
             return false;
         }
     }
     public synchronized static String getInfo(){
-        return "Error if getInfo\nempty\n";
+        collectionInfo.size = collectionData.size();
+        return collectionInfo.toString();
     }
 }
