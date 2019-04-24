@@ -30,6 +30,7 @@ public class FileParser {
         try {
             // Создается построитель документа
             DocumentBuilder documentBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+
             // Создается дерево DOM документа из файла
             Document document = documentBuilder.parse(pathToFile);
 
@@ -57,6 +58,8 @@ public class FileParser {
                 }
             }
 
+        } catch (FileNotFoundException fnfe){
+            System.out.println("---Файл не найден. Его не существует или доступ к нему закрыт---");
         } catch (ParserConfigurationException ex) {
             ex.printStackTrace(System.out);
         } catch (SAXException ex) {
@@ -64,7 +67,6 @@ public class FileParser {
         } catch (IOException ex) {
             ex.printStackTrace(System.out);
         }
-
 
 
 /*
