@@ -17,7 +17,7 @@ public class MultiThreadServer {
             }
             executeIt.shutdown();
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
     }
 }

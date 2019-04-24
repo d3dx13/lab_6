@@ -36,12 +36,10 @@ public class Client {
                     }
                 } catch (Exception ex){
                     System.out.println(ex.getMessage());
-                    ex.printStackTrace();
                 }
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
-            e.printStackTrace();
         }
     }
     public static void server(){

@@ -64,7 +64,7 @@ public class MonoThreadClientHandler implements Runnable {
             objectOutputStream.close();
             clientDialog.close();
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
     }
 
