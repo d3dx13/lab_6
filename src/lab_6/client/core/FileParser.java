@@ -42,20 +42,30 @@ public class FileParser {
                         Node dancerParametr = dancerParametrs.item(j);
                         // Если нода не текст, то это один из параметров объекта - печатаем
                         if (dancerParametr.getNodeType() != Node.TEXT_NODE) {
-                            dancerObject.setParam(dancerParametr.getNodeName(),dancerParametr.getChildNodes().item(0).getTextContent());
+                            try {
+                                dancerObject.setParam(dancerParametr.getNodeName(), dancerParametr.getChildNodes().item(0).getTextContent());
+                            }catch (Exception e)
+                            {
+                                System.out.println("---Импорт файла не удался. Неправильно введён параметр одного из объектов в XML-файле." +
+                                        " Может быть параметр съеден собакой?---");
+                            }
                         }
+
                     }
                     xmlFileMessage.values.add(dancerObject);
                 }
             }
         } catch (FileNotFoundException fnfe){
-            System.out.println("---Файл не найден. Его не существует или доступ к нему закрыт---");
+            System.out.println("---Файл не найден. Его не существует или доступ к нему закрыт.---\n---Предположительно, " +
+                    "имперские штурмовики прорвались к хранилищу, но Вы можете помочь Даше путешественнице найти этот файл!---");
         } catch (ParserConfigurationException ex) {
-            ex.printStackTrace(System.out);
+            System.out.println("Это какая-то редкая, легендарная, никогда не появлявшаяся ошибка!\n" +
+                    "Вы - первый, кто её обнаружил! Вам срочно нужно подойти к полке! Там Вас будет ждать пирожок."+ex);
         } catch (SAXException ex) {
-            ex.printStackTrace(System.out);
+            System.out.println("---Импорт XML-файла не удался. В нём существует ошибка! Это фиаско, братан...---");
         } catch (IOException ex) {
-            ex.printStackTrace(System.out);
+            System.out.println("Это какая-то редкая, легендарная, никогда не появлявшаяся ошибка!\n" +
+                    "Вы - первый, кто её обнаружил! Вам срочно нужно подойти к полке! Там Вас будет ждать пирожок."+ex);
         }
 
         return xmlFileMessage;
