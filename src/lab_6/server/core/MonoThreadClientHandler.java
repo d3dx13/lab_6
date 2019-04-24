@@ -9,6 +9,7 @@ import lab_6.world.state.PositionState;
 import lab_6.world.state.ThinkState;
 
 import javax.crypto.Cipher;
+import javax.xml.crypto.Data;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -90,6 +91,8 @@ public class MonoThreadClientHandler implements Runnable {
             return add(message);
         if (message.text.length() > 5 && message.text.substring(0,6).equals("remove"))
             return remove(message);
+        if (message.text.length() > 3 && message.text.substring(0,4).equals("info"))
+            return info(message);
         return new Message();
     }
 
@@ -244,7 +247,7 @@ public class MonoThreadClientHandler implements Runnable {
     }
     private Message show(){
         Message response = new Message();
-        response.text = "show";
+        response.text = "Collection elemets.";
         collection.stream().sorted().forEachOrdered(dancer -> response.values.addLast(dancer));
         return response;
     }
@@ -296,7 +299,9 @@ public class MonoThreadClientHandler implements Runnable {
     }
     private Message info(Message request){
         Message response = new Message();
-        response.text = "info";
+        Date date = new Date();
+        response.text = "Type of collection is "+collection.getClass()+".\nSize of collection:"+collection.size()+".\n"
+        +"Time of request:"+date.getHours()+":"+date.getMinutes()+":"+date.getSeconds();
         response.values = null;
         return response;
     }
