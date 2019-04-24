@@ -42,10 +42,14 @@ public class Database {
             FileInputStream fileInputStream;
             ObjectCryption objectCryption = new ObjectCryption();
             File dataPath = new File(collectionPath.getPath() + "/data");
+            if (!dataPath.exists())
+                collectionSave();
             fileInputStream = new FileInputStream(dataPath);
             collectionData = (PriorityBlockingQueue<Dancer>)objectCryption.messageDeserialize(fileInputStream.readAllBytes());
             fileInputStream.close();
             dataPath = new File(collectionPath.getPath() + "/info");
+            if (!dataPath.exists())
+                collectionSave();
             fileInputStream = new FileInputStream(dataPath);
             collectionInfo = (CollectionInfo)objectCryption.messageDeserialize(fileInputStream.readAllBytes());
             fileInputStream.close();
@@ -83,6 +87,8 @@ public class Database {
             FileInputStream fileInputStream;
             ObjectCryption objectCryption = new ObjectCryption();
             File dataPath = new File(collectionPath.getPath() + "/accounts");
+            if (!dataPath.exists())
+                accountsSave();
             fileInputStream = new FileInputStream(dataPath);
             accounts = (ConcurrentHashMap<String, Account>)objectCryption.messageDeserialize(fileInputStream.readAllBytes());
             fileInputStream.close();
