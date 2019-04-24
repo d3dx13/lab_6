@@ -39,16 +39,16 @@ public class FileParser {
             // Получаем корневой элемент
             Node root = document.getDocumentElement();
 
-            // Просматриваем все подэлементы корневого - т.е. книги
+            // Просматриваем все подэлементы корневого - т.е. объекты
             NodeList dancers = root.getChildNodes();
             for (int i = 0; i < dancers.getLength(); i++) {
                 Node dancer = dancers.item(i);
-                // Если нода не текст, то это книга - заходим внутрь
+                // Если нода не текст, то это объектт - заходим внутрь
                 if (dancer.getNodeType() != Node.TEXT_NODE) {
                     NodeList dancerParametrs = dancer.getChildNodes();
                     for(int j = 0; j < dancerParametrs.getLength(); j++) {
                         Node dancerParametr = dancerParametrs.item(j);
-                        // Если нода не текст, то это один из параметров книги - печатаем
+                        // Если нода не текст, то это один из параметров объекта - печатаем
                         if (dancerParametr.getNodeType() != Node.TEXT_NODE) {
                             //System.out.println(dancerParametr.getNodeName() + ":" + dancerParametr.getChildNodes().item(0).getTextContent());
                         }
