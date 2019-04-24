@@ -22,10 +22,6 @@ public class CommandParser {
 
     public static Dancer getDancerFromJSONObject(JSONObject JSONobj){
         Dancer tempDancer = new Dancer("NoName");
-        tempDancer.dynamicsStateState = DynamicsState.NEUTRAL;
-        tempDancer.feelState = FeelState.NEUTRAL;
-        tempDancer.thinkState = ThinkState.NEUTRAL;
-        tempDancer.positionState = PositionState.NEUTRAL;
         for (Map.Entry<String, Object> iter : JSONobj.toMap().entrySet()){
             if (! tempDancer.setParam(iter.getKey(), iter.getValue().toString())){
                 System.out.println(new StringBuffer()

@@ -3,7 +3,6 @@ package lab_6.client.userInterface;
 import lab_6.message.Message;
 import lab_6.world.creation.Dancer;
 
-import java.util.PriorityQueue;
 
 public class TableGUI {
     public static void printTable(Message message){
@@ -13,34 +12,73 @@ public class TableGUI {
             System.out.print("\n--- Collection is Empty ---\n");
             //return;
         }
-        int[] tableMaxLength = new int[] {0, 0, 0, 0, 0, 0, 0};
+        String [] tableHeader  = new String [] {
+                "name",
+                "birthday",
+                "dance points",
+                "dynamics",
+                "feel",
+                "think",
+                "position"
+        };
+        int[] tableMaxLength = new int[7];
+        for (int i = 0; i < 7; i++)
+            tableMaxLength[i] = tableHeader[i].length();
         for (Object iter : message.values){
             Dancer dancer = (Dancer)iter;
-            if (dancer.name.length() > tableMaxLength[0])
+            if (dancer.name != null && dancer.name.length() > tableMaxLength[0])
                 tableMaxLength[0] = dancer.name.length();
-            if (dancer.birthday.toString().length() > tableMaxLength[1])
+            if (dancer.birthday != null && dancer.birthday.toString().length() > tableMaxLength[1])
                 tableMaxLength[1] = dancer.birthday.toString().length();
-            if (dancer.dynamicsStateState.toString().length() > tableMaxLength[2])
-                tableMaxLength[2] = dancer.dynamicsStateState.toString().length();
+            if (String.valueOf(dancer.getDanceQuality()).length() > tableMaxLength[2])
+                tableMaxLength[2] = String.valueOf(dancer.getDanceQuality()).length();
+            if (dancer.dynamicsStateState != null && dancer.dynamicsStateState.toString().length() > tableMaxLength[3])
+                tableMaxLength[3] = dancer.dynamicsStateState.toString().length();
+            if (dancer.feelState != null && dancer.feelState.toString().length() > tableMaxLength[4])
+                tableMaxLength[4] = dancer.feelState.toString().length();
+            if (dancer.thinkState != null && dancer.thinkState.toString().length() > tableMaxLength[5])
+                tableMaxLength[5] = dancer.thinkState.toString().length();
+            if (dancer.positionState != null && dancer.positionState.toString().length() > tableMaxLength[6])
+                tableMaxLength[6] = dancer.positionState.toString().length();
         }
-        System.out.printf("\n|%-"+20+"s|\n", "name wad");
+        StringBuffer formatBuffer = new StringBuffer();
+        for (int i = 0; i < 7; i++){
+            formatBuffer.append("|%-");
+            formatBuffer.append(tableMaxLength[i]);
+            formatBuffer.append("s");
+        }
+        formatBuffer.append("|\n");
+        String header = String.format(formatBuffer.toString(),
+                tableHeader[0],
+                tableHeader[1],
+                tableHeader[2],
+                tableHeader[3],
+                tableHeader[4],
+                tableHeader[5],
+                tableHeader[6]);
+        printLine('-', header.length() - 1);
+        System.out.print(header);
+        printLine('-', header.length() - 1);
         StringBuffer stringBuffer = new StringBuffer();
-        stringBuffer
-                .append("\n\n--- Collection ---");
-        System.out.println("--------------------------------------------------------------------------------------------");
-        System.out.println("|    name    | birthday |  dynamics  |    feel    |   think    |  position  | dance points |");
-        System.out.println("--------------------------------------------------------------------------------------------");
-        //System.out.printf("%12s|%12d|%12s|%12s|%12s|%12s|\n", iter.toString(), iter.birthday, iter.danceQuality, iter.dynamicsStateState, iter.feelState, iter.thinkState, iter.positionState.toString());
-        System.out.println("------------------------------------------------------------------------------");
-        System.out.println();
-
-
-        System.out.println(message.values);
-        if (message.values != null)
-            message.values.forEach(o -> System.out.println("> " + ((Dancer) o).getDanceQuality() + " - " + ((Dancer) o)));
-        System.out.println(message.text);
+        for (Object iter : message.values){
+            Dancer dancer = (Dancer)iter;
+            stringBuffer.append(String.format(formatBuffer.toString(),
+                    dancer.name,
+                    dancer.birthday,
+                    dancer.getDanceQuality(),
+                    dancer.dynamicsStateState,
+                    dancer.feelState,
+                    dancer.thinkState,
+                    dancer.positionState));
+        }
+        System.out.print(stringBuffer.toString());
+        printLine('-', header.length() - 1);
     }
-
+    public static void printLine(char symbol, int len){
+        for (int i = 0; i < len; i++)
+            System.out.print(symbol);
+        System.out.print('\n');
+    }
     public static void main(String[] args) {
         printTable(new Message());
     }

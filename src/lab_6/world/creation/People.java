@@ -9,11 +9,10 @@ import java.io.Serializable;
 public class People extends Existing implements Feeling, Thinking, Affecting, Affected, Serializable {
 
     People(String newName){
+        super();
         this.name = newName;
         this.feelState = FeelState.NEUTRAL;
         this.thinkState = ThinkState.NEUTRAL;
-        this.dynamicsStateState = DynamicsState.NEUTRAL;
-        this.positionState = PositionState.NOWHERE;
         this.id = IdMaster.create();
     }
 
