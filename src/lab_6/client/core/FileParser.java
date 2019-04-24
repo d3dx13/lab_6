@@ -21,11 +21,7 @@ public class FileParser {
 
     public static Message getMessageFromXMLFile(String pathToFile)
     {
-
-
-        Message xmlFileMessage = new ObjectCryption().getNewMessage();
-        xmlFileMessage.text = "add";
-
+        Message xmlFileMessage = NetworkConnection.objectCryption.getNewMessage("add");
 
         try {
             // Создается построитель документа
@@ -59,6 +55,7 @@ public class FileParser {
             }
 
         } catch (FileNotFoundException fnfe){
+            fnfe.printStackTrace();
             System.out.println("---Файл не найден. Его не существует или доступ к нему закрыт---");
         } catch (ParserConfigurationException ex) {
             ex.printStackTrace(System.out);
