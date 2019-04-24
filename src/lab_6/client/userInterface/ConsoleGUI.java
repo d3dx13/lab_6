@@ -23,8 +23,7 @@ public class ConsoleGUI {
                     Message message = CommandParser.getMessageFromJSON(command);
                     if (message.text.length() > 5 && message.text.substring(0, 6).equals("import")) {
                         Message response = FileParser.getMessageFromXMLFile(System.getenv().get("COLLECTION_PATH"));
-                        response = NetworkConnection.command(response);
-                        System.out.println("import" + response.text.substring(3));
+                        NetworkConnection.command(response);
                         continue;
                     }
                     Message response = NetworkConnection.command(message);
@@ -40,7 +39,7 @@ public class ConsoleGUI {
                     } else
                         System.out.println(response.text);
                 }
-            }catch (StreamCorruptedException ex){
+            } catch (StreamCorruptedException ex){
                 System.out.println("Package is damaged");
             } catch (Exception ex) {
                 System.out.println(ex.getMessage());
