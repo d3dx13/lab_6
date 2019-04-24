@@ -22,8 +22,8 @@ public class FileParser {
     public static Message getMessageFromXMLFile(String pathToFile)
     {
 
-        ObjectCryption oC = new ObjectCryption();
-        Message xmlFileMessage = oC.getNewMessage();
+
+        Message xmlFileMessage = new ObjectCryption().getNewMessage();
         xmlFileMessage.text = "add";
 
 
