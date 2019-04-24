@@ -284,13 +284,13 @@ public class MonoThreadClientHandler implements Runnable {
     }
     private Message save(Message request){
         Message response = new Message();
-        response.text = "save";
+        response.text = "saved successful";
         collectionSave();
         return response;
     }
     private Message load(Message request){
         Message response = new Message();
-        response.text = "load";
+        response.text = "load success";
         collectionLoad();
         return response;
     }
