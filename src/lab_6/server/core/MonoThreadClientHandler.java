@@ -247,8 +247,14 @@ public class MonoThreadClientHandler implements Runnable {
     }
     private Message show(){
         Message response = new Message();
-        response.text = "Collection elemets.";
         collection.stream().sorted().forEachOrdered(dancer -> response.values.addLast(dancer));
+        if(collection.size()>0) {
+            response.text = "Collection elemets.";
+        }
+        else
+        {
+            response.text = "Collection is empty.";
+        }
         return response;
     }
     private Message add(Message request){
@@ -287,7 +293,7 @@ public class MonoThreadClientHandler implements Runnable {
     }
     private Message save(Message request){
         Message response = new Message();
-        response.text = "save";
+        response.text = "saved successful";
         response.values = null;
         return response;
     }
