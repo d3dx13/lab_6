@@ -25,7 +25,7 @@ public class FileParser {
 
         Message xmlFileMessage = new ObjectCryption().getNewMessage();
         xmlFileMessage.text = "add";
-
+        System.out.println(pathToFile);
 
         try {
             // Создается построитель документа
