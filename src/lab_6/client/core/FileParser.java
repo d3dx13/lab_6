@@ -5,10 +5,7 @@ import lab_6.message.Message;
 import lab_6.world.creation.Dancer;
 
 import java.io.*;
-import java.util.List;
-import java.util.PriorityQueue;
-import java.util.Scanner;
-import java.util.Stack;
+import java.util.*;
 
 import java.io.IOException;
 import javax.xml.parsers.DocumentBuilder;
@@ -43,16 +40,19 @@ public class FileParser {
             NodeList dancers = root.getChildNodes();
             for (int i = 0; i < dancers.getLength(); i++) {
                 Node dancer = dancers.item(i);
-                // Если нода не текст, то это объектт - заходим внутрь
-                if (dancer.getNodeType() != Node.TEXT_NODE) {
+                // Если нода не текст, то это объект - заходим внутрь
+                if (dancer.getNodeType() != Node.TEXT_NODE && dancer.getNodeName().equals("Dancer")) {
+                    Dancer dancerObject = new Dancer("NoName");
                     NodeList dancerParametrs = dancer.getChildNodes();
                     for(int j = 0; j < dancerParametrs.getLength(); j++) {
                         Node dancerParametr = dancerParametrs.item(j);
                         // Если нода не текст, то это один из параметров объекта - печатаем
                         if (dancerParametr.getNodeType() != Node.TEXT_NODE) {
+                            dancerObject.setParam(dancerParametr.getNodeName(),dancerParametr.getChildNodes().item(0).getTextContent());
                             //System.out.println(dancerParametr.getNodeName() + ":" + dancerParametr.getChildNodes().item(0).getTextContent());
                         }
                     }
+                    xmlFileMessage.values.add(dancerObject);
                     //System.out.println("===========>>>>");
                 }
             }
