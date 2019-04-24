@@ -96,12 +96,12 @@ public class MonoThreadClientHandler implements Runnable {
         RegistrationResponse response = new RegistrationResponse();
         if (request.login.length() < loginMinimalLength){
             response.confirm = false;
-            response.message = "login short";
+            response.message = "login is short";
             return response;
         }
         if (request.login.length() > loginMaximalLength){
             response.confirm = false;
-            response.message = "login long";
+            response.message = "login is long";
             return response;
         }
         Account tempAccount = new Account();
@@ -116,7 +116,7 @@ public class MonoThreadClientHandler implements Runnable {
             response.message = "success";
         } else {
             response.confirm = false;
-            response.message = "user exist";
+            response.message = "user exists";
         }
         return response;
     }
@@ -125,15 +125,15 @@ public class MonoThreadClientHandler implements Runnable {
         IdentificationResponse response = new IdentificationResponse();
         try {
             if (request.login.length() < loginMinimalLength) {
-                response.message = "login short";
+                response.message = "login is short";
                 return response;
             }
             if (request.login.length() > loginMaximalLength) {
-                response.message = "login long";
+                response.message = "login is long";
                 return response;
             }
             if (!accounts.containsKey(request.login)) {
-                response.message = "login wrong";
+                response.message = "login is wrong";
                 return response;
             }
             Account user = accounts.get(request.login);
@@ -156,19 +156,19 @@ public class MonoThreadClientHandler implements Runnable {
     private AuthenticationResponse authentication(AuthenticationRequest request){
         AuthenticationResponse response = new AuthenticationResponse();
         if (request.login.length() < loginMinimalLength) {
-            response.message = "login short";
+            response.message = "login is short";
             return response;
         }
         if (request.login.length() > loginMaximalLength) {
-            response.message = "login long";
+            response.message = "login is long";
             return response;
         }
         if (!accounts.containsKey(request.login)) {
-            response.message = "login wrong";
+            response.message = "login is wrong";
             return response;
         }
         if (!(Arrays.equals(accounts.get(request.login).random, request.random))) {
-            response.message = "random wrong";
+            response.message = "random is wrong";
             return response;
         } else {
             try {
