@@ -15,7 +15,7 @@ public class Server {
         MyShutdownHook shutdownHook = new MyShutdownHook();
         Runtime.getRuntime().addShutdownHook(shutdownHook);
         accountsLoad();
-        StringBuffer stringBuffer = new StringBuffer();
+        StringBuffer stringBuffer = new StringBuffer().append("\n\n");
         accounts.forEach((s, account) -> stringBuffer
                 .append(s)
                 .append(" - user found, registered - ")
