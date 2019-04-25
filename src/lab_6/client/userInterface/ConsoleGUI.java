@@ -49,7 +49,6 @@ public class ConsoleGUI {
             } catch (IllegalArgumentException ex){
 
             } catch (Exception ex) {
-                ex.printStackTrace();
                 System.out.println(ex.getMessage());
                 break;
             }
