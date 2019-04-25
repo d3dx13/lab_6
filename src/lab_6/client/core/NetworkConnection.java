@@ -26,20 +26,44 @@ import java.util.Arrays;
 
 import static lab_6.Settings.*;
 
+/**
+ * Класс для реализации сетевой коммуникации на стороне клиента.
+ */
 public class NetworkConnection {
+    /**
+     * Отправить команду на сервер и получить ответ на неё.
+     * @param message Команда
+     * @return Ответ
+     * @throws IOException
+     * @throws IllegalBlockSizeException
+     * @throws InvalidKeyException
+     * @throws BadPaddingException
+     * @throws NoSuchAlgorithmException
+     * @throws NoSuchPaddingException
+     * @throws ClassNotFoundException
+     */
     public static Message command(Message message) throws IOException, IllegalBlockSizeException, InvalidKeyException, BadPaddingException, NoSuchAlgorithmException, NoSuchPaddingException, ClassNotFoundException {
         Object response = objectSend(objectCryption.messageEncrypt(message));
         return objectCryption.messageDecrypt((Crypted)response);
     }
-
+    /**
+     * Настроить сетевое соединение: Установить Адрес сервера и порт.
+     * @param hostname Адрес сервера
+     * @param port Порт
+     */
     public static void setServerAddressr(String hostname, int port){
         serverAddress = new InetSocketAddress(hostname, port);
     }
-
+    /**
+     * @return Текущее соединение.
+     */
     public static InetSocketAddress getServerAddressr(){
         return serverAddress;
     }
-
+    /**
+     * Процесс регистрации.
+     * @return Успешность
+     */
     public static boolean signUp() {
         try {
             String password;
@@ -97,7 +121,10 @@ public class NetworkConnection {
             return false;
         }
     }
-
+    /**
+     * Процесс авторизации.
+     * @return Успешность
+     */
     public static boolean signIn() {
         try {
             String password;
@@ -151,9 +178,15 @@ public class NetworkConnection {
             return false;
         }
     }
-
+    /**
+     * Отправить Object на сервер и получить Object в ответ.
+     * @param message отправляемый Object
+     * @return получаемый Object
+     * @throws IOException
+     * @throws ClassNotFoundException
+     */
     private static Object objectSend(Object message) throws IOException, ClassNotFoundException {
-        server = SocketChannel.open(serverAddress);
+        SocketChannel server = SocketChannel.open(serverAddress);
         ByteBuffer outBuffer = ByteBuffer.wrap(objectCryption.messageSerialize(message));
         server.write(outBuffer);
         outBuffer.clear();
@@ -164,19 +197,36 @@ public class NetworkConnection {
         server.close();
         return response;
     }
+    /**
+     * Процесс идентификации пользователя.
+     * @return Ответ сервера
+     */
     private static IdentificationResponse identification (IdentificationRequest request) throws IOException, ClassNotFoundException {
         Object response = objectSend(request);
         return (IdentificationResponse)response;
     }
+    /**
+     * Процесс регистрации пользователя.
+     * @return Ответ сервера
+     */
     private static RegistrationResponse registration (RegistrationRequest request) throws IOException, ClassNotFoundException {
         Object response = objectSend(request);
         return (RegistrationResponse)response;
     }
+    /**
+     * Процесс аутентификации пользователя.
+     * @return Ответ сервера
+     */
     private static AuthenticationResponse authentication (AuthenticationRequest request) throws IOException, ClassNotFoundException {
         Object response = objectSend(request);
         return (AuthenticationResponse)response;
     }
-    private static SocketChannel server;
+    /**
+     * Текущее сетевое соединение.
+     */
     private static InetSocketAddress serverAddress;
+    /**
+     * Экземпляр класса ObjectCryption для работы с шифрованием и сериализацией.
+     */
     public static ObjectCryption objectCryption = new ObjectCryption();
 }
