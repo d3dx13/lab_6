@@ -4,6 +4,13 @@ import lab_6.server.core.MultiThreadServer;
 
 import static lab_6.server.Database.*;
 
+/**
+ * Оболочка многопоточного сервера.
+ * Внутри неё считываются данные учётных записей,
+ * Поднимается система перехвата сигнала выключения,
+ * В оперативную память загружается коллекция,
+ * После чего стартует многопоточный сервис-обработчик задач.
+ */
 public class Server {
     public static void main(String[] args) {
         class MyShutdownHook extends Thread {

@@ -9,11 +9,35 @@ import java.io.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.PriorityBlockingQueue;
 
+
+/**
+ * Главный класс для работы с коллекциями аккаунтов и "Танцоров".
+ * Позволяет получать информацию о коллекции,
+ * А также безопасно её сохранять/загружать.
+ * Также позволяет обновлять данные учётных записей.
+ */
 public class Database {
+    /**
+     * Путь к директории с текущей коллекцией.
+     */
     public static File collectionPath = new File("src/lab_6/server/database/");
+    /**
+     * Коллекция "Танцоров".
+     */
     public static PriorityBlockingQueue<Dancer> collectionData = new PriorityBlockingQueue<Dancer>();
+    /**
+     * Информация о коллекции "Танцоров".
+     */
     public static CollectionInfo collectionInfo = new CollectionInfo();
+    /**
+     * Информация о учётных записях пользователей.
+     */
     public static ConcurrentHashMap<String, Account> accounts = new ConcurrentHashMap<String, Account>();
+    /**
+     * Сохранить коллекцию.
+     * Операция потокобезопасна.
+     * @return Успешность операции.
+     */
     public synchronized static boolean collectionSave(){
         try {
             FileOutputStream fileOutputStream;
@@ -37,6 +61,11 @@ public class Database {
             return false;
         }
     }
+    /**
+     * Загрузить коллекцию.
+     * Операция потокобезопасна.
+     * @return Успешность операции.
+     */
     public synchronized static boolean collectionLoad(){
         try {
             FileInputStream fileInputStream;
@@ -65,6 +94,11 @@ public class Database {
             return false;
         }
     }
+    /**
+     * Сохранить данные учётных записей.
+     * Операция потокобезопасна.
+     * @return Успешность операции.
+     */
     public synchronized static boolean accountsSave(){
         try {
             FileOutputStream fileOutputStream;
@@ -82,6 +116,11 @@ public class Database {
             return false;
         }
     }
+    /**
+     * Загрузить данные учётных записей.
+     * Операция потокобезопасна.
+     * @return Успешность операции.
+     */
     public synchronized static boolean accountsLoad(){
         try {
             FileInputStream fileInputStream;
@@ -104,6 +143,10 @@ public class Database {
             return false;
         }
     }
+    /**
+     * Метод для получения информации о коллекции.
+     * @return Строка с информацией о коллекции.
+     */
     public synchronized static String getInfo(){
         collectionInfo.size = collectionData.size();
         return collectionInfo.toString();
