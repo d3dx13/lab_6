@@ -106,12 +106,25 @@ class CommandHandler {
         response.text = stringBuffer.toString();
         return response;
     }
+
+    /**
+     * Метод, создающий объект типа Message, в котором находится коллекция всех объектов, находящихся на сервере.
+     * Реализация с помощью Stream API.
+     * @return объект типа Message с коллекцией элементов.
+     */
     private static Message show(){
         Message response = new Message();
         response.text = "show";
         collectionData.stream().sorted().forEachOrdered(dancer -> response.values.addLast(dancer));
         return response;
     }
+
+    /**
+     * Метод, добавляющий коллекцию объектов, пришедший в объекте типа Message, в коллекцию на сервере.
+     * Реализация с помощью Stream API.
+     * @param request Объект Message, который содержит коллекцию элементов, которые необходимо добавить в коллекцию на сервере.
+     * @return Объект Message, содержащий текст об успешном добавлении элементов в коллекцию.
+     */
     private static Message add(Message request){
         Message response = new Message();
         response.text = "add success";
@@ -119,6 +132,13 @@ class CommandHandler {
         collectionInfo.lastChangeTime = Date.from(Instant.now()).toString();
         return response;
     }
+
+    /**
+     * Метод, выполняющий добавление каждого элемента из коллекции объекта Messsage, если этот элемент больше или равен максимальному,
+     * имеющемуся в коллекции на сервере.
+     * @param request Объект Message, который содержит коллекцию элементов.
+     * @return Объект Message, содержащий текст об успешности добавления элементов в коллекцию.
+     */
     private static Message add_if_max(Message request){
         Message response = new Message();
         if (collectionData.isEmpty()){
@@ -131,6 +151,12 @@ class CommandHandler {
         collectionInfo.lastChangeTime = Date.from(Instant.now()).toString();
         return response;
     }
+    /**
+     * Метод, выполняющий добавление каждого элемента из коллекции объекта Messsage, если этот элемент меньше или равен максимальному,
+     * имеющемуся в коллекции на сервере.
+     * @param request Объект Message, который содержит коллекци элементов.
+     * @return Объект Message, содержащий текст об успешности добавления элементов в коллекцию.
+     */
     private static Message add_if_min(Message request){
         Message response = new Message();
         if (collectionData.isEmpty()){
@@ -143,6 +169,12 @@ class CommandHandler {
         collectionInfo.lastChangeTime = Date.from(Instant.now()).toString();
         return response;
     }
+    /**
+     * Метод, выполняющий удаление из коллекции на сервере каждого элемента,
+     * который соответствует одному из элементов коллекции объекта Messsage.
+     * @param request Объект Message, который содержит коллекцию элементов.
+     * @return Объект Message, содержащий текст об успешном удалении элементов из коллекции.
+     */
     private static Message remove(Message request){
         Message response = new Message();
         request.values.parallelStream().map(o -> (Dancer)o).forEach(o -> collectionData.remove(o));
@@ -150,6 +182,11 @@ class CommandHandler {
         collectionInfo.lastChangeTime = Date.from(Instant.now()).toString();
         return response;
     }
+
+    /**
+     * Метод, сохраняющий коллекцию элементов на сервере в файл.
+     * @return Объект Message, содержащий текст об успешности сохранения коллекции.
+     */
     private static Message save(){
         Message response = new Message();
         if (collectionSave())
@@ -158,6 +195,10 @@ class CommandHandler {
             response.text = "save failed";
         return response;
     }
+    /**
+     * Метод, загружающий коллекцию элементов на сервер из файла.
+     * @return Объект Message, содержащий текст об успешности загрузки коллекции.
+     */
     private static Message load(){
         Message response = new Message();
         response.text = "load success";
@@ -167,6 +208,11 @@ class CommandHandler {
             response.text = "load failed";
         return response;
     }
+
+    /**
+     * Метод, возвращающий объект Message, содержащий информацию о коллекции, хранящейся на сервере.
+     * @return Объект Message, содержащий информацию о коллекции, хранящейся на сервере.
+     */
     private static Message info(){
         Message response = new Message();
         response.text = "info\n" + getInfo();
