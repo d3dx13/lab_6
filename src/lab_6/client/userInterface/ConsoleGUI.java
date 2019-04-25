@@ -51,7 +51,6 @@ public class ConsoleGUI {
                         "+\nПомогите Даше путешественнице найти файл.");
 
             } catch (Exception ex) {
-                ex.printStackTrace();
                 System.out.println(ex.getMessage());
                 break;
             }
