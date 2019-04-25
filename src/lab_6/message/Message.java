@@ -1,8 +1,11 @@
 package lab_6.message;
 import java.io.Serializable;
-import java.util.Date;
 import java.util.LinkedList;
 
+
+/**
+ * Стандартное сообщение для работы с коллекцией.
+ */
 public final class Message implements Serializable {
     public String login;
     public String text;

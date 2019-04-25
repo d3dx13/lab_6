@@ -3,29 +3,20 @@ import lab_6.message.*;
 import lab_6.message.loggingIn.*;
 import lab_6.message.registration.*;
 import lab_6.crypto.ObjectCryption;
-import lab_6.world.creation.Dancer;
-import lab_6.world.state.FeelState;
-import lab_6.world.state.PositionState;
-import lab_6.world.state.ThinkState;
 
-import javax.crypto.Cipher;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
-import java.security.KeyFactory;
-import java.security.SecureRandom;
-import java.security.spec.X509EncodedKeySpec;
-import java.time.Instant;
-import java.util.Arrays;
-import java.util.Date;
 
-import static lab_6.Settings.*;
 import static lab_6.server.Database.*;
 import static lab_6.server.core.SignUpInHandler.*;
 import static lab_6.server.core.CommandHandler.*;
 
-
+/**
+ * Запускаемый Runnable поток для обработки запроса пользователя.
+ * Передаёт команды в CommandHandler и SignUpInHandler.
+ */
 public class MonoThreadClientHandler implements Runnable {
     private Socket clientDialog;
     private ObjectCryption objectCryption;

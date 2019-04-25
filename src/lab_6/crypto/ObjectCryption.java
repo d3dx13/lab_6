@@ -14,16 +14,43 @@ import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.time.Instant;
 
+
+/**
+ * Служебный класс, реализующий работу с сериализацией и шифрованием объектов.
+ */
 public class ObjectCryption {
+    /**
+     * Установить логин пользователя, используемый для подписи сообщения.
+     * @param message Логин
+     */
     public void setUserLogin(String message){
         this.login = message;
     }
+    /**
+     * Получить логин пользователя, используемый для подписи сообщения.
+     * @return Логин
+     */
     public String getUserLogin(){
         return this.login;
     }
+    /**
+     * Установить секретный AES ключ пользователя.
+     * @param message - ключ
+     */
     public void setSecretKey(byte [] message){
         this.secretKey = message.clone();
     }
+    /**
+     * Зашифровать сообщение
+     * @param message Сообщение
+     * @return Зашифрованное сообщение
+     * @throws IOException
+     * @throws NoSuchPaddingException
+     * @throws NoSuchAlgorithmException
+     * @throws InvalidKeyException
+     * @throws BadPaddingException
+     * @throws IllegalBlockSizeException
+     */
     public Crypted messageEncrypt(Message message) throws IOException, NoSuchPaddingException, NoSuchAlgorithmException, InvalidKeyException, BadPaddingException, IllegalBlockSizeException {
         Crypted response = new Crypted();
         response.login = this.login;
@@ -43,6 +70,18 @@ public class ObjectCryption {
         response.data = cipher.doFinal(response.data);
         return response;
     }
+    /**
+     * Расшифровать сообщение
+     * @param message Зашифрованное сообщение
+     * @return Расшифрованное сообщение
+     * @throws IOException
+     * @throws ClassNotFoundException
+     * @throws BadPaddingException
+     * @throws IllegalBlockSizeException
+     * @throws NoSuchPaddingException
+     * @throws NoSuchAlgorithmException
+     * @throws InvalidKeyException
+     */
     public Message messageDecrypt(Crypted message) throws IOException, ClassNotFoundException, BadPaddingException, IllegalBlockSizeException, NoSuchPaddingException, NoSuchAlgorithmException, InvalidKeyException {
         SecretKeySpec secretKeySpec = new SecretKeySpec(secretKey, "AES");
         Cipher cipher = Cipher.getInstance("AES");
@@ -56,6 +95,12 @@ public class ObjectCryption {
         Message response = (Message)messageDeserialize(message.data);
         return response;
     }
+    /**
+     * Сериализовать Object
+     * @param message Object для сериализации
+     * @return Последовательность байт - сериализованный Object
+     * @throws IOException
+     */
     public byte[] messageSerialize(Object message) throws IOException {
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         ObjectOutput out = new ObjectOutputStream(bos);
@@ -63,21 +108,40 @@ public class ObjectCryption {
         out.flush();
         return bos.toByteArray();
     }
+    /**
+     * Десериализовать Object
+     * @param message Последовательность байт - сериализованный Object
+     * @return Object после десериализации.
+     * @throws IOException
+     */
     public Object messageDeserialize(byte[] message) throws IOException, ClassNotFoundException {
         ObjectInput out = new ObjectInputStream(new ByteArrayInputStream(message));
         return out.readObject();
     }
+    /**
+     * @return Message с заполненными полями login и time.
+     */
     public Message getNewMessage(){
         Message message = new Message();
         message.login = login;
         message.time = Instant.now().getEpochSecond() * 1000000L + (long) Instant.now().getNano() /1000;
         return message;
     }
+    /**
+     * @param text Текст сообщения в Message.
+     * @return Message с заполненными полями login, time и text.
+     */
     public Message getNewMessage(String text){
         Message message = getNewMessage();
         message.text = text;
         return message;
     }
+    /**
+     * Логин пользователя.
+     */
     protected String login;
-    protected byte [] secretKey;
+    /**
+     * Сессионный секретный ключ пользователя.
+     */
+    private byte [] secretKey;
 }

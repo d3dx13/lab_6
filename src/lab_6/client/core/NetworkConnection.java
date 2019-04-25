@@ -2,12 +2,8 @@ package lab_6.client.core;
 
 import lab_6.message.Crypted;
 import lab_6.message.Message;
-import lab_6.message.loggingIn.AuthenticationRequest;
-import lab_6.message.loggingIn.AuthenticationResponse;
-import lab_6.message.loggingIn.IdentificationRequest;
-import lab_6.message.loggingIn.IdentificationResponse;
-import lab_6.message.registration.RegistrationRequest;
-import lab_6.message.registration.RegistrationResponse;
+import lab_6.message.loggingIn.*;
+import lab_6.message.registration.*;
 import lab_6.crypto.ObjectCryption;
 
 import javax.crypto.BadPaddingException;
@@ -156,7 +152,7 @@ public class NetworkConnection {
         }
     }
 
-    protected static Object objectSend(Object message) throws IOException, ClassNotFoundException {
+    private static Object objectSend(Object message) throws IOException, ClassNotFoundException {
         server = SocketChannel.open(serverAddress);
         ByteBuffer outBuffer = ByteBuffer.wrap(objectCryption.messageSerialize(message));
         server.write(outBuffer);
@@ -168,19 +164,19 @@ public class NetworkConnection {
         server.close();
         return response;
     }
-    protected static IdentificationResponse identification (IdentificationRequest request) throws IOException, ClassNotFoundException {
+    private static IdentificationResponse identification (IdentificationRequest request) throws IOException, ClassNotFoundException {
         Object response = objectSend(request);
         return (IdentificationResponse)response;
     }
-    protected static RegistrationResponse registration (RegistrationRequest request) throws IOException, ClassNotFoundException {
+    private static RegistrationResponse registration (RegistrationRequest request) throws IOException, ClassNotFoundException {
         Object response = objectSend(request);
         return (RegistrationResponse)response;
     }
-    protected static AuthenticationResponse authentication (AuthenticationRequest request) throws IOException, ClassNotFoundException {
+    private static AuthenticationResponse authentication (AuthenticationRequest request) throws IOException, ClassNotFoundException {
         Object response = objectSend(request);
         return (AuthenticationResponse)response;
     }
-    protected static SocketChannel server;
-    protected static InetSocketAddress serverAddress;
+    private static SocketChannel server;
+    private static InetSocketAddress serverAddress;
     public static ObjectCryption objectCryption = new ObjectCryption();
 }

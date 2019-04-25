@@ -2,6 +2,9 @@ package lab_6.message;
 
 import java.io.Serializable;
 
+/**
+ * Класс учётной записи пользователя.
+ */
 public final class Account implements Serializable {
     public String login;
     public byte [] publicKey;

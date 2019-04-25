@@ -19,8 +19,15 @@ import static lab_6.Settings.*;
 import static lab_6.server.Database.accounts;
 import static lab_6.server.Database.accountsSave;
 
+/**
+ * Класс для обработки запросов пользователя на регистрацию, идентификацию и аутентификацию.
+ */
 class SignUpInHandler {
-
+    /**
+     * Метод обработки запроса на регистрацию от пользователя.
+     * @param request Запрос регистрации.
+     * @return Ответ на запрос регистрации.
+     */
     static RegistrationResponse registration(RegistrationRequest request){
         RegistrationResponse response = new RegistrationResponse();
         if (request.login.length() < loginMinimalLength){
@@ -49,7 +56,11 @@ class SignUpInHandler {
         }
         return response;
     }
-
+    /**
+     * Метод обработки запроса на идентификацию от пользователя.
+     * @param request Запрос идентификации.
+     * @return Ответ на запрос идентификации.
+     */
     static IdentificationResponse identification(IdentificationRequest request) {
         IdentificationResponse response = new IdentificationResponse();
         try {
@@ -81,7 +92,11 @@ class SignUpInHandler {
             return response;
         }
     }
-
+    /**
+     * Метод обработки запроса на аутентификацию от пользователя.
+     * @param request Запрос аутентификации.
+     * @return Ответ на запрос аутентификации.
+     */
     static AuthenticationResponse authentication(AuthenticationRequest request){
         AuthenticationResponse response = new AuthenticationResponse();
         if (request.login.length() < loginMinimalLength) {
@@ -117,5 +132,4 @@ class SignUpInHandler {
             }
         }
     }
-
 }

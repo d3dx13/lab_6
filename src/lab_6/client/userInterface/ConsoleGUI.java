@@ -11,6 +11,11 @@ import java.io.StreamCorruptedException;
 
 import static lab_6.client.userInterface.TableGUI.printTable;
 
+/**
+ * Класс для реализации управления коллекцией на сервере через графический интерфейс клиента.
+ * За обработку строковых команд отвечает CommandParser.
+ * За сообщения с сервером используется NetworkConnection.
+ */
 public class ConsoleGUI {
     public static void main() {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));

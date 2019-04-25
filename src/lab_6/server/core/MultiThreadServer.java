@@ -12,6 +12,10 @@ import static lab_6.Settings.threadPoolSize;
  * В основе лежит ExecutorService.
  */
 public class MultiThreadServer {
+    /**
+     * Пул потоков для выполнения запросов пользователя.
+     * Размер пула: threadPoolSize.
+     */
     static ExecutorService executeIt = Executors.newFixedThreadPool(threadPoolSize);
     public static void main() {
         try {

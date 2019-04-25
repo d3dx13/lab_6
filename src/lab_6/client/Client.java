@@ -11,6 +11,10 @@ import static lab_6.Settings.loginMaximalLength;
 import static lab_6.Settings.loginMinimalLength;
 import static lab_6.client.core.NetworkConnection.getServerAddressr;
 
+/**
+ * Оболочка клиента.
+ * Реализует консольный интерфейс для работы в Offline режиме.
+ */
 public class Client {
     private static BufferedReader reader;
     public static void main(String[] args) {
@@ -42,7 +46,10 @@ public class Client {
             System.out.println(e.getMessage());
         }
     }
-    public static void server(){
+    /**
+     * Выбор сервера с коллекцией.
+     */
+    private static void server(){
         String hostname;
         int port;
         try {
@@ -56,7 +63,10 @@ public class Client {
         }
         NetworkConnection.setServerAddressr(hostname, port);
     }
-    public static void help(){
+    /**
+     * Помощь по командам.
+     */
+    private static void help(){
         System.out.println(new StringBuffer()
                 .append("\nOffline mode:\n")
                 .append("login - Настроить имя пользователя\n")
@@ -66,7 +76,10 @@ public class Client {
                 .append("exit - Выход из программы\n")
         );
     }
-    public static void login() {
+    /**
+     * Выбор имени пользователя.
+     */
+    private static void login() {
         System.out.print(String.format("\nLogin must be %d to %d characters\nEnter your login: ",loginMinimalLength,loginMaximalLength));
         String login;
         try {
@@ -81,7 +94,10 @@ public class Client {
         NetworkConnection.objectCryption.setUserLogin(login);
         CommandParser.setUserLogin(login);
     }
-    public static void connect()  {
+    /**
+     * Попытка подключения к серверу.
+     */
+    private static void connect()  {
         if (getServerAddressr() == null)
             server();
         try {
@@ -91,7 +107,10 @@ public class Client {
             System.out.println(ex.getMessage());
         }
     }
-    public static void registration(){
+    /**
+     * Попытка регистрации на сервере.
+     */
+    private static void registration(){
         if (getServerAddressr() == null)
             server();
         if (NetworkConnection.signUp())

@@ -2,24 +2,18 @@ package lab_6.client.core;
 
 import lab_6.message.Message;
 import lab_6.world.creation.Dancer;
-import lab_6.world.state.DynamicsState;
-import lab_6.world.state.FeelState;
-import lab_6.world.state.PositionState;
-import lab_6.world.state.ThinkState;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.time.Instant;
 import java.util.LinkedList;
 import java.util.Map;
-import java.util.concurrent.LinkedBlockingDeque;
 
 public class CommandParser {
     private static String userLogin;
     public static void setUserLogin(String login){
         userLogin = login;
     }
-
     public static Dancer getDancerFromJSONObject(JSONObject JSONobj){
         Dancer tempDancer = new Dancer("NoName");
         for (Map.Entry<String, Object> iter : JSONobj.toMap().entrySet()){

@@ -4,8 +4,15 @@ import lab_6.message.Message;
 import lab_6.world.creation.Dancer;
 
 
-public class TableGUI {
-    public static void printTable(Message message){
+/**
+ * Класс для стандартизированных методов отрисовки графического интерфейса пользователя.
+ */
+class TableGUI {
+    /**
+     * Красивый вывод команды show в виде форматированной таблички.
+     * @param message Сообщение, поле values которого будет выведено.
+     */
+    static void printTable(Message message){
         if (message.values == null)
             return;
         if (message.values.size() == 0){
@@ -74,12 +81,14 @@ public class TableGUI {
         System.out.print(stringBuffer.toString());
         printLine('-', header.length() - 1);
     }
-    public static void printLine(char symbol, int len){
+    /**
+     * Вывести полосу из символов symbol длиной len.
+     * @param symbol Символ
+     * @param len Длина полосы
+     */
+    private static void printLine(char symbol, int len){
         for (int i = 0; i < len; i++)
             System.out.print(symbol);
         System.out.print('\n');
-    }
-    public static void main(String[] args) {
-        printTable(new Message());
     }
 }
