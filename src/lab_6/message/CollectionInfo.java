@@ -2,6 +2,9 @@ package lab_6.message;
 
 import java.io.Serializable;
 
+/**
+ * Класс, кооторый содержит информацию о коллекции.
+ */
 public class CollectionInfo implements Serializable {
     public int size;
     public String type;

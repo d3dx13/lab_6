@@ -3,6 +3,9 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.LinkedList;
 
+/**
+ * Класс, экземпляры которого передают элементы и команды между клиентом и сервером.
+ */
 public final class Message implements Serializable {
     public String login;
     public String text;
