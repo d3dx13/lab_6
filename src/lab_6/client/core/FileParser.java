@@ -16,9 +16,15 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
-
+/**
+ * Класс, содержащий метод для получения объектов из файла XML и возвращения их в коллекции объекта Message.
+ */
 public class FileParser {
-
+    /**
+     * Метод, возвращающий объект Message с коллекцией элементов, считанных из файла XML.
+     * @param pathToFile Объект String, содержащий путь к файлу XML.
+     * @return Объект Message, содержащий коллекцию элементов, считанных из файла XML.
+     */
     public static Message getMessageFromXMLFile(String pathToFile)
     {
         Message xmlFileMessage = NetworkConnection.objectCryption.getNewMessage("add");
