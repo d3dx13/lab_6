@@ -15,6 +15,11 @@ import static lab_6.server.Database.collectionLoad;
 import static lab_6.server.Database.getInfo;
 
 class CommandHandler {
+    /**
+     * Метод, реализующий вызов команды в зависимости от текста сообщения, пришедшего в объекте Message.
+     * @param message Объект Message, содержащий название команды, которую необходимо выполнить.
+     * @return Объект Message полученный после выполнения команды.
+     */
     static Message command(Message message){
         Account user = accounts.get(message.login);
         if (message.time > user.lastAccessTime) {
@@ -50,6 +55,12 @@ class CommandHandler {
             return info();
         return new Message();
     }
+
+    /**
+     * Метод, реализующий отключение клиента от сервера.
+     * @param message Объект Message, содержащий логин клиента, отключаемого от сервера.
+     * @return Объект Message с текстовым сообщением о о завершении отключения.
+     */
     private static Message disconnect(Message message){
         Account user = accounts.get(message.login);
         user.lastAccessTime = 0;
@@ -62,6 +73,11 @@ class CommandHandler {
         response.time = message.time;
         return response;
     }
+
+    /**
+     * Метод возвращающий объект Message с текстовым списком команд сервера и их описанием.
+     * @return Объект Message с текстовым списком команд сервера и их описанием.
+     */
     private static Message getHelpMessage(){
         StringBuffer stringBuffer = new StringBuffer()
                 .append("help\n")
