@@ -47,7 +47,7 @@ public class ConsoleGUI {
             } catch (StreamCorruptedException ex) {
                 System.out.println("Package is damaged");
             } catch (IllegalArgumentException ex){
-                System.out.println("Путь к файлу не найден. Возможно переменная окружения не задана или имеет неправильный путь к файлу." +
+                System.out.println("Путь к файлу не найден. Возможно переменная окружения \"COLLECTION_PATH\" не задана или имеет неправильный путь к файлу." +
                         "+\nПомогите Даше путешественнице найти файл.");
 
             } catch (Exception ex) {
