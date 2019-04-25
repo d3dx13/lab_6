@@ -14,6 +14,9 @@ import static lab_6.server.Database.*;
 import static lab_6.server.Database.collectionLoad;
 import static lab_6.server.Database.getInfo;
 
+/**
+ * Класс, который содержит методы для выполнения команд, приходящих с клиента на сервер, и создания ответа клиенту.
+ */
 class CommandHandler {
     /**
      * Метод, реализующий вызов команды в зависимости от текста сообщения, пришедшего в объекте Message.
