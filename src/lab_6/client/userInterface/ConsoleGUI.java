@@ -44,9 +44,12 @@ public class ConsoleGUI {
                     } else
                         System.out.println(response.text);
                 }
-            } catch (StreamCorruptedException ex){
+            } catch (StreamCorruptedException ex) {
                 System.out.println("Package is damaged");
+            } catch (IllegalArgumentException ex){
+
             } catch (Exception ex) {
+                ex.printStackTrace();
                 System.out.println(ex.getMessage());
                 break;
             }
