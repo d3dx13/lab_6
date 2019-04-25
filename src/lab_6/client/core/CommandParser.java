@@ -9,11 +9,25 @@ import java.time.Instant;
 import java.util.LinkedList;
 import java.util.Map;
 
+/**
+ * Класс, реализующий парсинг команд на стороне клиента.
+ */
 public class CommandParser {
     private static String userLogin;
+
+    /**
+     * Метод, установливающий логин клиенту.
+     * @param login Логин, который устанавливается клиенту.
+     */
     public static void setUserLogin(String login){
         userLogin = login;
     }
+
+    /**
+     * Метод, который переводит строку, заданную в JSON-формате, в объект Dancer.
+     * @param JSONobj JSONObject объект, который переводится в объект Dancer.
+     * @return Объект Dancer, который возвращает метод, получив его из JSON.
+     */
     public static Dancer getDancerFromJSONObject(JSONObject JSONobj){
         Dancer tempDancer = new Dancer("NoName");
         for (Map.Entry<String, Object> iter : JSONobj.toMap().entrySet()){
@@ -32,6 +46,12 @@ public class CommandParser {
         }
         return tempDancer;
     }
+
+    /**
+     * Метод, который переводит строку, заданную в JSON-формате, в объект Message.
+     * @param inputJSON JSONObject объект, который переводится в объект Message.
+     * @return Объект Message, который возвращает метод, получив его из JSON.
+     */
     public static Message getMessageFromJSON(String inputJSON){
         Message response = NetworkConnection.objectCryption.getNewMessage();
         inputJSON = inputJSON.strip();
@@ -107,6 +127,9 @@ public class CommandParser {
         return response;
     }
 
+    /**
+     * Исключение, которое возникает при ошибке в обработке JSON. Оно содержит рекомендаци, позволяющие исправить ошибку.
+     */
     private static final StringBuffer JSONParseException = new StringBuffer()
             .append("\n")
             .append("\n")
