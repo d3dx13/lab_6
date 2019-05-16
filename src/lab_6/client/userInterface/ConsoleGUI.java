@@ -24,7 +24,7 @@ public class ConsoleGUI {
                 String command;
                 System.out.print(String.format("%s: ", NetworkConnection.objectCryption.getUserLogin()));
                 command = reader.readLine();
-                if (!command.strip().equals("")) {
+                if (!command.trim().equals("")) {
                     Message message = CommandParser.getMessageFromJSON(command);
                     if (message.text.length() > 5 && message.text.substring(0, 6).equals("import")) {
                         Message response = FileParser.getMessageFromXMLFile(System.getenv().get("COLLECTION_PATH"));

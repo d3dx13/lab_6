@@ -54,7 +54,7 @@ public class CommandParser {
      */
     public static Message getMessageFromJSON(String inputJSON){
         Message response = NetworkConnection.objectCryption.getNewMessage();
-        inputJSON = inputJSON.strip();
+        inputJSON = inputJSON.trim();
         if (inputJSON.length() > 3 && inputJSON.substring(0,4).equalsIgnoreCase("show")){
             response.text = "show";
             return response;

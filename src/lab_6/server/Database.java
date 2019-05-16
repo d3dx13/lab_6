@@ -6,8 +6,11 @@ import lab_6.message.CollectionInfo;
 import lab_6.world.creation.Dancer;
 
 import java.io.*;
+import java.nio.file.Files;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.PriorityBlockingQueue;
+
+import static lab_6.Settings.databasePath;
 
 
 /**
@@ -20,7 +23,7 @@ public class Database {
     /**
      * Путь к директории с текущей коллекцией.
      */
-    public static File collectionPath = new File("src/lab_6/server/database/");
+    public static File collectionPath = new File(databasePath);
     /**
      * Коллекция "Танцоров".
      */
@@ -73,15 +76,11 @@ public class Database {
             File dataPath = new File(collectionPath.getPath() + "/data");
             if (!dataPath.exists())
                 collectionSave();
-            fileInputStream = new FileInputStream(dataPath);
-            collectionData = (PriorityBlockingQueue<Dancer>)objectCryption.messageDeserialize(fileInputStream.readAllBytes());
-            fileInputStream.close();
+            collectionData = (PriorityBlockingQueue<Dancer>)objectCryption.messageDeserialize(Files.readAllBytes(dataPath.toPath()));
             dataPath = new File(collectionPath.getPath() + "/info");
             if (!dataPath.exists())
                 collectionSave();
-            fileInputStream = new FileInputStream(dataPath);
-            collectionInfo = (CollectionInfo)objectCryption.messageDeserialize(fileInputStream.readAllBytes());
-            fileInputStream.close();
+            collectionInfo = (CollectionInfo)objectCryption.messageDeserialize(Files.readAllBytes(dataPath.toPath()));
             return true;
         } catch (FileNotFoundException e) {
             System.out.println(e.getMessage());
@@ -123,14 +122,11 @@ public class Database {
      */
     public synchronized static boolean accountsLoad(){
         try {
-            FileInputStream fileInputStream;
             ObjectCryption objectCryption = new ObjectCryption();
             File dataPath = new File(collectionPath.getPath() + "/accounts");
             if (!dataPath.exists())
                 accountsSave();
-            fileInputStream = new FileInputStream(dataPath);
-            accounts = (ConcurrentHashMap<String, Account>)objectCryption.messageDeserialize(fileInputStream.readAllBytes());
-            fileInputStream.close();
+            accounts = (ConcurrentHashMap<String, Account>)objectCryption.messageDeserialize(Files.readAllBytes(dataPath.toPath()));
             return true;
         } catch (FileNotFoundException e) {
             System.out.println(e.getMessage());

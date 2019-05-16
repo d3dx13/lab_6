@@ -97,7 +97,7 @@ public class NetworkConnection {
             KeyPair keyPair = keyPairGenerator.genKeyPair();
             registrationRequest.publicKey = keyPair.getPublic().getEncoded();
             MessageDigest sha = MessageDigest.getInstance("SHA-256");
-            byte[] secretKey = Arrays.copyOf(sha.digest(password.getBytes(Charset.forName("UTF-8"))), 32);
+            byte[] secretKey = Arrays.copyOf(sha.digest(password.getBytes(Charset.forName("UTF-8"))), userAESKeySize);
             SecretKeySpec secretKeySpec = new SecretKeySpec(secretKey, "AES");
             Cipher cipher = Cipher.getInstance("AES");
             cipher.init(Cipher.ENCRYPT_MODE, secretKeySpec);
@@ -136,7 +136,7 @@ public class NetworkConnection {
             System.out.print("Logging in...\nEnter your password: ");
             password = reader.readLine();
             MessageDigest sha = MessageDigest.getInstance("SHA-256");
-            SecretKeySpec secretKeySpec = new SecretKeySpec(Arrays.copyOf(sha.digest(password.getBytes(Charset.forName("UTF-8"))), 32), "AES");
+            SecretKeySpec secretKeySpec = new SecretKeySpec(Arrays.copyOf(sha.digest(password.getBytes(Charset.forName("UTF-8"))), userAESKeySize), "AES");
             Cipher cipher = Cipher.getInstance("AES");
             cipher.init(Cipher.DECRYPT_MODE, secretKeySpec);
             byte[] privateKey;

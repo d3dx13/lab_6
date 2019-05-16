@@ -24,7 +24,7 @@ public class Client {
             while (true){
                 try {
                     System.out.print(String.format("[offline] Address{%s} : %s :>>> ", getServerAddressr(), NetworkConnection.objectCryption.getUserLogin()));
-                    String command = reader.readLine().strip();
+                    String command = reader.readLine().trim();
                     if (command.length() > 3 && command.substring(0, 4).equals("help")) {
                         help();
                     } else if (command.length() > 4 && command.substring(0, 5).equals("login")) {
