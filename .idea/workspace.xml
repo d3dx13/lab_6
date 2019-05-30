@@ -2,22 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2171ea72-3fcf-4fb0-b595-b6bc385d1cc5" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/json__2_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lab_6.iml" beforeDir="false" afterPath="$PROJECT_DIR$/lab_6.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lab_6/Settings.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/lab_6/Settings.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lab_6/client/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/lab_6/client/Client.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lab_6/client/core/CommandParser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/lab_6/client/core/CommandParser.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lab_6/client/core/NetworkConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/lab_6/client/core/NetworkConnection.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lab_6/client/libraries/json.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lab_6/client/userInterface/ConsoleGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/lab_6/client/userInterface/ConsoleGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lab_6/server/Database.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/lab_6/server/Database.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lab_6/server/core/MultiThreadServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/lab_6/server/core/MultiThreadServer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lab_6/server/database/accounts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lab_6/server/database/data" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lab_6/server/database/info" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -57,43 +42,14 @@
     </session>
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/lab_6/client/Client.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
-              <caret line="18" column="38" selection-start-line="18" selection-start-column="38" selection-end-line="18" selection-end-column="38" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/lab_6/Settings.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="90">
-              <caret line="6" column="7" lean-forward="true" selection-start-line="6" selection-start-column="7" selection-end-line="6" selection-end-column="7" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/lab_6/server/Database.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="297">
-              <caret line="25" column="61" selection-start-line="25" selection-start-column="61" selection-end-line="25" selection-end-column="61" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#812#820#0" expanded="true" />
-                <element signature="e#1106#1123#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -107,12 +63,80 @@
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="10" />
-    <option name="y" value="20" />
-    <option name="width" value="1346" />
-    <option name="height" value="692" />
+    <option name="x" value="67" />
+    <option name="y" value="25" />
+    <option name="width" value="927" />
+    <option name="height" value="1055" />
   </component>
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectInspectionProfilesVisibleTreeState">
+    <entry key="Project Default">
+      <profile-state>
+        <expanded-state>
+          <State />
+          <State>
+            <id>Android</id>
+          </State>
+          <State>
+            <id>Assignment issuesJava</id>
+          </State>
+          <State>
+            <id>Bitwise operation issuesJava</id>
+          </State>
+          <State>
+            <id>Code maturityJava</id>
+          </State>
+          <State>
+            <id>Code style issuesJava</id>
+          </State>
+          <State>
+            <id>Control flow issuesJava</id>
+          </State>
+          <State>
+            <id>CorrectnessLintAndroid</id>
+          </State>
+          <State>
+            <id>Inheritance issuesJava</id>
+          </State>
+          <State>
+            <id>JUnitJava</id>
+          </State>
+          <State>
+            <id>Java</id>
+          </State>
+          <State>
+            <id>Java language level migration aidsJava</id>
+          </State>
+          <State>
+            <id>LintAndroid</id>
+          </State>
+          <State>
+            <id>Naming conventionsJava</id>
+          </State>
+          <State>
+            <id>Numeric issuesJava</id>
+          </State>
+          <State>
+            <id>PerformanceLintAndroid</id>
+          </State>
+          <State>
+            <id>Probable bugsJava</id>
+          </State>
+          <State>
+            <id>Resource managementJava</id>
+          </State>
+          <State>
+            <id>SecurityLintAndroid</id>
+          </State>
+          <State>
+            <id>UsabilityLintAndroid</id>
+          </State>
+        </expanded-state>
+      </profile-state>
+    </entry>
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
@@ -127,70 +151,6 @@
               <item name="lab_6" type="b2602c69:ProjectViewProjectNode" />
               <item name="lab_6" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="lab_6" type="b2602c69:ProjectViewProjectNode" />
-              <item name="lab_6" type="462c0819:PsiDirectoryNode" />
-              <item name="out" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="lab_6" type="b2602c69:ProjectViewProjectNode" />
-              <item name="lab_6" type="462c0819:PsiDirectoryNode" />
-              <item name="out" type="462c0819:PsiDirectoryNode" />
-              <item name="production" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="lab_6" type="b2602c69:ProjectViewProjectNode" />
-              <item name="lab_6" type="462c0819:PsiDirectoryNode" />
-              <item name="out" type="462c0819:PsiDirectoryNode" />
-              <item name="production" type="462c0819:PsiDirectoryNode" />
-              <item name="lab_6" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="lab_6" type="b2602c69:ProjectViewProjectNode" />
-              <item name="lab_6" type="462c0819:PsiDirectoryNode" />
-              <item name="out" type="462c0819:PsiDirectoryNode" />
-              <item name="production" type="462c0819:PsiDirectoryNode" />
-              <item name="lab_6" type="462c0819:PsiDirectoryNode" />
-              <item name="database" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="lab_6" type="b2602c69:ProjectViewProjectNode" />
-              <item name="lab_6" type="462c0819:PsiDirectoryNode" />
-              <item name="out" type="462c0819:PsiDirectoryNode" />
-              <item name="production" type="462c0819:PsiDirectoryNode" />
-              <item name="lab_6" type="462c0819:PsiDirectoryNode" />
-              <item name="lab_6" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="lab_6" type="b2602c69:ProjectViewProjectNode" />
-              <item name="lab_6" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="lab_6" type="b2602c69:ProjectViewProjectNode" />
-              <item name="lab_6" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="database" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="lab_6" type="b2602c69:ProjectViewProjectNode" />
-              <item name="lab_6" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="lab_6" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="lab_6" type="b2602c69:ProjectViewProjectNode" />
-              <item name="lab_6" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="lab_6" type="462c0819:PsiDirectoryNode" />
-              <item name="server" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="lab_6" type="b2602c69:ProjectViewProjectNode" />
-              <item name="lab_6" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="libraries" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
@@ -199,7 +159,233 @@
   </component>
   <component name="PropertiesComponent">
     <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1558012300509" />
-    <property name="settings.editor.selected.configurable" value="configurable.group.build.tools" />
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.0" />
+    <property name="settings.editor.selected.configurable" value="configurable.group.editor" />
+  </component>
+  <component name="RestoreUpdateTree" date="Moments ago" ActionInfo="_Update">
+    <UpdatedFiles>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Updated from server" />
+        <option name="myStatusName" value="Changed on server" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="CHANGED_ON_SERVER" />
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Updated" />
+          <option name="myStatusName" value="Changed" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="UPDATED" />
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/.idea/misc.xml</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/lab_6.iml</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/lab_6/Settings.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/lab_6/client/Client.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/lab_6/client/core/CommandParser.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/lab_6/client/core/NetworkConnection.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/lab_6/client/userInterface/ConsoleGUI.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/lab_6/server/Database.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/lab_6/server/core/MultiThreadServer.java</PATH>
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Created" />
+          <option name="myStatusName" value="Created" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="CREATED" />
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/.idea/libraries/json__2_.xml</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/.idea/workspace.xml</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/out/production/lab_6/database/accounts</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/out/production/lab_6/database/data</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/out/production/lab_6/database/info</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/out/production/lab_6/lab_6/Settings.class</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/out/production/lab_6/lab_6/client/Client.class</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/out/production/lab_6/lab_6/client/core/CommandParser.class</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/out/production/lab_6/lab_6/client/core/FileParser.class</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/out/production/lab_6/lab_6/client/core/NetworkConnection.class</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/out/production/lab_6/lab_6/client/input.xml</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/out/production/lab_6/lab_6/client/userInterface/ConsoleGUI.class</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/out/production/lab_6/lab_6/client/userInterface/TableGUI.class</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/out/production/lab_6/lab_6/crypto/ObjectCryption.class</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/out/production/lab_6/lab_6/message/Account.class</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/out/production/lab_6/lab_6/message/CollectionInfo.class</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/out/production/lab_6/lab_6/message/Crypted.class</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/out/production/lab_6/lab_6/message/Message.class</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/out/production/lab_6/lab_6/message/loggingIn/AuthenticationRequest.class</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/out/production/lab_6/lab_6/message/loggingIn/AuthenticationResponse.class</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/out/production/lab_6/lab_6/message/loggingIn/IdentificationRequest.class</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/out/production/lab_6/lab_6/message/loggingIn/IdentificationResponse.class</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/out/production/lab_6/lab_6/message/registration/RegistrationRequest.class</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/out/production/lab_6/lab_6/message/registration/RegistrationResponse.class</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/out/production/lab_6/lab_6/server/Database.class</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/out/production/lab_6/lab_6/server/Server$1MyShutdownHook.class</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/out/production/lab_6/lab_6/server/Server.class</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/out/production/lab_6/lab_6/server/core/CommandHandler.class</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/out/production/lab_6/lab_6/server/core/MonoThreadClientHandler.class</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/out/production/lab_6/lab_6/server/core/MultiThreadServer.class</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/out/production/lab_6/lab_6/server/core/SignUpInHandler.class</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/out/production/lab_6/lab_6/world/IdMaster.class</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/out/production/lab_6/lab_6/world/Main.class</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/out/production/lab_6/lab_6/world/base/Affected.class</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/out/production/lab_6/lab_6/world/base/Affecting.class</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/out/production/lab_6/lab_6/world/base/Existing.class</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/out/production/lab_6/lab_6/world/base/Feeling.class</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/out/production/lab_6/lab_6/world/base/Thinking.class</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/out/production/lab_6/lab_6/world/creation/Dancer.class</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/out/production/lab_6/lab_6/world/creation/People.class</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/out/production/lab_6/lab_6/world/creation/Square$1.class</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/out/production/lab_6/lab_6/world/creation/Square$1MyShutdownHook.class</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/out/production/lab_6/lab_6/world/creation/Square.class</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/out/production/lab_6/lab_6/world/creation/Thing$1.class</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/out/production/lab_6/lab_6/world/creation/Thing.class</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/out/production/lab_6/lab_6/world/creation/musical/Music.class</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/out/production/lab_6/lab_6/world/creation/musical/MusicalInstrument.class</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/out/production/lab_6/lab_6/world/creation/musical/StringedMusicalInstrument$Strings.class</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/out/production/lab_6/lab_6/world/creation/musical/StringedMusicalInstrument.class</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/out/production/lab_6/lab_6/world/exception/BrainOutException.class</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/out/production/lab_6/lab_6/world/exception/SetupHyperParametersException.class</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/out/production/lab_6/lab_6/world/state/AffectState$1.class</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/out/production/lab_6/lab_6/world/state/AffectState$2.class</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/out/production/lab_6/lab_6/world/state/AffectState$3.class</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/out/production/lab_6/lab_6/world/state/AffectState$4.class</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/out/production/lab_6/lab_6/world/state/AffectState$5.class</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/out/production/lab_6/lab_6/world/state/AffectState$6.class</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/out/production/lab_6/lab_6/world/state/AffectState$7.class</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/out/production/lab_6/lab_6/world/state/AffectState$8.class</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/out/production/lab_6/lab_6/world/state/AffectState.class</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/out/production/lab_6/lab_6/world/state/DynamicsState$1.class</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/out/production/lab_6/lab_6/world/state/DynamicsState$2.class</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/out/production/lab_6/lab_6/world/state/DynamicsState$3.class</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/out/production/lab_6/lab_6/world/state/DynamicsState$4.class</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/out/production/lab_6/lab_6/world/state/DynamicsState$5.class</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/out/production/lab_6/lab_6/world/state/DynamicsState$6.class</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/out/production/lab_6/lab_6/world/state/DynamicsState$7.class</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/out/production/lab_6/lab_6/world/state/DynamicsState$8.class</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/out/production/lab_6/lab_6/world/state/DynamicsState.class</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/out/production/lab_6/lab_6/world/state/FeelState$1.class</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/out/production/lab_6/lab_6/world/state/FeelState$2.class</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/out/production/lab_6/lab_6/world/state/FeelState$3.class</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/out/production/lab_6/lab_6/world/state/FeelState$4.class</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/out/production/lab_6/lab_6/world/state/FeelState$5.class</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/out/production/lab_6/lab_6/world/state/FeelState$6.class</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/out/production/lab_6/lab_6/world/state/FeelState$7.class</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/out/production/lab_6/lab_6/world/state/FeelState$8.class</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/out/production/lab_6/lab_6/world/state/FeelState.class</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/out/production/lab_6/lab_6/world/state/PositionState$1.class</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/out/production/lab_6/lab_6/world/state/PositionState$2.class</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/out/production/lab_6/lab_6/world/state/PositionState$3.class</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/out/production/lab_6/lab_6/world/state/PositionState$4.class</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/out/production/lab_6/lab_6/world/state/PositionState$5.class</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/out/production/lab_6/lab_6/world/state/PositionState.class</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/out/production/lab_6/lab_6/world/state/ThinkState$1.class</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/out/production/lab_6/lab_6/world/state/ThinkState$2.class</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/out/production/lab_6/lab_6/world/state/ThinkState$3.class</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/out/production/lab_6/lab_6/world/state/ThinkState$4.class</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/out/production/lab_6/lab_6/world/state/ThinkState$5.class</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/out/production/lab_6/lab_6/world/state/ThinkState$6.class</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/out/production/lab_6/lab_6/world/state/ThinkState$7.class</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/out/production/lab_6/lab_6/world/state/ThinkState$8.class</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/out/production/lab_6/lab_6/world/state/ThinkState$9.class</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/out/production/lab_6/lab_6/world/state/ThinkState.class</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/out/production/lab_6/libraries/json.jar</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/database/accounts</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/database/data</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/database/info</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/libraries/json.jar</PATH>
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Deleted" />
+          <option name="myStatusName" value="Deleted" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="true" />
+          <option name="myId" value="REMOVED_FROM_REPOSITORY" />
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/.idea/encodings.xml</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/.idea/uiDesigner.xml</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/lab_6/client/libraries/json.jar</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/lab_6/server/database/accounts</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/lab_6/server/database/data</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/lab_6/server/database/info</PATH>
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Restored" />
+          <option name="myStatusName" value="Will be restored" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="RESTORED" />
+        </FILE-GROUP>
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Modified" />
+        <option name="myStatusName" value="Modified" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MODIFIED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Skipped" />
+        <option name="myStatusName" value="Skipped" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="SKIPPED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Merged with conflicts" />
+        <option name="myStatusName" value="Will be merged with conflicts" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MERGED_WITH_CONFLICTS" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Merged with tree conflicts" />
+        <option name="myStatusName" value="Merged with tree conflicts" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MERGED_WITH_TREE_CONFLICT" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Merged with property conflicts" />
+        <option name="myStatusName" value="Will be merged with property conflicts" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MERGED_WITH_PROPERTY_CONFLICT" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Merged" />
+        <option name="myStatusName" value="Will be merged" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MERGED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Not in repository" />
+        <option name="myStatusName" value="Not in repository" />
+        <option name="mySupportsDeletion" value="true" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="UNKNOWN" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Locally added" />
+        <option name="myStatusName" value="Locally added" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="LOCALLY_ADDED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Locally removed" />
+        <option name="myStatusName" value="Locally removed" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="LOCALLY_REMOVED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Switched" />
+        <option name="myStatusName" value="Switched" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="SWITCHED" />
+      </FILE-GROUP>
+    </UpdatedFiles>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -277,20 +463,15 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-4" y="0" width="1374" height="736" extended-state="6" />
-    <editor active="true" />
+    <frame x="67" y="25" width="1853" height="1055" extended-state="6" />
     <layout>
-      <window_info id="Image Layers" />
-      <window_info id="Designer" />
-      <window_info id="UI Designer" />
-      <window_info id="Capture Tool" />
-      <window_info id="Favorites" side_tool="true" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24469697" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.13669065" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Version Control" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Terminal" />
-      <window_info anchor="bottom" id="Event Log" side_tool="true" />
-      <window_info anchor="bottom" id="Messages" weight="0.30528054" />
+      <window_info id="Capture Tool" order="2" />
+      <window_info id="Image Layers" order="3" />
+      <window_info id="Designer" order="4" />
+      <window_info id="UI Designer" order="5" />
+      <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
       <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32838285" />
@@ -298,27 +479,46 @@
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="right" id="Palette" />
-      <window_info anchor="right" id="Theme Preview" />
-      <window_info anchor="right" id="Capture Analysis" />
-      <window_info anchor="right" id="Palette&#9;" />
-      <window_info anchor="right" id="Maven Projects" />
+      <window_info anchor="bottom" id="Terminal" order="7" />
+      <window_info anchor="bottom" id="Event Log" order="8" side_tool="true" />
+      <window_info anchor="bottom" id="Version Control" order="9" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Messages" order="10" weight="0.30528054" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Palette" order="3" />
+      <window_info anchor="right" id="Capture Analysis" order="4" />
+      <window_info anchor="right" id="Theme Preview" order="5" />
+      <window_info anchor="right" id="Palette&#9;" order="6" />
+      <window_info anchor="right" id="Maven Projects" order="7" />
     </layout>
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
   </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Первая загрузка на сервер" />
+    <MESSAGE value="Работа от 21.04.19" />
+    <MESSAGE value="Работа от 22.04.19 - 0:12" />
+    <MESSAGE value="Исправлена шифровка сессионного пароля" />
+    <MESSAGE value="Начата разработка GUI" />
+    <MESSAGE value="Перенесена консоль. Перенесена объектная модель." />
+    <MESSAGE value="Замена Map на PriorityQueue" />
+    <MESSAGE value="Работа с GUI переход к сетевой части" />
+    <MESSAGE value="Сериализация объектов, отладка ядра сервера, начало разработки сетевой части клиента" />
+    <MESSAGE value="Шифрованная передача сериализованных объектов с 2-х кратной солью реализована." />
+    <MESSAGE value="Разработка GUI. Шлифовка передачи объектов. Создание базы данных для хранения аккаунтов." />
+    <MESSAGE value="Работа с коллекцией" />
+    <MESSAGE value="Завершена базовая работа с коллекцией" />
+    <MESSAGE value="save load shutdownHook info_RAW" />
+    <MESSAGE value="info" />
+    <MESSAGE value="table and import" />
+    <MESSAGE value="comment" />
+    <MESSAGE value="JavaDOc комментарии" />
+    <option name="LAST_COMMIT_MESSAGE" value="JavaDOc комментарии" />
+  </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/lab_6/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="6" column="5" selection-start-line="4" selection-start-column="43" selection-end-line="6" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/lab_6/Main.java" />
     <entry file="file://$PROJECT_DIR$/src/lab_6/client/core/CommandParser.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
@@ -340,11 +540,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="297">
           <caret line="25" column="61" selection-start-line="25" selection-start-column="61" selection-end-line="25" selection-end-column="61" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#812#820#0" expanded="true" />
-            <element signature="e#1106#1123#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -355,9 +550,115 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/lab_6/client/core/FileParser.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="404">
+          <caret line="75" selection-start-line="75" selection-end-line="75" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/lab_6/client/userInterface/ConsoleGUI.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="13" column="3" selection-start-line="13" selection-start-column="3" selection-end-line="13" selection-end-column="3" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.idea/misc.xml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
   </component>
   <component name="masterDetails">
     <states>
+      <state key="ArtifactsStructureConfigurable.UI">
+        <settings>
+          <artifact-editor />
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="FacetStructureConfigurable.UI">
+        <settings>
+          <last-edited>No facets are configured</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="GlobalLibrariesConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="JdkListConfigurable.UI">
+        <settings>
+          <last-edited>11</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ModuleStructureConfigurable.UI">
+        <settings>
+          <last-edited>lab_6</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectJDKs.UI">
+        <settings>
+          <last-edited>1.8</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectLibrariesConfigurable.UI">
+        <settings>
+          <last-edited>json</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
       <state key="ScopeChooserConfigurable.UI">
         <settings>
           <splitter-proportions>
